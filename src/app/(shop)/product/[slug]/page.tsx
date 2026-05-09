@@ -2,8 +2,7 @@ import { Box, Typography } from "@mui/material";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ProductCard from "@/components/product/ProductCard";
-import { ProductGallery } from "@/components/product/ProductGallery";
-import { ProductPurchasePanel } from "@/components/product/ProductPurchasePanel";
+import { ProductDetailExperience } from "@/components/product/ProductDetailExperience";
 import {
   AppContainer,
   BodyCopy,
@@ -19,11 +18,13 @@ import {
   getAllProducts,
   getProductBySlug,
   getRelatedProducts,
+  normalizeParam,
 } from "@/lib/catalog";
 import { createMetadata } from "@/lib/seo";
 
 type ProductPageProps = {
   params: Promise<{ slug: string }>;
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
 };
 
 export async function generateStaticParams() {
@@ -53,8 +54,12 @@ export async function generateMetadata({
   });
 }
 
-export default async function ProductPage({ params }: ProductPageProps) {
+export default async function ProductPage({
+  params,
+  searchParams,
+}: ProductPageProps) {
   const { slug } = await params;
+  const query = searchParams ? await searchParams : {};
   const product = getProductBySlug(slug);
 
   if (!product) {
@@ -67,10 +72,11 @@ export default async function ProductPage({ params }: ProductPageProps) {
     <>
       <PageSection>
         <AppContainer>
-          <SplitLayout>
-            <ProductGallery product={product} />
-            <ProductPurchasePanel product={product} />
-          </SplitLayout>
+          <ProductDetailExperience
+            initialColor={normalizeParam(query.color)}
+            initialSize={normalizeParam(query.size)}
+            product={product}
+          />
         </AppContainer>
       </PageSection>
 

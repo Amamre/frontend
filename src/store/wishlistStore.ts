@@ -41,6 +41,7 @@ export const useWishlistStore = create<WishlistStore>()(
     {
       name: "amamre-wishlist",
       version: 1,
+      skipHydration: true,
     },
   ),
 );

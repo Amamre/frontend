@@ -13,10 +13,36 @@ export type ProductSort =
 export interface ProductImage {
   id: string;
   url: string;
+  mobileUrl?: string;
   alt: string;
   width: number;
   height: number;
-  role: "hero" | "gallery" | "detail" | "swatch";
+  role:
+    | "hero"
+    | "hover"
+    | "front"
+    | "back"
+    | "side"
+    | "detail"
+    | "detail-sleeve"
+    | "detail-embroidery"
+    | "detail-trim"
+    | "hood-lining"
+    | "texture"
+    | "lifestyle"
+    | "folded"
+    | "flatlay"
+    | "gallery"
+    | "swatch";
+  color?: string;
+}
+
+export interface ProductColorOption {
+  name: string;
+  slug: string;
+  code: string;
+  description: string;
+  images: ProductImage[];
 }
 
 export interface ProductVariant {
@@ -50,6 +76,7 @@ export interface Product {
   features: string[];
   sizes: string[];
   colors: { name: string; code: string }[];
+  colorOptions: ProductColorOption[];
   rating: number;
   reviewCount: number;
   inStock: boolean;

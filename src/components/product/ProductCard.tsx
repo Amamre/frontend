@@ -14,6 +14,7 @@ import {
   Swatch,
 } from "@/components/ui/Primitives";
 import { IMAGE_CONFIG } from "@/constants/config";
+import { useIsMounted } from "@/hooks/useUtils";
 import { formatPrice } from "@/lib/utils";
 import { useCartStore } from "@/store/cartStore";
 import { useWishlistStore } from "@/store/wishlistStore";
@@ -32,9 +33,10 @@ export default function ProductCard({
   onViewDetails,
 }: ProductCardProps) {
   const theme = useTheme();
+  const mounted = useIsMounted();
   const addToCart = useCartStore((state) => state.addItem);
   const { addItem, isInWishlist, removeItem } = useWishlistStore();
-  const inWishlist = isInWishlist(product.id);
+  const inWishlist = mounted && isInWishlist(product.id);
   const firstVariant = product.variants[0];
   const href = `/product/${product.slug}`;
 

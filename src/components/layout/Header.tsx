@@ -19,6 +19,7 @@ import { usePathname } from "next/navigation";
 import { type ElementType, useState } from "react";
 import { AppContainer, IconAction } from "@/components/ui/Primitives";
 import { BRAND, COLLECTIONS, MAIN_NAVIGATION } from "@/constants/config";
+import { useIsMounted } from "@/hooks/useUtils";
 import { useCartStore } from "@/store/cartStore";
 import { useWishlistStore } from "@/store/wishlistStore";
 import { brandColors } from "@/styles/theme";
@@ -27,8 +28,11 @@ export function Header() {
   const pathname = usePathname();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
+  const mounted = useIsMounted();
   const cartCount = useCartStore((state) => state.getItemCount());
   const wishlistCount = useWishlistStore((state) => state.getItemCount());
+  const visibleCartCount = mounted ? cartCount : 0;
+  const visibleWishlistCount = mounted ? wishlistCount : 0;
 
   const close = () => setOpen(false);
 
@@ -38,7 +42,8 @@ export function Header() {
       elevation={0}
       position="fixed"
       sx={{
-        height: "var(--header-height)",
+        top: "var(--ticker-height)",
+        height: "var(--nav-height)",
         borderBottom: `1px solid ${brandColors.border}`,
         background: "rgba(9, 9, 8, 0.78)",
         backdropFilter: "blur(18px)",
@@ -115,18 +120,18 @@ export function Header() {
             <AccountCircleOutlinedIcon fontSize="small" />
           </IconAction>
           <IconAction
-            badgeContent={wishlistCount}
+            badgeContent={visibleWishlistCount}
             component={Link as ElementType}
             href="/wishlist"
-            aria-label={`Wishlist with ${wishlistCount} items`}
+            aria-label={`Wishlist with ${visibleWishlistCount} items`}
           >
             <FavoriteBorderIcon fontSize="small" />
           </IconAction>
           <IconAction
-            badgeContent={cartCount}
+            badgeContent={visibleCartCount}
             component={Link as ElementType}
             href="/cart"
-            aria-label={`Cart with ${cartCount} items`}
+            aria-label={`Cart with ${visibleCartCount} items`}
           >
             <ShoppingBagOutlinedIcon fontSize="small" />
           </IconAction>

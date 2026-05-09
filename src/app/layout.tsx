@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
+import "./globals.css";
 import Providers from "@/components/common/Providers";
+import { AtelierMarquee } from "@/components/layout/atelier-marquee";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { MainShell } from "@/components/ui/Primitives";
@@ -21,8 +23,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <body>
+        <AtelierMarquee />
         <Providers>
           <Header />
           <MainShell>{children}</MainShell>

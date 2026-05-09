@@ -22,6 +22,7 @@ import {
   Subhead,
   Surface,
 } from "@/components/ui/Primitives";
+import { useIsMounted } from "@/hooks/useUtils";
 import { calculateOrderSummary } from "@/lib/cart";
 import { formatPrice } from "@/lib/utils";
 import { useCartStore } from "@/store/cartStore";
@@ -29,19 +30,21 @@ import { brandColors } from "@/styles/theme";
 
 export function CartClient() {
   const { items, removeItem, updateQuantity } = useCartStore();
+  const mounted = useIsMounted();
+  const visibleItems = mounted ? items : [];
   const [isPending, startTransition] = useTransition();
   const [promoCode, setPromoCode] = useState("");
-  const summary = calculateOrderSummary(items);
+  const summary = calculateOrderSummary(visibleItems);
 
   const checkout = () => {
-    if (items.length === 0) {
+    if (visibleItems.length === 0) {
       return;
     }
 
     startTransition(async () => {
       try {
         await startShopifyCheckout(
-          items.map((item) => ({
+          visibleItems.map((item) => ({
             variantId: item.variantId,
             quantity: item.quantity,
           })),
@@ -54,7 +57,7 @@ export function CartClient() {
     });
   };
 
-  if (items.length === 0) {
+  if (visibleItems.length === 0) {
     return (
       <EmptyState>
         <div>
@@ -80,12 +83,14 @@ export function CartClient() {
             <Eyebrow>Cart</Eyebrow>
             <Headline>Shopping bag</Headline>
           </Box>
-          <Subhead>{items.length} line items ready for checkout.</Subhead>
+          <Subhead>
+            {visibleItems.length} line items ready for checkout.
+          </Subhead>
         </SectionHeading>
 
         <SplitLayout>
           <Stack spacing={1.75}>
-            {items.map((item) => (
+            {visibleItems.map((item) => (
               <Surface
                 component="article"
                 key={item.variantId}

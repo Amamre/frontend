@@ -67,6 +67,7 @@ export const useCartStore = create<CartStore>()(
     {
       name: "amamre-cart",
       version: 1,
+      skipHydration: true,
     },
   ),
 );

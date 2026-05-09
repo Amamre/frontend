@@ -34,7 +34,7 @@ export default function ShippingReturnsPage() {
         <Typography variant="h2" sx={{ mt: 4.25, fontWeight: 600 }}>
           Returns
         </Typography>
-        <BodyCopy sx={{pt:2}}>
+        <BodyCopy sx={{ pt: 2 }}>
           AMAMRE should support the statutory EU withdrawal period and a clear
           return portal before launch. Items must be unworn, unwashed, and
           returned with original tags.

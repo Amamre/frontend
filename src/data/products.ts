@@ -1,115 +1,194 @@
-import type { Collection, Product, ProductImage } from "@/types";
+import type {
+  Collection,
+  Product,
+  ProductColorOption,
+  ProductImage,
+  ProductVariant,
+} from "@/types";
 
 const CAMPAIGN_IMAGE = "/editorial/amamre-hero-campaign.png";
 
-const imageSet = (slug: string, title: string): ProductImage[] => [
-  {
-    id: `${slug}-hero`,
-    url: CAMPAIGN_IMAGE,
-    alt: `${title} editorial campaign image`,
-    width: 1792,
-    height: 1024,
-    role: "hero",
-  },
-  {
-    id: `${slug}-detail`,
-    url: CAMPAIGN_IMAGE,
-    alt: `${title} fabric and silhouette detail`,
-    width: 1792,
-    height: 1024,
-    role: "detail",
-  },
-  {
-    id: `${slug}-gallery`,
-    url: CAMPAIGN_IMAGE,
-    alt: `${title} styled on model`,
-    width: 1792,
-    height: 1024,
-    role: "gallery",
-  },
+const COLOR_CODES: Record<string, string> = {
+  "Obsidian Black": "#090908",
+  "Deep Olive": "#4f5f3f",
+  "Soft Ivory": "#faf8f1",
+  "Dark Cocoa": "#574235",
+  "Muted Gold": "#b8956a",
+  "Muted Warm Gold": "#b8956a",
+};
+
+const COLOR_DESCRIPTIONS: Record<string, string> = {
+  "Obsidian Black": "Matte black fleece with warm ivory and tonal trim.",
+  "Deep Olive": "Muted olive with a quiet studio utility character.",
+  "Soft Ivory": "Warm ivory with a clean gallery-light finish.",
+  "Dark Cocoa": "Deep cocoa with restrained European tailoring energy.",
+  "Muted Gold": "Soft gold knit with a subdued satin interior.",
+  "Muted Warm Gold": "Soft warm gold with a quiet satin interior.",
+};
+
+const IMAGE_ROLES: Array<{
+  role: ProductImage["role"];
+  label: string;
+}> = [
+  { role: "hero", label: "cinematic hero study" },
+  { role: "hover", label: "alternate campaign frame" },
+  { role: "front", label: "front view" },
+  { role: "back", label: "back view" },
+  { role: "side", label: "side profile" },
+  { role: "detail-sleeve", label: "sleeve detail" },
+  { role: "detail-embroidery", label: "tonal embroidery detail" },
+  { role: "detail-trim", label: "heritage trim detail" },
+  { role: "hood-lining", label: "satin lining close-up" },
+  { role: "texture", label: "textile texture macro" },
+  { role: "lifestyle", label: "editorial lifestyle image" },
+  { role: "folded", label: "folded garment study" },
+  { role: "flatlay", label: "premium flatlay" },
 ];
+
+const optionSlug = (value: string) =>
+  value
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+
+const colorCode = (color: string) => COLOR_CODES[color] ?? "#77716a";
+
+const imageSet = (
+  slug: string,
+  title: string,
+  colorName = "Obsidian Black",
+): ProductImage[] => {
+  const colorSlug = optionSlug(colorName);
+
+  return IMAGE_ROLES.map((item) => ({
+    id: `${slug}-${colorSlug}-${item.role}`,
+    url: CAMPAIGN_IMAGE,
+    mobileUrl: CAMPAIGN_IMAGE,
+    alt: `${title} in ${colorName}, ${item.label}`,
+    width: 1792,
+    height: 1024,
+    role: item.role,
+    color: colorName,
+  }));
+};
+
+const createColorOptions = (
+  slug: string,
+  title: string,
+  colors: string[],
+): ProductColorOption[] =>
+  colors.map((color) => ({
+    name: color,
+    slug: optionSlug(color),
+    code: colorCode(color),
+    description:
+      COLOR_DESCRIPTIONS[color] ??
+      "Editorial colorway with understated AMAMRE detailing.",
+    images: imageSet(slug, title, color),
+  }));
+
+const colorsFromOptions = (options: ProductColorOption[]) =>
+  options.map((option) => ({ name: option.name, code: option.code }));
+
+function createVariants(params: {
+  productCode: string;
+  baseTitle: string;
+  amount: number;
+  sizes: string[];
+  colors: string[];
+  lowStockSizes?: string[];
+  soldOutSizes?: string[];
+}): ProductVariant[] {
+  return params.colors.flatMap((color) =>
+    params.sizes.map((size) => {
+      const sizeCode = size.replace(/\W/g, "").toUpperCase();
+      const colorCodePart = color.replace(/\W/g, "").slice(0, 4).toUpperCase();
+      const sku = `AM-${params.productCode}-${sizeCode}-${colorCodePart}`;
+      const soldOut = params.soldOutSizes?.includes(size) ?? false;
+      const lowStock = params.lowStockSizes?.includes(size) ?? false;
+
+      return {
+        id: `gid://shopify/ProductVariant/${sku}`,
+        title: `${params.baseTitle} / ${color} / ${size}`,
+        price: params.amount,
+        sku,
+        inventory: soldOut ? 0 : lowStock ? 3 : 18,
+        size,
+        color,
+      };
+    }),
+  );
+}
+
+const signatureColors = createColorOptions(
+  "signature-satin-hood-hoodie",
+  "Signature Satin Hood Hoodie",
+  ["Obsidian Black", "Deep Olive"],
+);
+const tracksuitColors = createColorOptions(
+  "heritage-tracksuit",
+  "Heritage Tracksuit",
+  ["Obsidian Black", "Dark Cocoa"],
+);
+const overshirtColors = createColorOptions(
+  "atelier-overshirt",
+  "Atelier Overshirt",
+  ["Dark Cocoa", "Deep Olive"],
+);
+const beanieColors = createColorOptions(
+  "satin-lined-beanie",
+  "Satin-Lined Beanie",
+  ["Obsidian Black", "Muted Warm Gold", "Dark Cocoa"],
+);
+const capColors = createColorOptions("heritage-cap", "Heritage Cap", [
+  "Obsidian Black",
+  "Deep Olive",
+]);
+const teeColors = createColorOptions(
+  "premium-essential-tee",
+  "Premium Essential Tee",
+  ["Soft Ivory", "Obsidian Black", "Deep Olive"],
+);
 
 export const MOCK_PRODUCTS: Product[] = [
   {
     id: "prod_signature_satin_hood",
     title: "Signature Satin Hood Hoodie",
     slug: "signature-satin-hood-hoodie",
-    description:
-      "Organic heavyweight fleece with a smooth satin-lined hood, finished with restrained AMAMRE embroidery.",
+    description: "Heavy fleece with a quiet satin-lined hood.",
     longDescription:
-      "The piece that defines the AMAMRE wardrobe. A sculpted oversized hoodie built from organic cotton fleece and lined through the hood with satin for a clean feel against hair and skin. The silhouette is quiet, heavy, and architectural, with subtle heritage-inspired embroidery placed where luxury brands usually overstate themselves.",
-    price: 189,
-    compareAtPrice: 229,
-    images: imageSet(
-      "signature-satin-hood-hoodie",
-      "Signature Satin Hood Hoodie",
-    ),
-    variants: [
-      {
-        id: "gid://shopify/ProductVariant/signature-black-s",
-        title: "Obsidian Black / S",
-        price: 189,
-        sku: "AM-HOOD-OBS-S",
-        inventory: 8,
-        size: "S",
-        color: "Obsidian Black",
-      },
-      {
-        id: "gid://shopify/ProductVariant/signature-black-m",
-        title: "Obsidian Black / M",
-        price: 189,
-        sku: "AM-HOOD-OBS-M",
-        inventory: 18,
-        size: "M",
-        color: "Obsidian Black",
-      },
-      {
-        id: "gid://shopify/ProductVariant/signature-black-l",
-        title: "Obsidian Black / L",
-        price: 189,
-        sku: "AM-HOOD-OBS-L",
-        inventory: 14,
-        size: "L",
-        color: "Obsidian Black",
-      },
-      {
-        id: "gid://shopify/ProductVariant/signature-ivory-m",
-        title: "Soft Ivory / M",
-        price: 189,
-        sku: "AM-HOOD-IVY-M",
-        inventory: 11,
-        size: "M",
-        color: "Soft Ivory",
-      },
-      {
-        id: "gid://shopify/ProductVariant/signature-ivory-l",
-        title: "Soft Ivory / L",
-        price: 189,
-        sku: "AM-HOOD-IVY-L",
-        inventory: 7,
-        size: "L",
-        color: "Soft Ivory",
-      },
-    ],
+      "A dense 480 GSM cotton fleece hoodie cut with a relaxed European shoulder, deep ribbing, and AMAMRE's satin-lined hood for a smooth luxury finish. It is the first signature piece: minimal, weighty, and built for daily city wear.",
+    price: 148,
+    compareAtPrice: 178,
+    images: signatureColors[0]?.images ?? [],
+    variants: createVariants({
+      productCode: "SSH",
+      baseTitle: "Signature Satin Hood Hoodie",
+      amount: 148,
+      sizes: ["XS", "S", "M", "L", "XL", "XXL"],
+      colors: signatureColors.map((color) => color.name),
+      lowStockSizes: ["M", "XL"],
+      soldOutSizes: ["XXL"],
+    }),
     category: "hoodies",
     collection: "signature",
-    tags: ["bestseller", "satin-lined", "organic cotton", "streetwear"],
-    material: "520gsm organic cotton fleece, recycled satin hood lining",
-    care: "Wash inside out at 30C. Air dry. Steam lightly. Do not tumble dry.",
-    fit: "Oversized streetwear fit with dropped shoulders and a structured hem.",
+    tags: ["signature", "satin lined", "heavyweight", "made for layering"],
+    material:
+      "480 GSM organic cotton fleece, recycled satin hood lining, ribbed cotton cuffs",
+    care: "Wash inside out at 30C. Do not tumble dry. Steam gently from reverse side.",
+    fit: "Relaxed streetwear fit with dropped shoulder and structured hood.",
     story:
-      "Designed in Stuttgart as a daily uniform for people who move between cultures, studios, airports, and late-night city streets.",
+      "Designed in Stuttgart as the first AMAMRE signature piece, the satin hood references ceremonial polish without turning heritage into costume.",
     features: [
       "Satin-lined hood designed for comfort and hair protection",
-      "Hidden phone pocket inside the kangaroo pocket",
+      "Dense 480 GSM organic cotton fleece",
       "Muted warm-gold embroidery inspired by geometric textile borders",
-      "Ribbed cuffs engineered to hold shape after repeated wear",
+      "Deep ribbing engineered to hold shape after repeated wear",
     ],
-    sizes: ["S", "M", "L", "XL"],
-    colors: [
-      { name: "Obsidian Black", code: "#0a0a0a" },
-      { name: "Soft Ivory", code: "#faf8f6" },
-    ],
+    sizes: ["XS", "S", "M", "L", "XL", "XXL"],
+    colors: colorsFromOptions(signatureColors),
+    colorOptions: signatureColors,
     rating: 4.9,
     reviewCount: 142,
     inStock: true,
@@ -119,7 +198,7 @@ export const MOCK_PRODUCTS: Product[] = [
       seo: {
         title: "Signature Satin Hood Hoodie | AMAMRE",
         description:
-          "The AMAMRE signature hoodie in heavyweight organic cotton with a satin-lined hood and subtle heritage embroidery.",
+          "AMAMRE's heavyweight satin-lined hoodie in obsidian black and deep olive. Premium Afro-European streetwear from Stuttgart.",
         keywords: ["satin lined hoodie", "luxury streetwear", "AMAMRE hoodie"],
         ogImage: CAMPAIGN_IMAGE,
       },
@@ -129,61 +208,36 @@ export const MOCK_PRODUCTS: Product[] = [
     id: "prod_heritage_tracksuit",
     title: "Heritage Tracksuit",
     slug: "heritage-tracksuit",
-    description:
-      "A complete elevated tracksuit with tonal geometric trim, relaxed proportions, and a clean Stuttgart silhouette.",
+    description: "A tailored tracksuit with understated heritage piping.",
     longDescription:
-      "Built for travel, studio days, and considered off-duty dressing, the Heritage Tracksuit pairs a relaxed track jacket with tapered trousers. The trim references African textile rhythm in a subdued, tonal language so the look remains minimal, mature, and easy to wear.",
-    price: 299,
-    compareAtPrice: 349,
-    images: imageSet("heritage-tracksuit", "Heritage Tracksuit"),
-    variants: [
-      {
-        id: "gid://shopify/ProductVariant/tracksuit-black-s",
-        title: "Obsidian Black / S",
-        price: 299,
-        sku: "AM-TRACK-OBS-S",
-        inventory: 6,
-        size: "S",
-        color: "Obsidian Black",
-      },
-      {
-        id: "gid://shopify/ProductVariant/tracksuit-black-m",
-        title: "Obsidian Black / M",
-        price: 299,
-        sku: "AM-TRACK-OBS-M",
-        inventory: 12,
-        size: "M",
-        color: "Obsidian Black",
-      },
-      {
-        id: "gid://shopify/ProductVariant/tracksuit-olive-l",
-        title: "Deep Olive / L",
-        price: 299,
-        sku: "AM-TRACK-OLV-L",
-        inventory: 9,
-        size: "L",
-        color: "Deep Olive",
-      },
-    ],
+      "A coordinated jacket and trouser set in compact double-knit fabric with tonal paneling, muted gold zip pulls, and a clean straight-leg profile. Built for travel, studio days, and considered off-duty dressing.",
+    price: 196,
+    images: tracksuitColors[0]?.images ?? [],
+    variants: createVariants({
+      productCode: "HTS",
+      baseTitle: "Heritage Tracksuit",
+      amount: 196,
+      sizes: ["XS", "S", "M", "L", "XL"],
+      colors: tracksuitColors.map((color) => color.name),
+      lowStockSizes: ["S"],
+    }),
     category: "sets",
     collection: "heritage",
-    tags: ["set", "tracksuit", "heritage", "travel"],
-    material: "Organic cotton double-knit with recycled poly stretch",
-    care: "Machine wash cold with similar colors. Hang dry to preserve drape.",
-    fit: "Relaxed jacket and tapered trouser, designed to sit cleanly over sneakers.",
+    tags: ["set", "double knit", "travel uniform", "tonal piping"],
+    material: "Organic cotton double knit, recycled polyester stretch yarn",
+    care: "Wash at 30C with similar colors. Dry flat. Avoid fabric softener.",
+    fit: "Jacket is boxy and cropped at the hip. Trouser is straight with a clean break.",
     story:
-      "A nod to early European sportswear codes, softened with details that carry the pulse of African craft without turning heritage into costume.",
+      "The tracksuit carries AMAMRE's Afro-European balance: functional Stuttgart minimalism, movement-first comfort, and restrained trim inspired by ceremonial linework.",
     features: [
       "Two-piece set with jacket and trouser",
-      "Tonal geometric trim at pocket and side seam",
-      "Zip pockets and internal drawcords",
-      "Brushed interior for all-day comfort",
+      "Tonal heritage piping at pocket and side seam",
+      "Muted gold zip pulls",
+      "Brushed pocketing for all-day comfort",
     ],
-    sizes: ["S", "M", "L", "XL"],
-    colors: [
-      { name: "Obsidian Black", code: "#0a0a0a" },
-      { name: "Deep Olive", code: "#4f5f3f" },
-    ],
+    sizes: ["XS", "S", "M", "L", "XL"],
+    colors: colorsFromOptions(tracksuitColors),
+    colorOptions: tracksuitColors,
     rating: 4.8,
     reviewCount: 89,
     inStock: true,
@@ -193,7 +247,7 @@ export const MOCK_PRODUCTS: Product[] = [
       seo: {
         title: "Heritage Tracksuit | AMAMRE",
         description:
-          "Premium Afro-European tracksuit with tonal heritage trim and elevated streetwear proportions.",
+          "Premium AMAMRE heritage tracksuit with tonal linework, muted gold hardware, and a tailored streetwear fit.",
         keywords: ["luxury tracksuit", "heritage streetwear", "AMAMRE set"],
         ogImage: CAMPAIGN_IMAGE,
       },
@@ -203,61 +257,36 @@ export const MOCK_PRODUCTS: Product[] = [
     id: "prod_atelier_overshirt",
     title: "Atelier Overshirt",
     slug: "atelier-overshirt",
-    description:
-      "A structured overshirt in a linen-cotton blend, cut for editorial layering and year-round wear.",
+    description: "Structured overshirt for an editorial layering system.",
     longDescription:
-      "The Atelier Overshirt is a quiet luxury layer with a decisive shoulder, deep chest pocket, and a dry handfeel. It can be worn over the Essential Tee, under outerwear, or buttoned as a soft jacket.",
-    price: 219,
-    images: imageSet("atelier-overshirt", "Atelier Overshirt"),
-    variants: [
-      {
-        id: "gid://shopify/ProductVariant/overshirt-ivory-m",
-        title: "Soft Ivory / M",
-        price: 219,
-        sku: "AM-OVER-IVY-M",
-        inventory: 13,
-        size: "M",
-        color: "Soft Ivory",
-      },
-      {
-        id: "gid://shopify/ProductVariant/overshirt-black-l",
-        title: "Obsidian Black / L",
-        price: 219,
-        sku: "AM-OVER-OBS-L",
-        inventory: 8,
-        size: "L",
-        color: "Obsidian Black",
-      },
-      {
-        id: "gid://shopify/ProductVariant/overshirt-cocoa-xl",
-        title: "Dark Cocoa / XL",
-        price: 219,
-        sku: "AM-OVER-COC-XL",
-        inventory: 4,
-        size: "XL",
-        color: "Dark Cocoa",
-      },
-    ],
+      "A brushed cotton-twill overshirt with a sharp camp collar, hidden placket, matte snaps, and oversized patch pockets engineered for clean utility.",
+    price: 174,
+    images: overshirtColors[0]?.images ?? [],
+    variants: createVariants({
+      productCode: "AOS",
+      baseTitle: "Atelier Overshirt",
+      amount: 174,
+      sizes: ["S", "M", "L", "XL"],
+      colors: overshirtColors.map((color) => color.name),
+      lowStockSizes: ["L"],
+    }),
     category: "tops",
     collection: "atelier",
-    tags: ["overshirt", "linen", "layering", "atelier"],
-    material: "European linen and organic cotton twill",
-    care: "Cold gentle wash. Reshape while damp. Press with steam if desired.",
-    fit: "Boxy oversized fit with a clean shoulder line.",
+    tags: ["layering", "cotton twill", "utility", "atelier"],
+    material: "Brushed organic cotton twill, corozo-style recycled buttons",
+    care: "Machine wash cold. Hang dry. Iron on low from reverse.",
+    fit: "Oversized through the body with a straight hem and relaxed sleeve.",
     story:
-      "Inspired by quiet Stuttgart ateliers and the discipline of making one piece that works across seasons.",
+      "The Atelier Overshirt is the AMAMRE answer to European minimal outerwear: grounded color, quiet utility, and a silhouette with calm authority.",
     features: [
-      "Horn-effect buttons",
-      "Double-needle seams",
-      "Internal hanging loop",
+      "Hidden placket",
+      "Matte recycled snaps",
+      "Oversized utility pockets",
       "Subtle chest embroidery",
     ],
     sizes: ["S", "M", "L", "XL"],
-    colors: [
-      { name: "Soft Ivory", code: "#faf8f6" },
-      { name: "Obsidian Black", code: "#0a0a0a" },
-      { name: "Dark Cocoa", code: "#5a4033" },
-    ],
+    colors: colorsFromOptions(overshirtColors),
+    colorOptions: overshirtColors,
     rating: 4.7,
     reviewCount: 76,
     inStock: true,
@@ -267,7 +296,7 @@ export const MOCK_PRODUCTS: Product[] = [
       seo: {
         title: "Atelier Overshirt | AMAMRE",
         description:
-          "Structured premium overshirt in linen-cotton twill for refined everyday layering.",
+          "Structured premium overshirt by AMAMRE with brushed twill, utility pockets, and a relaxed editorial silhouette.",
         keywords: ["atelier overshirt", "premium overshirt", "AMAMRE tops"],
         ogImage: CAMPAIGN_IMAGE,
       },
@@ -277,61 +306,36 @@ export const MOCK_PRODUCTS: Product[] = [
     id: "prod_satin_lined_beanie",
     title: "Satin-Lined Beanie",
     slug: "satin-lined-beanie",
-    description:
-      "Merino wool warmth with a satin interior, created for comfort, shape retention, and hair-conscious wear.",
+    description: "Soft rib knit outside, smooth satin inside.",
     longDescription:
-      "A small accessory with a large daily impact. The Satin-Lined Beanie uses a soft merino exterior and smooth satin interior to reduce friction while maintaining a minimal luxury profile.",
-    price: 79,
-    images: imageSet("satin-lined-beanie", "Satin-Lined Beanie"),
-    variants: [
-      {
-        id: "gid://shopify/ProductVariant/beanie-black-os",
-        title: "Obsidian Black / One Size",
-        price: 79,
-        sku: "AM-BEAN-OBS-OS",
-        inventory: 36,
-        color: "Obsidian Black",
-        size: "One Size",
-      },
-      {
-        id: "gid://shopify/ProductVariant/beanie-gold-os",
-        title: "Muted Gold / One Size",
-        price: 79,
-        sku: "AM-BEAN-GLD-OS",
-        inventory: 22,
-        color: "Muted Gold",
-        size: "One Size",
-      },
-      {
-        id: "gid://shopify/ProductVariant/beanie-olive-os",
-        title: "Deep Olive / One Size",
-        price: 79,
-        sku: "AM-BEAN-OLV-OS",
-        inventory: 17,
-        color: "Deep Olive",
-        size: "One Size",
-      },
-    ],
+      "A premium rib-knit beanie with a discreet AMAMRE tab and satin lining designed to reduce friction while keeping a sculpted profile.",
+    price: 48,
+    images: beanieColors[0]?.images ?? [],
+    variants: createVariants({
+      productCode: "SLB",
+      baseTitle: "Satin-Lined Beanie",
+      amount: 48,
+      sizes: ["ONE SIZE"],
+      colors: beanieColors.map((color) => color.name),
+      lowStockSizes: ["ONE SIZE"],
+    }),
     category: "accessories",
     collection: "signature",
-    tags: ["beanie", "satin-lined", "accessory", "gift"],
-    material: "Merino wool exterior, recycled satin lining",
-    care: "Hand wash cold. Lay flat to dry.",
-    fit: "One size with soft stretch and a clean folded cuff.",
+    tags: ["satin lined", "headwear", "winter", "accessory"],
+    material: "Merino blend rib knit, recycled satin lining, woven AMAMRE tab",
+    care: "Hand wash cold. Reshape while damp. Dry flat.",
+    fit: "One size with a close luxury rib profile.",
     story:
-      "Made for the winter commute, the studio, and the after-hours walk home, with protection built into the inside.",
+      "Made as a daily accessory with beauty and practicality in mind, the satin lining nods to hair care rituals and the intimacy of heritage-informed design.",
     features: [
       "Smooth satin interior",
       "Soft folded cuff",
-      "Low-profile AMAMRE embroidery",
+      "Low-profile AMAMRE tab",
       "Gift-ready packaging",
     ],
-    sizes: ["One Size"],
-    colors: [
-      { name: "Obsidian Black", code: "#0a0a0a" },
-      { name: "Muted Gold", code: "#b8956a" },
-      { name: "Deep Olive", code: "#4f5f3f" },
-    ],
+    sizes: ["ONE SIZE"],
+    colors: colorsFromOptions(beanieColors),
+    colorOptions: beanieColors,
     rating: 4.9,
     reviewCount: 203,
     inStock: true,
@@ -341,7 +345,7 @@ export const MOCK_PRODUCTS: Product[] = [
       seo: {
         title: "Satin-Lined Beanie | AMAMRE",
         description:
-          "Premium merino beanie with satin lining for warmth, comfort, and hair protection.",
+          "AMAMRE satin-lined rib knit beanie with a premium soft interior and minimal tab branding.",
         keywords: ["satin lined beanie", "luxury beanie", "AMAMRE accessory"],
         ogImage: CAMPAIGN_IMAGE,
       },
@@ -351,51 +355,35 @@ export const MOCK_PRODUCTS: Product[] = [
     id: "prod_heritage_cap",
     title: "Heritage Cap",
     slug: "heritage-cap",
-    description:
-      "A structured six-panel cap with tonal embroidery and a leather-backed adjuster.",
+    description: "Low-profile cap with tonal embroidery.",
     longDescription:
-      "The Heritage Cap keeps branding quiet and construction precise. It is shaped from organic cotton twill, finished with tonal embroidery, and designed to work with the full AMAMRE wardrobe.",
-    price: 65,
-    images: imageSet("heritage-cap", "Heritage Cap"),
-    variants: [
-      {
-        id: "gid://shopify/ProductVariant/cap-black-os",
-        title: "Obsidian Black / One Size",
-        price: 65,
-        sku: "AM-CAP-OBS-OS",
-        inventory: 31,
-        color: "Obsidian Black",
-        size: "One Size",
-      },
-      {
-        id: "gid://shopify/ProductVariant/cap-ivory-os",
-        title: "Soft Ivory / One Size",
-        price: 65,
-        sku: "AM-CAP-IVY-OS",
-        inventory: 19,
-        color: "Soft Ivory",
-        size: "One Size",
-      },
-    ],
+      "A structured six-panel cap in washed cotton canvas with tonal AMAMRE embroidery, antique gold adjuster, and a curved brim.",
+    price: 54,
+    images: capColors[0]?.images ?? [],
+    variants: createVariants({
+      productCode: "HCP",
+      baseTitle: "Heritage Cap",
+      amount: 54,
+      sizes: ["ONE SIZE"],
+      colors: capColors.map((color) => color.name),
+    }),
     category: "accessories",
     collection: "heritage",
-    tags: ["cap", "six-panel", "heritage", "accessory"],
-    material: "Organic cotton twill, recycled polyester sweatband",
-    care: "Spot clean with a damp cloth. Do not machine wash.",
-    fit: "Structured six-panel shape with adjustable back strap.",
+    tags: ["cap", "embroidery", "cotton canvas", "adjustable"],
+    material: "Washed organic cotton canvas, recycled metal adjuster",
+    care: "Spot clean only. Do not bleach. Air dry.",
+    fit: "Low-profile six-panel fit with adjustable back strap.",
     story:
-      "A low-key piece that brings heritage detailing into an everyday European uniform.",
+      "The Heritage Cap compresses the AMAMRE visual language into an everyday object: subtle linework, calm proportion, and a Stuttgart streetwear attitude.",
     features: [
       "Tonal border embroidery",
       "Matte metal adjuster",
       "Curved brim",
       "Breathable internal sweatband",
     ],
-    sizes: ["One Size"],
-    colors: [
-      { name: "Obsidian Black", code: "#0a0a0a" },
-      { name: "Soft Ivory", code: "#faf8f6" },
-    ],
+    sizes: ["ONE SIZE"],
+    colors: colorsFromOptions(capColors),
+    colorOptions: capColors,
     rating: 4.6,
     reviewCount: 54,
     inStock: true,
@@ -405,7 +393,7 @@ export const MOCK_PRODUCTS: Product[] = [
       seo: {
         title: "Heritage Cap | AMAMRE",
         description:
-          "Structured premium cap with tonal heritage embroidery and understated AMAMRE detailing.",
+          "Low-profile AMAMRE heritage cap in washed cotton canvas with tonal embroidery.",
         keywords: ["heritage cap", "luxury cap", "AMAMRE accessories"],
         ogImage: CAMPAIGN_IMAGE,
       },
@@ -415,70 +403,36 @@ export const MOCK_PRODUCTS: Product[] = [
     id: "prod_premium_essential_tee",
     title: "Premium Essential Tee",
     slug: "premium-essential-tee",
-    description:
-      "Dense organic pima cotton with a crisp neck, refined drape, and discreet embroidery.",
+    description: "A refined heavyweight tee with a dry hand feel.",
     longDescription:
-      "The foundation layer in the AMAMRE system. The Essential Tee is intentionally simple: excellent cotton, an exacting neckline, and enough weight to hold a premium shape without feeling stiff.",
-    price: 59,
-    images: imageSet("premium-essential-tee", "Premium Essential Tee"),
-    variants: [
-      {
-        id: "gid://shopify/ProductVariant/tee-black-s",
-        title: "Obsidian Black / S",
-        price: 59,
-        sku: "AM-TEE-OBS-S",
-        inventory: 44,
-        size: "S",
-        color: "Obsidian Black",
-      },
-      {
-        id: "gid://shopify/ProductVariant/tee-black-m",
-        title: "Obsidian Black / M",
-        price: 59,
-        sku: "AM-TEE-OBS-M",
-        inventory: 57,
-        size: "M",
-        color: "Obsidian Black",
-      },
-      {
-        id: "gid://shopify/ProductVariant/tee-ivory-m",
-        title: "Soft Ivory / M",
-        price: 59,
-        sku: "AM-TEE-IVY-M",
-        inventory: 39,
-        size: "M",
-        color: "Soft Ivory",
-      },
-      {
-        id: "gid://shopify/ProductVariant/tee-cocoa-l",
-        title: "Dark Cocoa / L",
-        price: 59,
-        sku: "AM-TEE-COC-L",
-        inventory: 24,
-        size: "L",
-        color: "Dark Cocoa",
-      },
-    ],
+      "A 260 GSM compact cotton tee with a clean collar, slightly boxy body, and understated chest mark for daily uniform dressing.",
+    price: 68,
+    images: teeColors[0]?.images ?? [],
+    variants: createVariants({
+      productCode: "PET",
+      baseTitle: "Premium Essential Tee",
+      amount: 68,
+      sizes: ["XS", "S", "M", "L", "XL", "XXL"],
+      colors: teeColors.map((color) => color.name),
+      lowStockSizes: ["XS", "XXL"],
+    }),
     category: "tops",
     collection: "essentials",
-    tags: ["tee", "essential", "organic cotton", "bestseller"],
-    material: "240gsm organic pima cotton jersey",
-    care: "Wash at 30C. Tumble low or air dry. Do not bleach.",
-    fit: "Relaxed but not oversized, designed for layering.",
+    tags: ["tee", "heavyweight", "uniform", "premium basic"],
+    material: "260 GSM organic compact cotton, ribbed collar",
+    care: "Wash inside out at 30C. Do not tumble dry. Iron low.",
+    fit: "Slightly boxy with a clean sleeve length and straight hem.",
     story:
-      "A premium first layer that carries the whole collection without asking for attention.",
+      "The Essential Tee is intentionally restrained. It is designed to sit under the overshirt, work beneath the hoodie, and hold its own with tailored trousers.",
     features: [
-      "Dense pima cotton jersey",
+      "Dense organic compact cotton",
       "Reinforced neckline",
       "Side seam construction",
-      "Subtle tonal logo embroidery",
+      "Subtle tonal chest mark",
     ],
-    sizes: ["S", "M", "L", "XL"],
-    colors: [
-      { name: "Obsidian Black", code: "#0a0a0a" },
-      { name: "Soft Ivory", code: "#faf8f6" },
-      { name: "Dark Cocoa", code: "#5a4033" },
-    ],
+    sizes: ["XS", "S", "M", "L", "XL", "XXL"],
+    colors: colorsFromOptions(teeColors),
+    colorOptions: teeColors,
     rating: 4.8,
     reviewCount: 287,
     inStock: true,
@@ -488,7 +442,7 @@ export const MOCK_PRODUCTS: Product[] = [
       seo: {
         title: "Premium Essential Tee | AMAMRE",
         description:
-          "Premium organic pima cotton tee with refined drape, reinforced neckline, and discreet AMAMRE embroidery.",
+          "Heavyweight AMAMRE premium essential tee in compact organic cotton.",
         keywords: [
           "premium tee",
           "organic cotton t-shirt",

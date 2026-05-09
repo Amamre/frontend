@@ -49,7 +49,7 @@ export default function CollectionsPage() {
               <Typography variant="h2" sx={{ mt: 0, fontWeight: 600 }}>
                 {collection.title}
               </Typography>
-              <BodyCopy sx={{pt:2}}>{collection.description}</BodyCopy>
+              <BodyCopy sx={{ pt: 2 }}>{collection.description}</BodyCopy>
             </EditorialCard>
           ))}
         </ContentGrid>

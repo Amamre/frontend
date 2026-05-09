@@ -33,7 +33,7 @@ export function LegalPage({
             <Typography variant="h2" sx={{ mt: 4.25, fontWeight: 600 }}>
               {section.title}
             </Typography>
-            <BodyCopy sx={{pt:2}}>{section.body}</BodyCopy>
+            <BodyCopy sx={{ pt: 2 }}>{section.body}</BodyCopy>
           </Box>
         ))}
       </AppContainer>

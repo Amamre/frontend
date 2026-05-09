@@ -136,7 +136,9 @@ export const theme = responsiveFontSizes(
       MuiCssBaseline: {
         styleOverrides: {
           ":root": {
-            "--header-height": "72px",
+            "--ticker-height": "32px",
+            "--nav-height": "72px",
+            "--header-height": "calc(var(--ticker-height) + var(--nav-height))",
             "--container": "1360px",
           },
           "*": {
@@ -196,7 +198,8 @@ export const theme = responsiveFontSizes(
           },
           "@media (max-width: 680px)": {
             ":root": {
-              "--header-height": "64px",
+              "--ticker-height": "30px",
+              "--nav-height": "64px",
             },
           },
           "@media (prefers-reduced-motion: reduce)": {

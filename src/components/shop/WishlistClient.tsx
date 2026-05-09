@@ -14,18 +14,21 @@ import {
   SectionHeading,
   Subhead,
 } from "@/components/ui/Primitives";
+import { useIsMounted } from "@/hooks/useUtils";
 import { useWishlistStore } from "@/store/wishlistStore";
 
 export function WishlistClient() {
   const items = useWishlistStore((state) => state.items);
+  const mounted = useIsMounted();
+  const visibleItems = mounted ? items : [];
 
-  if (items.length === 0) {
+  if (visibleItems.length === 0) {
     return (
       <EmptyState>
         <div>
           <Eyebrow>Wishlist</Eyebrow>
           <Headline>No saved pieces yet.</Headline>
-          <BodyCopy sx={{py: 2}}>
+          <BodyCopy sx={{ py: 2 }}>
             Save products while you browse and return to them before checkout.
           </BodyCopy>
           <AppButton href="/shop" variant="primary">
@@ -44,10 +47,10 @@ export function WishlistClient() {
             <Eyebrow>Wishlist</Eyebrow>
             <Headline>Saved pieces</Headline>
           </Box>
-          <Subhead>{items.length} AMAMRE pieces saved.</Subhead>
+          <Subhead>{visibleItems.length} AMAMRE pieces saved.</Subhead>
         </SectionHeading>
         <ProductGrid>
-          {items.map((product) => (
+          {visibleItems.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </ProductGrid>

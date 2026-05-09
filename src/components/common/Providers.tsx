@@ -1,10 +1,18 @@
 "use client";
 
 import { CssBaseline, ThemeProvider } from "@mui/material";
+import { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
+import { useCartStore } from "@/store/cartStore";
+import { useWishlistStore } from "@/store/wishlistStore";
 import { theme } from "@/styles/theme";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
+  useEffect(() => {
+    void useCartStore.persist.rehydrate();
+    void useWishlistStore.persist.rehydrate();
+  }, []);
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />

@@ -28,6 +28,7 @@ import {
   Subhead,
   Surface,
 } from "@/components/ui/Primitives";
+import { useIsMounted } from "@/hooks/useUtils";
 import { calculateOrderSummary } from "@/lib/cart";
 import { formatPrice } from "@/lib/utils";
 import { type CheckoutData, checkoutSchema } from "@/lib/validation";
@@ -36,7 +37,9 @@ import { brandColors } from "@/styles/theme";
 
 export function CheckoutClient() {
   const items = useCartStore((state) => state.items);
-  const summary = calculateOrderSummary(items);
+  const mounted = useIsMounted();
+  const visibleItems = mounted ? items : [];
+  const summary = calculateOrderSummary(visibleItems);
   const [message, setMessage] = useState("");
   const [isPending, startTransition] = useTransition();
   const {
@@ -76,7 +79,7 @@ export function CheckoutClient() {
     });
   };
 
-  if (items.length === 0) {
+  if (visibleItems.length === 0) {
     return (
       <EmptyState>
         <div>
@@ -189,7 +192,7 @@ export function CheckoutClient() {
           >
             <Eyebrow>Order summary</Eyebrow>
             <Stack spacing={1.5}>
-              {items.map((item) => (
+              {visibleItems.map((item) => (
                 <SummaryRow
                   key={item.variantId}
                   label={`${item.quantity} x ${item.product.title}`}

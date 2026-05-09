@@ -26,6 +26,8 @@ const initialState = {
   message: "",
 };
 
+const COPYRIGHT_YEAR = 2026;
+
 export function Footer() {
   const theme = useTheme();
   const [state, formAction, pending] = useActionState(
@@ -128,7 +130,7 @@ export function Footer() {
         }}
       >
         <span>
-          © {new Date().getFullYear()} {BRAND.name}. All rights reserved.
+          © {COPYRIGHT_YEAR} {BRAND.name}. All rights reserved.
         </span>
         <span>
           <a href={SOCIAL_LINKS.instagram}>Instagram</a> ·{" "}

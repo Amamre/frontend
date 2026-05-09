@@ -1,1 +1,143 @@
-/* Global styling is provided by MUI CssBaseline in src/styles/theme.ts. */
+/* Baseline application styling is provided by MUI CssBaseline in src/styles/theme.ts. */
+
+:root {
+  --ticker-height: 32px;
+  --nav-height: 72px;
+  --header-height: calc(var(--ticker-height) + var(--nav-height));
+  --container: 1360px;
+}
+
+.atelier-marquee {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1200;
+  width: 100%;
+  height: var(--ticker-height);
+  overflow: hidden;
+  border-bottom: 1px solid rgba(250, 248, 241, 0.1);
+  background: #050505;
+  color: #f6efe2;
+  white-space: nowrap;
+}
+
+.atelier-marquee__track {
+  display: flex;
+  width: max-content;
+  min-width: 200%;
+  height: 100%;
+  align-items: center;
+  animation: atelier-marquee-scroll 64s linear infinite;
+  will-change: transform;
+}
+
+.atelier-marquee:hover .atelier-marquee__track {
+  animation-play-state: paused;
+}
+
+.atelier-marquee__row {
+  display: inline-flex;
+  height: 100%;
+  align-items: center;
+}
+
+.atelier-marquee__item {
+  position: relative;
+  display: inline-flex;
+  height: 100%;
+  align-items: center;
+  padding: 0 clamp(22px, 4vw, 56px);
+  color: rgba(250, 248, 241, 0.76);
+  font-size: 0.63rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.atelier-marquee__item::after {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 1px;
+  height: 10px;
+  content: "";
+  background: rgba(216, 198, 165, 0.3);
+  transform: translateY(-50%);
+}
+
+.atelier-marquee__fade {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      90deg,
+      #050505 0%,
+      rgba(5, 5, 5, 0) 8%,
+      rgba(5, 5, 5, 0) 92%,
+      #050505 100%
+    ),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0));
+}
+
+@keyframes atelier-marquee-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.cinematic-background {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+  background: #090908;
+}
+
+.cinematic-background__poster,
+.cinematic-background__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cinematic-background__poster {
+  z-index: 0;
+}
+
+.cinematic-background__video {
+  z-index: 1;
+  opacity: 0.92;
+}
+
+@media (max-width: 680px) {
+  :root {
+    --ticker-height: 30px;
+    --nav-height: 64px;
+  }
+
+  .atelier-marquee__item {
+    padding: 0 24px;
+    font-size: 0.56rem;
+    letter-spacing: 0.22em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .atelier-marquee__track {
+    animation: none;
+    transform: translate3d(0, 0, 0);
+  }
+
+  .cinematic-background__video {
+    display: none;
+  }
+}
