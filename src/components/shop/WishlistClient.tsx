@@ -25,7 +25,7 @@ export function WishlistClient() {
         <div>
           <Eyebrow>Wishlist</Eyebrow>
           <Headline>No saved pieces yet.</Headline>
-          <BodyCopy>
+          <BodyCopy sx={{py: 2}}>
             Save products while you browse and return to them before checkout.
           </BodyCopy>
           <AppButton href="/shop" variant="primary">

@@ -12,7 +12,7 @@ export default function NotFound() {
       <div>
         <Eyebrow>404</Eyebrow>
         <Headline>This page is not in the collection.</Headline>
-        <BodyCopy>
+        <BodyCopy sx={{py:2}}>
           The route may have moved, or the product is no longer available.
         </BodyCopy>
         <AppButton href="/shop" variant="primary">

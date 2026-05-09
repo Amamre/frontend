@@ -40,7 +40,7 @@ export default function AboutPage() {
                 a practical everyday rhythm. The brand is premium by
                 construction, not by exclusion.
               </BodyCopy>
-              <BodyCopy>
+              <BodyCopy sx={{pt:2}}>
                 The launch collection focuses on pieces with a real reason to
                 exist: satin-lined hoods and beanies, structured layers, precise
                 trims, and understated details that carry heritage without

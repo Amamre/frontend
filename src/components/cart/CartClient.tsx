@@ -120,7 +120,7 @@ export function CartClient() {
                   />
                 </Box>
                 <Box>
-                  <Typography component="h2" sx={{ m: "0 0 6px" }}>
+                  <Typography variant="h2" sx={{ m: "0 0 6px" }}>
                     {item.product.title}
                   </Typography>
                   <BodyCopy sx={{ m: 0 }}>

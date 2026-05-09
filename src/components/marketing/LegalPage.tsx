@@ -30,10 +30,10 @@ export function LegalPage({
         <Subhead sx={{ mt: 2.25 }}>{intro}</Subhead>
         {sections.map((section) => (
           <Box component="section" key={section.title}>
-            <Typography component="h2" sx={{ mt: 4.25 }}>
+            <Typography variant="h2" sx={{ mt: 4.25, fontWeight: 600 }}>
               {section.title}
             </Typography>
-            <BodyCopy>{section.body}</BodyCopy>
+            <BodyCopy sx={{pt:2}}>{section.body}</BodyCopy>
           </Box>
         ))}
       </AppContainer>

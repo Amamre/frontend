@@ -38,6 +38,7 @@ export function Footer() {
       component="footer"
       sx={{
         mt: 9,
+        pt: 5,
         borderTop: `1px solid ${brandColors.border}`,
         background:
           "linear-gradient(135deg, rgba(79, 95, 63, 0.18), transparent 38%), rgba(9, 9, 8, 0.94)",
@@ -53,6 +54,7 @@ export function Footer() {
           },
           gap: 4.25,
           py: "56px 36px",
+          mb: 2,
         }}
       >
         <Box>
@@ -60,6 +62,7 @@ export function Footer() {
             component="h3"
             sx={{
               m: "0 0 14px",
+
               fontFamily: 'Georgia, "Times New Roman", serif',
               fontSize: "1.4rem",
               fontWeight: 700,
