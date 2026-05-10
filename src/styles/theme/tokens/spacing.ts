@@ -1,0 +1,32 @@
+export const spacing = {
+  none: 0,
+  xxs: "0.25rem",
+  xs: "0.5rem",
+  sm: "1rem",
+  md: "1.5rem",
+  lg: "2rem",
+  xl: "3rem",
+  "2xl": "4rem",
+  "3xl": "6rem",
+  "4xl": "8rem",
+  buttonX: "22px",
+  button: "0 22px",
+  field: "13px 14px",
+  accordionSummary: "18px",
+  accordionDetails: "0 18px 18px",
+  mobileDrawer: "20px 16px 28px",
+  containerXs: "min(100% - 24px, var(--container))",
+  containerSm: "min(100% - 32px, var(--container))",
+} as const;
+
+export const semanticSpacing = {
+  sectionY: { xs: 6.5, md: 9 },
+  sectionYTight: { xs: 5, md: 5 },
+  sectionHeadingGap: 3,
+  sectionHeadingMargin: 4.25,
+  card: 3,
+  gridGap: 2.25,
+  splitGap: 4.25,
+  formGap: 2,
+  labelMargin: "0 0 14px",
+} as const;
