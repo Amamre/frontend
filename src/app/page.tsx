@@ -1,3 +1,4 @@
+import { EditorialNewsletterSection } from "@/components/sections/editorial-newsletter-section";
 import {
   CollectionEditorialSection,
   FeaturedProductsSection,
@@ -17,6 +18,7 @@ export default function HomePage() {
       <FeaturedProductsSection />
       <CollectionEditorialSection />
       <ValuePropositionSection />
+      <EditorialNewsletterSection />
     </>
   );
 }

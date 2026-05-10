@@ -1,14 +1,13 @@
 "use client";
 
-import CloseIcon from "@mui/icons-material/Close";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { Box, Dialog, Stack, Typography, useTheme } from "@mui/material";
-import { AnimatePresence, MotionConfig, motion } from "framer-motion";
-import Image from "next/image";
+import { Box, Stack, Typography, useTheme } from "@mui/material";
+import { MotionConfig } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import toast from "react-hot-toast";
+import { ProductMediaGallery } from "@/components/product/product-media-gallery";
 import {
   AppButton,
   BodyCopy,
@@ -21,28 +20,17 @@ import {
   Subhead,
   Swatch,
 } from "@/components/ui/Primitives";
-import { IMAGE_CONFIG } from "@/constants/config";
 import { useIsMounted } from "@/hooks/useUtils";
 import { formatPrice } from "@/lib/utils";
 import { useCartStore } from "@/store/cartStore";
 import { useWishlistStore } from "@/store/wishlistStore";
-import { brandColors, shadows, transitions } from "@/styles/theme";
-import type {
-  Product,
-  ProductColorOption,
-  ProductImage,
-  ProductVariant,
-} from "@/types";
+import { brandColors, transitions } from "@/styles/theme";
+import type { Product, ProductColorOption, ProductVariant } from "@/types";
 
 type ProductDetailExperienceProps = {
   initialColor?: string;
   initialSize?: string;
   product: Product;
-};
-
-const galleryTransition = {
-  duration: 0.5,
-  ease: [0.22, 1, 0.36, 1] as const,
 };
 
 export function ProductDetailExperience({
@@ -62,11 +50,7 @@ export function ProductDetailExperience({
   const [selectedSize, setSelectedSize] = useState(() =>
     resolveSize(product, initialColorOption, initialSize),
   );
-  const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
-  const [fullscreenImage, setFullscreenImage] = useState<ProductImage | null>(
-    null,
-  );
   const addToCart = useCartStore((state) => state.addItem);
   const { addItem, isInWishlist, removeItem } = useWishlistStore();
   const inWishlist = mounted && isInWishlist(product.id);
@@ -77,7 +61,6 @@ export function ProductDetailExperience({
   const selectedImages = selectedColor.images.length
     ? selectedColor.images
     : product.images;
-  const activeImage = selectedImages[activeImageIndex] ?? selectedImages[0];
 
   useEffect(() => {
     setQuantity((value) =>
@@ -100,7 +83,6 @@ export function ProductDetailExperience({
     const nextSize = resolveSize(product, color, selectedSize);
     setSelectedColorSlug(color.slug);
     setSelectedSize(nextSize);
-    setActiveImageIndex(0);
     updateUrl(color.slug, nextSize);
   };
 
@@ -139,126 +121,12 @@ export function ProductDetailExperience({
   return (
     <MotionConfig reducedMotion="user">
       <SplitLayout sx={{ gap: { xs: 3, md: 5.5 } }}>
-        <Box sx={{ display: "grid", gap: 1.5 }}>
-          <Box
-            sx={{
-              position: "relative",
-              overflow: "hidden",
-              border: `1px solid ${brandColors.border}`,
-              borderRadius: "8px",
-              aspectRatio: { xs: "4 / 5", md: "5 / 6" },
-              background:
-                "linear-gradient(135deg, rgba(216, 198, 165, 0.06), transparent 42%), #11100e",
-              boxShadow: shadows.soft,
-            }}
-          >
-            <AnimatePresence initial={false} mode="wait">
-              {activeImage ? (
-                <motion.button
-                  animate={{ opacity: 1, scale: 1 }}
-                  aria-label={`Open ${activeImage.alt}`}
-                  exit={{ opacity: 0, scale: 1.01 }}
-                  initial={{ opacity: 0, scale: 1.015 }}
-                  key={activeImage.id}
-                  onClick={() => setFullscreenImage(activeImage)}
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    display: "block",
-                    width: "100%",
-                    height: "100%",
-                    border: 0,
-                    padding: 0,
-                    background: "transparent",
-                  }}
-                  transition={galleryTransition}
-                  type="button"
-                >
-                  <ColorizedImage
-                    color={selectedColor}
-                    image={activeImage}
-                    priority
-                    sizes={IMAGE_CONFIG.sizes}
-                  />
-                </motion.button>
-              ) : null}
-            </AnimatePresence>
-            <Box
-              sx={{
-                position: "absolute",
-                right: 14,
-                bottom: 14,
-                zIndex: 3,
-                px: 1.4,
-                py: 0.75,
-                border: `1px solid ${brandColors.border}`,
-                borderRadius: "999px",
-                color: "rgba(250, 248, 241, 0.78)",
-                background: "rgba(9, 9, 8, 0.72)",
-                fontSize: "0.68rem",
-                fontWeight: 800,
-                letterSpacing: "0.14em",
-                textTransform: "uppercase",
-              }}
-            >
-              {selectedColor.name}
-            </Box>
-          </Box>
-
-          <Box
-            aria-label={`${product.title} ${selectedColor.name} gallery`}
-            component="ul"
-            sx={{
-              display: "grid",
-              gridTemplateColumns: {
-                xs: "repeat(4, minmax(0, 1fr))",
-                sm: "repeat(6, minmax(0, 1fr))",
-              },
-              gap: 1,
-              p: 0,
-              m: 0,
-              listStyle: "none",
-            }}
-          >
-            {selectedImages.slice(0, 12).map((image, index) => (
-              <Box component="li" key={image.id}>
-                <Box
-                  aria-label={`View ${image.alt}`}
-                  aria-pressed={activeImageIndex === index}
-                  component="button"
-                  onClick={() => setActiveImageIndex(index)}
-                  sx={{
-                    position: "relative",
-                    display: "block",
-                    width: "100%",
-                    overflow: "hidden",
-                    border: `1px solid ${
-                      activeImageIndex === index
-                        ? "rgba(216, 198, 165, 0.82)"
-                        : brandColors.border
-                    }`,
-                    borderRadius: "6px",
-                    aspectRatio: "1",
-                    background: brandColors.charcoal,
-                    p: 0,
-                    transition: `border-color 180ms ${transitions.ease}, transform 180ms ${transitions.ease}`,
-                    "&:hover": {
-                      borderColor: "rgba(216, 198, 165, 0.72)",
-                      transform: "translateY(-1px)",
-                    },
-                  }}
-                  type="button"
-                >
-                  <ColorizedImage
-                    color={selectedColor}
-                    image={image}
-                    sizes="120px"
-                  />
-                </Box>
-              </Box>
-            ))}
-          </Box>
-        </Box>
+        <ProductMediaGallery
+          color={selectedColor}
+          images={selectedImages}
+          key={selectedColor.slug}
+          productTitle={product.title}
+        />
 
         <Box
           component="aside"
@@ -562,46 +430,6 @@ export function ProductDetailExperience({
           </Stack>
         </Box>
       </SplitLayout>
-
-      <Dialog
-        fullScreen
-        onClose={() => setFullscreenImage(null)}
-        open={Boolean(fullscreenImage)}
-        slotProps={{
-          paper: {
-            sx: {
-              background: "rgba(5, 5, 5, 0.96)",
-              backgroundImage: "none",
-            },
-          },
-        }}
-      >
-        <Box sx={{ position: "relative", minHeight: "100svh" }}>
-          <IconAction
-            aria-label="Close image"
-            onClick={() => setFullscreenImage(null)}
-            sx={{ position: "fixed", top: 20, right: 20, zIndex: 2 }}
-          >
-            <CloseIcon fontSize="small" />
-          </IconAction>
-          {fullscreenImage ? (
-            <Box
-              sx={{
-                position: "absolute",
-                inset: { xs: 16, md: 36 },
-                overflow: "hidden",
-                borderRadius: "8px",
-              }}
-            >
-              <ColorizedImage
-                color={selectedColor}
-                image={fullscreenImage}
-                sizes="100vw"
-              />
-            </Box>
-          ) : null}
-        </Box>
-      </Dialog>
     </MotionConfig>
   );
 }
@@ -637,54 +465,6 @@ function OptionHeading({ label, value }: { label: string; value: string }) {
         {value}
       </Muted>
     </Stack>
-  );
-}
-
-function ColorizedImage({
-  color,
-  image,
-  priority = false,
-  sizes,
-}: {
-  color: ProductColorOption;
-  image: ProductImage;
-  priority?: boolean;
-  sizes: string;
-}) {
-  const opacity = color.name === "Soft Ivory" ? 0.16 : 0.28;
-
-  return (
-    <>
-      <Image
-        alt={image.alt}
-        fill
-        priority={priority}
-        sizes={sizes}
-        src={image.url}
-        style={{ objectFit: "cover" }}
-      />
-      <Box
-        aria-hidden="true"
-        sx={{
-          position: "absolute",
-          inset: 0,
-          background: `linear-gradient(135deg, ${color.code}, transparent 42%), radial-gradient(circle at 72% 22%, rgba(216, 198, 165, 0.2), transparent 30%)`,
-          mixBlendMode: color.name === "Soft Ivory" ? "soft-light" : "color",
-          opacity,
-          pointerEvents: "none",
-        }}
-      />
-      <Box
-        aria-hidden="true"
-        sx={{
-          position: "absolute",
-          inset: 0,
-          background:
-            "linear-gradient(180deg, rgba(9, 9, 8, 0.02), rgba(9, 9, 8, 0.42))",
-          pointerEvents: "none",
-        }}
-      />
-    </>
   );
 }
 

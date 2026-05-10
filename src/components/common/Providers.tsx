@@ -3,6 +3,7 @@
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
+import { LuxuryCookieConsent } from "@/components/common/luxury-cookie-consent";
 import { useCartStore } from "@/store/cartStore";
 import { useWishlistStore } from "@/store/wishlistStore";
 import { theme } from "@/styles/theme";
@@ -17,6 +18,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       {children}
+      <LuxuryCookieConsent />
       <Toaster
         position="bottom-center"
         toastOptions={{

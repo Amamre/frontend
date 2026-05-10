@@ -4,6 +4,17 @@ test.beforeEach(async ({ page }) => {
   await page.addInitScript(() => {
     localStorage.removeItem("amamre-cart");
     localStorage.removeItem("amamre-wishlist");
+    localStorage.setItem(
+      "amamre-consent",
+      JSON.stringify({
+        analytics: false,
+        essential: true,
+        expiresAt: "2099-01-01T00:00:00.000Z",
+        marketing: false,
+        updatedAt: "2026-05-10T00:00:00.000Z",
+        version: 1,
+      }),
+    );
   });
 });
 
