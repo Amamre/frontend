@@ -1,13 +1,13 @@
 "use client";
 
+import { GDPR_SETTINGS } from "@/constants/config";
+import { brandColors, transitions } from "@/styles/theme";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import { AnimatePresence, motion } from "framer-motion";
 import NextLink from "next/link";
 import { useEffect, useState } from "react";
-import { GDPR_SETTINGS } from "@/constants/config";
-import { brandColors, transitions } from "@/styles/theme";
 
-const CONSENT_KEY = "amamre-consent";
+const CONSENT_KEY = "amambra-consent";
 const CONSENT_VERSION = 1;
 const DAY_IN_MS = 24 * 60 * 60 * 1000;
 
@@ -37,7 +37,7 @@ export function LuxuryCookieConsent() {
     try {
       window.localStorage.setItem(CONSENT_KEY, JSON.stringify(consent));
       window.dispatchEvent(
-        new CustomEvent("amamre:consent", { detail: consent }),
+        new CustomEvent("amambra:consent", { detail: consent }),
       );
     } catch {
       // Consent still dismisses for the current session if storage is blocked.

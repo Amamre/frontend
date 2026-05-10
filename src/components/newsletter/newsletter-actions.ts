@@ -29,6 +29,6 @@ export async function subscribeNewsletter(
   // so API keys never ship to the browser.
   return {
     ok: true,
-    message: "You are on the AMAMRE list.",
+    message: "You are on the AMAMBRA list.",
   };
 }

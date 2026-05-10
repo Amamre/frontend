@@ -6,7 +6,7 @@ import type { ProductFilter } from "@/types";
 export const metadata = createMetadata({
   title: "Shop",
   description:
-    "Shop AMAMRE launch pieces: satin-lined hoodies, premium tracksuits, atelier overshirts, tees, caps, and beanies.",
+    "Shop AMAMBRA launch pieces: satin-lined hoodies, premium tracksuits, atelier overshirts, tees, caps, and beanies.",
   path: "/shop",
 });
 

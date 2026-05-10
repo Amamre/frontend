@@ -1,12 +1,12 @@
 "use client";
 
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { Box, Stack, Typography } from "@mui/material";
-import { MotionConfig, motion } from "framer-motion";
 import { AppButton, AppContainer, Eyebrow } from "@/components/ui/Primitives";
 import { CinematicBackground } from "@/components/video/cinematic-background";
 import { BRAND } from "@/constants/config";
 import { brandColors } from "@/styles/theme";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { Box, Stack, Typography } from "@mui/material";
+import { MotionConfig, motion } from "framer-motion";
 
 const heroTransition = {
   duration: 0.95,
@@ -56,9 +56,9 @@ export function LuxuryHero() {
         }}
       >
         <CinematicBackground
-          posterAlt="AMAMRE cinematic Afro-European atelier campaign"
-          posterSrc="/editorial/amamre-hero-campaign.png"
-          videoSrc="/videos/amamre-atelier-loop.mp4"
+          posterAlt="AMAMBRA cinematic Afro-European atelier campaign"
+          posterSrc="/editorial/amambra-hero-campaign.png"
+          videoSrc="/videos/amambra-atelier-loop.mp4"
         />
 
         <AppContainer
@@ -146,7 +146,7 @@ export function LuxuryHero() {
           </Box>
 
           <Box
-            aria-label="AMAMRE campaign notes"
+            aria-label="AMAMBRA campaign notes"
             component="dl"
             sx={{
               display: { xs: "none", sm: "grid" },

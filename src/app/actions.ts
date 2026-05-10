@@ -1,6 +1,5 @@
 "use server";
 
-import { redirect } from "next/navigation";
 import {
   checkoutSchema,
   contactFormSchema,
@@ -8,6 +7,7 @@ import {
 } from "@/lib/validation";
 import { createCart } from "@/services/shopify";
 import type { ActionState } from "@/types";
+import { redirect } from "next/navigation";
 
 const validationError = (
   message: string,
@@ -39,7 +39,7 @@ export const subscribeNewsletter = async (
   return {
     ok: true,
     message:
-      "You are on the AMAMRE list. Collection notes and launch access will arrive by email.",
+      "You are on the AMAMBRA list. Collection notes and launch access will arrive by email.",
   };
 };
 
@@ -64,7 +64,7 @@ export const submitContact = async (
   return {
     ok: true,
     message:
-      "Message received. AMAMRE customer care will respond within one business day.",
+      "Message received. AMAMBRA customer care will respond within one business day.",
   };
 };
 

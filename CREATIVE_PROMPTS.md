@@ -1,4 +1,4 @@
-# AMAMRE Creative Generation Prompts
+# AMAMBRA Creative Generation Prompts
 
 ## Hero Film
 
@@ -6,4 +6,4 @@ Create a 12-second silent looping luxury fashion campaign film for an ecommerce 
 
 ## Product Color Sets
 
-For each AMAMRE colorway, generate a complete premium ecommerce image set for the selected product: hero, hover, front, back, side, sleeve detail, tonal embroidery, heritage trim, satin hood lining, texture macro, editorial lifestyle, folded garment, and flatlay. Use clean luxury studio photography with soft shadows, realistic heavyweight textile texture, restrained Afro-European trim, minimal branding, warm-neutral background, matte black contrast, subtle gold detail, natural model confidence where applicable, and no loud patterns. Keep crops suitable for 4:5 PDP hero, 1:1 thumbnail, and mobile editorial framing.
+For each AMAMBRA colorway, generate a complete premium ecommerce image set for the selected product: hero, hover, front, back, side, sleeve detail, tonal embroidery, heritage trim, satin hood lining, texture macro, editorial lifestyle, folded garment, and flatlay. Use clean luxury studio photography with soft shadows, realistic heavyweight textile texture, restrained Afro-European trim, minimal branding, warm-neutral background, matte black contrast, subtle gold detail, natural model confidence where applicable, and no loud patterns. Keep crops suitable for 4:5 PDP hero, 1:1 thumbnail, and mobile editorial framing.

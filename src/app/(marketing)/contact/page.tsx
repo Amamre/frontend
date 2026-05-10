@@ -1,4 +1,3 @@
-import { Box } from "@mui/material";
 import { ContactForm } from "@/components/forms/ContactForm";
 import {
   AppContainer,
@@ -13,11 +12,12 @@ import {
 } from "@/components/ui/Primitives";
 import { BRAND } from "@/constants/config";
 import { createMetadata } from "@/lib/seo";
+import { Box } from "@mui/material";
 
 export const metadata = createMetadata({
   title: "Contact",
   description:
-    "Contact AMAMRE customer care, press, and wholesale from Stuttgart, Germany.",
+    "Contact AMAMBRA customer care, press, and wholesale from Stuttgart, Germany.",
   path: "/contact",
 });
 

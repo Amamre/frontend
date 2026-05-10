@@ -1,5 +1,3 @@
-import { Box } from "@mui/material";
-import Image from "next/image";
 import {
   AppContainer,
   BodyCopy,
@@ -13,11 +11,13 @@ import {
 } from "@/components/ui/Primitives";
 import { BRAND } from "@/constants/config";
 import { createMetadata } from "@/lib/seo";
+import { Box } from "@mui/material";
+import Image from "next/image";
 
 export const metadata = createMetadata({
   title: "About",
   description:
-    "AMAMRE is a Stuttgart-based Afro-European accessible premium streetwear brand.",
+    "AMAMBRA is a Stuttgart-based Afro-European accessible premium streetwear brand.",
   path: "/about",
 });
 
@@ -55,11 +55,11 @@ export default function AboutPage() {
         <AppContainer>
           <ImageFrame sx={{ aspectRatio: "16 / 7" }}>
             <Image
-              alt="AMAMRE campaign photographed in a minimal atelier"
+              alt="AMAMBRA campaign photographed in a minimal atelier"
               fill
               priority
               sizes="100vw"
-              src="/editorial/amamre-hero-campaign.png"
+              src="/editorial/amambra-hero-campaign.png"
             />
           </ImageFrame>
         </AppContainer>

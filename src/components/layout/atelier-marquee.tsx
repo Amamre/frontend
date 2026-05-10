@@ -6,7 +6,7 @@ const MARQUEE_ITEMS = [
   "SATIN-LINED ESSENTIALS",
   "CULTURE WITHOUT COSTUME",
   "ACCESSIBLE PREMIUM",
-  "AMAMRE ATELIER",
+  "AMAMBRA ATELIER",
 ] as const;
 
 const marqueeRows = [
@@ -17,7 +17,7 @@ const marqueeRows = [
 export function AtelierMarquee() {
   return (
     <aside
-      aria-label="AMAMRE atelier announcements"
+      aria-label="AMAMBRA atelier announcements"
       className="atelier-marquee"
     >
       <div className="atelier-marquee__fade" />

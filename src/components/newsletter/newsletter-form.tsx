@@ -1,5 +1,7 @@
 "use client";
 
+import { subscribeNewsletter } from "@/app/actions";
+import { brandColors, transitions } from "@/styles/theme";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import {
   Box,
@@ -11,8 +13,6 @@ import {
   Typography,
 } from "@mui/material";
 import { useActionState } from "react";
-import { subscribeNewsletter } from "@/app/actions";
-import { brandColors, transitions } from "@/styles/theme";
 
 type NewsletterFormProps = {
   source: string;
@@ -119,7 +119,7 @@ export function NewsletterForm({ source }: NewsletterFormProps) {
               }}
             />
           }
-          label="I agree to receive AMAMRE editorial emails and can unsubscribe at any time."
+          label="I agree to receive AMAMBRA editorial emails and can unsubscribe at any time."
           sx={{
             alignItems: "flex-start",
             color: "rgba(250, 248, 241, 0.62)",

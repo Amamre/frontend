@@ -1,11 +1,11 @@
 "use client";
 
-import { Box, Paper, Stack, Typography } from "@mui/material";
-import { alpha, styled } from "@mui/material/styles";
-import { motion } from "framer-motion";
 import { NewsletterForm } from "@/components/newsletter/newsletter-form";
 import { AppContainer, Eyebrow } from "@/components/ui/Primitives";
 import { brandColors, transitions } from "@/styles/theme";
+import { Box, Paper, Stack, Typography } from "@mui/material";
+import { alpha, styled } from "@mui/material/styles";
+import { motion } from "framer-motion";
 
 const NewsletterSurface = styled(Paper)(({ theme }) => ({
   position: "relative",
@@ -115,7 +115,7 @@ export function EditorialNewsletterSection() {
                   }}
                 >
                   Early access to drops, editorials, private Stuttgart releases,
-                  and collection notes from the AMAMRE world.
+                  and collection notes from the AMAMBRA world.
                 </Typography>
               </Stack>
 

@@ -1,4 +1,3 @@
-import { Box, Typography } from "@mui/material";
 import {
   AppContainer,
   BodyCopy,
@@ -7,6 +6,7 @@ import {
   PageSection,
   Subhead,
 } from "@/components/ui/Primitives";
+import { Box, Typography } from "@mui/material";
 
 type Section = {
   title: string;
@@ -25,7 +25,7 @@ export function LegalPage({
   return (
     <PageSection>
       <AppContainer component="article" sx={{ maxWidth: 860 }}>
-        <Eyebrow>AMAMRE</Eyebrow>
+        <Eyebrow>AMAMBRA</Eyebrow>
         <Headline>{title}</Headline>
         <Subhead sx={{ mt: 2.25 }}>{intro}</Subhead>
         {sections.map((section) => (

@@ -15,7 +15,7 @@ export const getConsentState = (): ConsentState => {
     return defaultConsent;
   }
 
-  const raw = window.localStorage.getItem("amamre-consent");
+  const raw = window.localStorage.getItem("amambra-consent");
 
   if (!raw) {
     return defaultConsent;
@@ -36,7 +36,7 @@ export const trackEvent = (event: AnalyticsEvent): void => {
   }
 
   window.dispatchEvent(
-    new CustomEvent("amamre:analytics", {
+    new CustomEvent("amambra:analytics", {
       detail: event,
     }),
   );

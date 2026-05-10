@@ -1,12 +1,5 @@
 "use client";
 
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { Box, Stack, Typography, useTheme } from "@mui/material";
-import { MotionConfig } from "framer-motion";
-import { useRouter } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
-import toast from "react-hot-toast";
 import { ProductMediaGallery } from "@/components/product/product-media-gallery";
 import {
   AppButton,
@@ -26,6 +19,13 @@ import { useCartStore } from "@/store/cartStore";
 import { useWishlistStore } from "@/store/wishlistStore";
 import { brandColors, transitions } from "@/styles/theme";
 import type { Product, ProductColorOption, ProductVariant } from "@/types";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { Box, Stack, Typography, useTheme } from "@mui/material";
+import { MotionConfig } from "framer-motion";
+import { useRouter } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
+import toast from "react-hot-toast";
 
 type ProductDetailExperienceProps = {
   initialColor?: string;
@@ -480,7 +480,7 @@ function resolveColor(
       name: "Obsidian Black",
       slug: "obsidian-black",
       code: brandColors.obsidian,
-      description: "Matte black AMAMRE colorway.",
+      description: "Matte black AMAMBRA colorway.",
       images: [],
     }
   );

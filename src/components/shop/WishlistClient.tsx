@@ -1,6 +1,5 @@
 "use client";
 
-import { Box } from "@mui/material";
 import ProductCard from "@/components/product/ProductCard";
 import {
   AppButton,
@@ -16,6 +15,7 @@ import {
 } from "@/components/ui/Primitives";
 import { useIsMounted } from "@/hooks/useUtils";
 import { useWishlistStore } from "@/store/wishlistStore";
+import { Box } from "@mui/material";
 
 export function WishlistClient() {
   const items = useWishlistStore((state) => state.items);
@@ -47,7 +47,7 @@ export function WishlistClient() {
             <Eyebrow>Wishlist</Eyebrow>
             <Headline>Saved pieces</Headline>
           </Box>
-          <Subhead>{visibleItems.length} AMAMRE pieces saved.</Subhead>
+          <Subhead>{visibleItems.length} AMAMBRA pieces saved.</Subhead>
         </SectionHeading>
         <ProductGrid>
           {visibleItems.map((product) => (

@@ -1,6 +1,6 @@
-# AMAMRE Ecommerce Architecture
+# AMAMBRA Ecommerce Architecture
 
-AMAMRE is implemented as a Next.js 16 App Router storefront with a production-oriented split between server-rendered routes, client-only commerce interactions, typed catalog data, and replaceable Shopify/Sanity boundaries.
+AMAMBRA is implemented as a Next.js 16 App Router storefront with a production-oriented split between server-rendered routes, client-only commerce interactions, typed catalog data, and replaceable Shopify/Sanity boundaries.
 
 ## Route Structure
 
@@ -33,7 +33,7 @@ src/app
 
 ## Core Layers
 
-- `src/data/products.ts`: realistic AMAMRE launch catalog, variants, inventory, collection mapping, copy, materials, care, and SEO metadata.
+- `src/data/products.ts`: realistic AMAMBRA launch catalog, variants, inventory, collection mapping, copy, materials, care, and SEO metadata.
 - `src/lib/catalog.ts`: server-safe catalog selectors, filtering, sorting, search, and static route helpers.
 - `src/lib/cart.ts`: shared order summary calculation for client cart and checkout views.
 - `src/services/shopify.ts`: typed Shopify Storefront API client using the Cart API and checkout URL handoff.
@@ -54,7 +54,7 @@ The UI uses project-local CSS tokens in `src/app/globals.css`:
 The generated bitmap campaign image is stored at:
 
 ```txt
-public/editorial/amamre-hero-campaign.png
+public/editorial/amambra-hero-campaign.png
 ```
 
 ## Commerce Flow

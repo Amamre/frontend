@@ -1,6 +1,6 @@
+import type { Cart, CartItem } from "@/types";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { Cart, CartItem } from "@/types";
 
 interface CartStore {
   cart: Cart | null;
@@ -65,7 +65,7 @@ export const useCartStore = create<CartStore>()(
       },
     }),
     {
-      name: "amamre-cart",
+      name: "amambra-cart",
       version: 1,
       skipHydration: true,
     },

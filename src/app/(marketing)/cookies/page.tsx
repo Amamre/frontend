@@ -3,7 +3,7 @@ import { createMetadata } from "@/lib/seo";
 
 export const metadata = createMetadata({
   title: "Cookies",
-  description: "AMAMRE cookie and consent policy.",
+  description: "AMAMBRA cookie and consent policy.",
   path: "/cookies",
 });
 

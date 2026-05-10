@@ -1,4 +1,3 @@
-import { Box } from "@mui/material";
 import {
   AppContainer,
   BodyCopy,
@@ -11,11 +10,12 @@ import {
   Subhead,
 } from "@/components/ui/Primitives";
 import { createMetadata } from "@/lib/seo";
+import { Box } from "@mui/material";
 
 export const metadata = createMetadata({
   title: "Account",
   description:
-    "AMAMRE account area for orders, profile, wishlist, and returns.",
+    "AMAMBRA account area for orders, profile, wishlist, and returns.",
   path: "/account",
   noIndex: true,
 });
@@ -47,7 +47,7 @@ export default function AccountPage() {
             },
             {
               title: "Wishlist",
-              body: "Return to saved AMAMRE pieces before checkout.",
+              body: "Return to saved AMAMBRA pieces before checkout.",
               href: "/wishlist",
             },
           ].map((item) => (

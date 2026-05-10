@@ -3,7 +3,7 @@ import { createMetadata } from "@/lib/seo";
 
 export const metadata = createMetadata({
   title: "Privacy",
-  description: "AMAMRE privacy policy and GDPR information.",
+  description: "AMAMBRA privacy policy and GDPR information.",
   path: "/privacy",
 });
 
@@ -11,11 +11,11 @@ export default function PrivacyPage() {
   return (
     <LegalPage
       title="Privacy policy"
-      intro="GDPR-oriented privacy structure for an AMAMRE production launch."
+      intro="GDPR-oriented privacy structure for an AMAMBRA production launch."
       sections={[
         {
           title: "Data controller",
-          body: "AMAMRE must add the final legal entity, address, and data protection contact before launch.",
+          body: "AMAMBRA must add the final legal entity, address, and data protection contact before launch.",
         },
         {
           title: "Storefront data",

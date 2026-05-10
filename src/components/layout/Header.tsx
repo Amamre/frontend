@@ -1,5 +1,11 @@
 "use client";
 
+import { AppContainer, IconAction } from "@/components/ui/Primitives";
+import { BRAND, COLLECTIONS, MAIN_NAVIGATION } from "@/constants/config";
+import { useIsMounted } from "@/hooks/useUtils";
+import { useCartStore } from "@/store/cartStore";
+import { useWishlistStore } from "@/store/wishlistStore";
+import { brandColors, transitions } from "@/styles/theme";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import CloseIcon from "@mui/icons-material/Close";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -7,6 +13,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import {
+  alpha,
   AppBar,
   Box,
   Collapse,
@@ -17,12 +24,6 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { type ElementType, useState } from "react";
-import { AppContainer, IconAction } from "@/components/ui/Primitives";
-import { BRAND, COLLECTIONS, MAIN_NAVIGATION } from "@/constants/config";
-import { useIsMounted } from "@/hooks/useUtils";
-import { useCartStore } from "@/store/cartStore";
-import { useWishlistStore } from "@/store/wishlistStore";
-import { brandColors } from "@/styles/theme";
 
 export function Header() {
   const pathname = usePathname();
@@ -59,13 +60,13 @@ export function Header() {
         }}
       >
         <Typography
-          aria-label="AMAMRE home"
+          aria-label="AMAMBRA home"
           component={Link}
           href="/"
           sx={{
             fontFamily: 'Georgia, "Times New Roman", serif',
             fontSize: "1.4rem",
-            fontWeight: 700,
+            fontWeight: 600,
             letterSpacing: 0,
           }}
         >
@@ -76,7 +77,7 @@ export function Header() {
           aria-label="Primary navigation"
           component="nav"
           direction="row"
-          spacing={3.5}
+          spacing={4.5}
           sx={{ display: { xs: "none", md: "flex" }, justifyContent: "center" }}
         >
           {MAIN_NAVIGATION.map((item) => (
@@ -85,14 +86,53 @@ export function Header() {
               href={item.href}
               key={item.href}
               sx={{
+                position: "relative",
+                display: "inline-flex",
+                alignItems: "center",
+                width: "fit-content",
+
                 color:
                   pathname === item.href
                     ? theme.palette.text.primary
                     : theme.palette.text.secondary,
-                fontSize: "0.86rem",
-                fontWeight: 700,
-                transition: "color 180ms cubic-bezier(0.22, 1, 0.36, 1)",
-                "&:hover": { color: theme.palette.text.primary },
+
+                fontSize: "0.82rem",
+                fontWeight: 600,
+                letterSpacing: "0.16em",
+                textTransform: "uppercase",
+                textDecoration: "none",
+
+                transition: `color 240ms ${transitions.ease}`,
+
+                "&::after": {
+                  content: '""',
+                  position: "absolute",
+                  left: 0,
+                  bottom: "-7px",
+                  height: "0.5px",
+
+                  width: "100%",
+
+                  backgroundColor: alpha(brandColors.goldSoft, 0.78),
+
+                  transform: pathname === item.href ? "scaleX(1)" : "scaleX(0)",
+                  transformOrigin: "left center",
+
+                  transition: `transform 320ms ${transitions.ease}`,
+                },
+
+                "&:hover": {
+                  color: alpha(brandColors.goldSoft, 0.92),
+
+                  "&::after": {
+                    transform: "scaleX(1)",
+                  },
+                },
+
+                "&:focus-visible": {
+                  outline: `2px solid ${alpha(brandColors.goldSoft, 0.72)}`,
+                  outlineOffset: "6px",
+                },
               }}
             >
               {item.title}

@@ -1,6 +1,6 @@
+import type { Product } from "@/types";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { Product } from "@/types";
 
 interface WishlistStore {
   items: Product[];
@@ -39,7 +39,7 @@ export const useWishlistStore = create<WishlistStore>()(
       getItemCount: () => get().items.length,
     }),
     {
-      name: "amamre-wishlist",
+      name: "amambra-wishlist",
       version: 1,
       skipHydration: true,
     },

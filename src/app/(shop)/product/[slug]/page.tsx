@@ -1,6 +1,3 @@
-import { Box, Typography } from "@mui/material";
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 import ProductCard from "@/components/product/ProductCard";
 import { ProductDetailExperience } from "@/components/product/ProductDetailExperience";
 import {
@@ -21,6 +18,9 @@ import {
   normalizeParam,
 } from "@/lib/catalog";
 import { createMetadata } from "@/lib/seo";
+import { Box, Typography } from "@mui/material";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 type ProductPageProps = {
   params: Promise<{ slug: string }>;
@@ -46,7 +46,7 @@ export async function generateMetadata({
   }
 
   return createMetadata({
-    title: product.metadata.seo.title.replace(" | AMAMRE", ""),
+    title: product.metadata.seo.title.replace(" | AMAMBRA", ""),
     description: product.metadata.seo.description,
     keywords: product.metadata.seo.keywords,
     image: product.metadata.seo.ogImage ?? product.images[0]?.url,

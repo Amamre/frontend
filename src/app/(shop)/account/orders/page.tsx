@@ -9,7 +9,7 @@ import { createMetadata } from "@/lib/seo";
 
 export const metadata = createMetadata({
   title: "Orders",
-  description: "AMAMRE customer order history.",
+  description: "AMAMBRA customer order history.",
   path: "/account/orders",
   noIndex: true,
 });
@@ -25,7 +25,7 @@ export default function OrdersPage() {
           account provider before exposing customer order data.
         </BodyCopy>
         <AppButton href="/shop" variant="primary">
-          Shop AMAMRE
+          Shop AMAMBRA
         </AppButton>
       </div>
     </EmptyState>

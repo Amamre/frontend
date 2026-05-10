@@ -1,6 +1,7 @@
 "use client";
 
 import { Box } from "@mui/material";
+import Image from "next/image";
 import { brandColors, transitions } from "@/styles/theme";
 import type { ProductImage } from "@/types";
 
@@ -109,35 +110,26 @@ export function StickyThumbnailRail({
                     active ? "rgba(216, 198, 165, 0.88)" : brandColors.border
                   }`,
                   borderRadius: "6px",
-                  background: brandColors.charcoal,
+                  background: brandColors.obsidian,
                   boxShadow: active
-                    ? "0 0 0 1px rgba(216, 198, 165, 0.16), 0 14px 36px rgba(0, 0, 0, 0.28)"
+                    ? "0 0 0 1px rgba(216, 198, 165, 0.2), 0 0 24px rgba(216, 198, 165, 0.12), 0 16px 38px rgba(0, 0, 0, 0.34)"
                     : "none",
                   cursor: "pointer",
-                  opacity: active ? 1 : 0.62,
                   p: 0,
-                  transition: `border-color 220ms ${transitions.ease}, box-shadow 220ms ${transitions.ease}, opacity 220ms ${transitions.ease}, transform 220ms ${transitions.ease}`,
-                  "&::after": {
-                    position: "absolute",
-                    right: vertical ? 5 : 6,
-                    bottom: vertical ? 5 : 6,
-                    left: vertical ? 5 : 6,
-                    height: 1,
-                    content: '""',
-                    background: active
-                      ? "rgba(216, 198, 165, 0.92)"
-                      : "rgba(250, 248, 241, 0.16)",
-                    opacity: active ? 1 : 0,
-                    transition: `opacity 220ms ${transitions.ease}`,
-                  },
+                  transform: active ? "scale(1.018)" : "scale(1)",
+                  transition: `border-color 220ms ${transitions.ease}, box-shadow 220ms ${transitions.ease}, transform 220ms ${transitions.ease}`,
                   "&:hover": {
                     borderColor: "rgba(216, 198, 165, 0.72)",
-                    opacity: 1,
-                    transform: "translateY(-1px)",
+                    boxShadow:
+                      "0 0 0 1px rgba(216, 198, 165, 0.14), 0 14px 34px rgba(0, 0, 0, 0.32)",
+                    transform: active
+                      ? "scale(1.018)"
+                      : "translateY(-1px) scale(1)",
                   },
                   "&:focus-visible": {
                     borderColor: "rgba(216, 198, 165, 0.94)",
-                    boxShadow: "0 0 0 3px rgba(216, 198, 165, 0.18)",
+                    boxShadow:
+                      "0 0 0 3px rgba(216, 198, 165, 0.18), 0 0 24px rgba(216, 198, 165, 0.12)",
                     outline: "none",
                   },
                 }}
@@ -175,14 +167,16 @@ function ThumbnailMedia({ image }: { image: ProductImage }) {
           }}
         />
       ) : (
-        <Box
+        <Image
+          alt=""
           aria-hidden="true"
-          sx={{
-            position: "absolute",
-            inset: 0,
-            backgroundImage: `url(${image.mobileUrl ?? image.url})`,
-            backgroundPosition: "42% 50%",
-            backgroundSize: "cover",
+          fill
+          quality={82}
+          sizes="76px"
+          src={image.mobileUrl ?? image.url}
+          style={{
+            objectFit: "cover",
+            objectPosition: "64% 50%",
           }}
         />
       )}

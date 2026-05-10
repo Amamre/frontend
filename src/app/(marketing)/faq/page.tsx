@@ -1,10 +1,3 @@
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Box,
-} from "@mui/material";
 import {
   AppContainer,
   Eyebrow,
@@ -14,19 +7,26 @@ import {
 } from "@/components/ui/Primitives";
 import { BRAND } from "@/constants/config";
 import { createMetadata } from "@/lib/seo";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Box,
+} from "@mui/material";
 
 export const metadata = createMetadata({
   title: "FAQ",
   description:
-    "AMAMRE FAQ for shipping, returns, sizing, payments, materials, and product care.",
+    "AMAMBRA FAQ for shipping, returns, sizing, payments, materials, and product care.",
   path: "/faq",
 });
 
 const faqs = [
   {
-    question: "Where is AMAMRE based?",
+    question: "Where is AMAMBRA based?",
     answer:
-      "AMAMRE is based in Stuttgart, Germany. The brand direction combines European minimalism with subtle African heritage inspiration.",
+      "AMAMBRA is based in Stuttgart, Germany. The brand direction combines European minimalism with subtle African heritage inspiration.",
   },
   {
     question: "How does shipping work?",
@@ -39,7 +39,7 @@ const faqs = [
       "The recommended production policy is a 14-day EU withdrawal period plus a customer-friendly 30-day return window for unworn items with tags attached.",
   },
   {
-    question: "How do AMAMRE pieces fit?",
+    question: "How do AMAMBRA pieces fit?",
     answer:
       "Most launch pieces use relaxed or oversized streetwear proportions. Product pages include variant, fit, and material notes for each item.",
   },

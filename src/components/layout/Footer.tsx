@@ -1,15 +1,5 @@
 "use client";
 
-import {
-  Box,
-  Checkbox,
-  FormControlLabel,
-  Stack,
-  TextField,
-  Typography,
-  useTheme,
-} from "@mui/material";
-import { useActionState } from "react";
 import { subscribeNewsletter } from "@/app/actions";
 import {
   AppButton,
@@ -20,6 +10,16 @@ import {
 } from "@/components/ui/Primitives";
 import { BRAND, FOOTER_NAVIGATION, SOCIAL_LINKS } from "@/constants/config";
 import { brandColors } from "@/styles/theme";
+import {
+  Box,
+  Checkbox,
+  FormControlLabel,
+  Stack,
+  TextField,
+  Typography,
+  useTheme,
+} from "@mui/material";
+import { useActionState } from "react";
 
 const initialState = {
   ok: false,
@@ -89,7 +89,7 @@ export function Footer() {
             />
             <FormControlLabel
               control={<Checkbox name="consent" required />}
-              label="I agree to receive AMAMRE editorial emails and can unsubscribe at any time."
+              label="I agree to receive AMAMBRA editorial emails and can unsubscribe at any time."
               sx={{
                 alignItems: "flex-start",
                 color: theme.palette.text.secondary,

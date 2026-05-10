@@ -1,12 +1,5 @@
 "use client";
 
-import AddIcon from "@mui/icons-material/Add";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { Box, Chip, Stack, Typography, useTheme } from "@mui/material";
-import Image from "next/image";
-import Link from "next/link";
-import toast from "react-hot-toast";
 import {
   IconAction,
   Muted,
@@ -20,6 +13,13 @@ import { useCartStore } from "@/store/cartStore";
 import { useWishlistStore } from "@/store/wishlistStore";
 import { brandColors, transitions } from "@/styles/theme";
 import type { Product } from "@/types";
+import AddIcon from "@mui/icons-material/Add";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { Box, Chip, Stack, Typography, useTheme } from "@mui/material";
+import Image from "next/image";
+import Link from "next/link";
+import toast from "react-hot-toast";
 
 interface ProductCardProps {
   product: Product;
@@ -93,7 +93,7 @@ export default function ProductCard({
           fill
           priority={priority}
           sizes={IMAGE_CONFIG.sizes}
-          src={product.images[0]?.url ?? "/editorial/amamre-hero-campaign.png"}
+          src={product.images[0]?.url ?? "/editorial/amambra-hero-campaign.png"}
         />
         <Stack
           direction="row"

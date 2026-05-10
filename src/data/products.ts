@@ -6,7 +6,7 @@ import type {
   ProductVariant,
 } from "@/types";
 
-const CAMPAIGN_IMAGE = "/editorial/amamre-hero-campaign.png";
+const CAMPAIGN_IMAGE = "/editorial/amambra-hero-campaign.png";
 
 const COLOR_CODES: Record<string, string> = {
   "Obsidian Black": "#090908",
@@ -84,7 +84,7 @@ const createColorOptions = (
     code: colorCode(color),
     description:
       COLOR_DESCRIPTIONS[color] ??
-      "Editorial colorway with understated AMAMRE detailing.",
+      "Editorial colorway with understated AMAMBRA detailing.",
     images: imageSet(slug, title, color),
   }));
 
@@ -158,7 +158,7 @@ export const MOCK_PRODUCTS: Product[] = [
     slug: "signature-satin-hood-hoodie",
     description: "Heavy fleece with a quiet satin-lined hood.",
     longDescription:
-      "A dense 480 GSM cotton fleece hoodie cut with a relaxed European shoulder, deep ribbing, and AMAMRE's satin-lined hood for a smooth luxury finish. It is the first signature piece: minimal, weighty, and built for daily city wear.",
+      "A dense 480 GSM cotton fleece hoodie cut with a relaxed European shoulder, deep ribbing, and AMAMBRA's satin-lined hood for a smooth luxury finish. It is the first signature piece: minimal, weighty, and built for daily city wear.",
     price: 148,
     compareAtPrice: 178,
     images: signatureColors[0]?.images ?? [],
@@ -179,7 +179,7 @@ export const MOCK_PRODUCTS: Product[] = [
     care: "Wash inside out at 30C. Do not tumble dry. Steam gently from reverse side.",
     fit: "Relaxed streetwear fit with dropped shoulder and structured hood.",
     story:
-      "Designed in Stuttgart as the first AMAMRE signature piece, the satin hood references ceremonial polish without turning heritage into costume.",
+      "Designed in Stuttgart as the first AMAMBRA signature piece, the satin hood references ceremonial polish without turning heritage into costume.",
     features: [
       "Satin-lined hood designed for comfort and hair protection",
       "Dense 480 GSM organic cotton fleece",
@@ -196,10 +196,10 @@ export const MOCK_PRODUCTS: Product[] = [
     publishedAt: "2026-01-15T09:00:00.000Z",
     metadata: {
       seo: {
-        title: "Signature Satin Hood Hoodie | AMAMRE",
+        title: "Signature Satin Hood Hoodie | AMAMBRA",
         description:
-          "AMAMRE's heavyweight satin-lined hoodie in obsidian black and deep olive. Premium Afro-European streetwear from Stuttgart.",
-        keywords: ["satin lined hoodie", "luxury streetwear", "AMAMRE hoodie"],
+          "AMAMBRA's heavyweight satin-lined hoodie in obsidian black and deep olive. Premium Afro-European streetwear from Stuttgart.",
+        keywords: ["satin lined hoodie", "luxury streetwear", "AMAMBRA hoodie"],
         ogImage: CAMPAIGN_IMAGE,
       },
     },
@@ -228,7 +228,7 @@ export const MOCK_PRODUCTS: Product[] = [
     care: "Wash at 30C with similar colors. Dry flat. Avoid fabric softener.",
     fit: "Jacket is boxy and cropped at the hip. Trouser is straight with a clean break.",
     story:
-      "The tracksuit carries AMAMRE's Afro-European balance: functional Stuttgart minimalism, movement-first comfort, and restrained trim inspired by ceremonial linework.",
+      "The tracksuit carries AMAMBRA's Afro-European balance: functional Stuttgart minimalism, movement-first comfort, and restrained trim inspired by ceremonial linework.",
     features: [
       "Two-piece set with jacket and trouser",
       "Tonal heritage piping at pocket and side seam",
@@ -245,10 +245,10 @@ export const MOCK_PRODUCTS: Product[] = [
     publishedAt: "2026-02-12T09:00:00.000Z",
     metadata: {
       seo: {
-        title: "Heritage Tracksuit | AMAMRE",
+        title: "Heritage Tracksuit | AMAMBRA",
         description:
-          "Premium AMAMRE heritage tracksuit with tonal linework, muted gold hardware, and a tailored streetwear fit.",
-        keywords: ["luxury tracksuit", "heritage streetwear", "AMAMRE set"],
+          "Premium AMAMBRA heritage tracksuit with tonal linework, muted gold hardware, and a tailored streetwear fit.",
+        keywords: ["luxury tracksuit", "heritage streetwear", "AMAMBRA set"],
         ogImage: CAMPAIGN_IMAGE,
       },
     },
@@ -277,7 +277,7 @@ export const MOCK_PRODUCTS: Product[] = [
     care: "Machine wash cold. Hang dry. Iron on low from reverse.",
     fit: "Oversized through the body with a straight hem and relaxed sleeve.",
     story:
-      "The Atelier Overshirt is the AMAMRE answer to European minimal outerwear: grounded color, quiet utility, and a silhouette with calm authority.",
+      "The Atelier Overshirt is the AMAMBRA answer to European minimal outerwear: grounded color, quiet utility, and a silhouette with calm authority.",
     features: [
       "Hidden placket",
       "Matte recycled snaps",
@@ -294,10 +294,10 @@ export const MOCK_PRODUCTS: Product[] = [
     publishedAt: "2026-03-08T09:00:00.000Z",
     metadata: {
       seo: {
-        title: "Atelier Overshirt | AMAMRE",
+        title: "Atelier Overshirt | AMAMBRA",
         description:
-          "Structured premium overshirt by AMAMRE with brushed twill, utility pockets, and a relaxed editorial silhouette.",
-        keywords: ["atelier overshirt", "premium overshirt", "AMAMRE tops"],
+          "Structured premium overshirt by AMAMBRA with brushed twill, utility pockets, and a relaxed editorial silhouette.",
+        keywords: ["atelier overshirt", "premium overshirt", "AMAMBRA tops"],
         ogImage: CAMPAIGN_IMAGE,
       },
     },
@@ -308,7 +308,7 @@ export const MOCK_PRODUCTS: Product[] = [
     slug: "satin-lined-beanie",
     description: "Soft rib knit outside, smooth satin inside.",
     longDescription:
-      "A premium rib-knit beanie with a discreet AMAMRE tab and satin lining designed to reduce friction while keeping a sculpted profile.",
+      "A premium rib-knit beanie with a discreet AMAMBRA tab and satin lining designed to reduce friction while keeping a sculpted profile.",
     price: 48,
     images: beanieColors[0]?.images ?? [],
     variants: createVariants({
@@ -322,7 +322,7 @@ export const MOCK_PRODUCTS: Product[] = [
     category: "accessories",
     collection: "signature",
     tags: ["satin lined", "headwear", "winter", "accessory"],
-    material: "Merino blend rib knit, recycled satin lining, woven AMAMRE tab",
+    material: "Merino blend rib knit, recycled satin lining, woven AMAMBRA tab",
     care: "Hand wash cold. Reshape while damp. Dry flat.",
     fit: "One size with a close luxury rib profile.",
     story:
@@ -330,7 +330,7 @@ export const MOCK_PRODUCTS: Product[] = [
     features: [
       "Smooth satin interior",
       "Soft folded cuff",
-      "Low-profile AMAMRE tab",
+      "Low-profile AMAMBRA tab",
       "Gift-ready packaging",
     ],
     sizes: ["ONE SIZE"],
@@ -343,10 +343,10 @@ export const MOCK_PRODUCTS: Product[] = [
     publishedAt: "2026-01-20T09:00:00.000Z",
     metadata: {
       seo: {
-        title: "Satin-Lined Beanie | AMAMRE",
+        title: "Satin-Lined Beanie | AMAMBRA",
         description:
-          "AMAMRE satin-lined rib knit beanie with a premium soft interior and minimal tab branding.",
-        keywords: ["satin lined beanie", "luxury beanie", "AMAMRE accessory"],
+          "AMAMBRA satin-lined rib knit beanie with a premium soft interior and minimal tab branding.",
+        keywords: ["satin lined beanie", "luxury beanie", "AMAMBRA accessory"],
         ogImage: CAMPAIGN_IMAGE,
       },
     },
@@ -357,7 +357,7 @@ export const MOCK_PRODUCTS: Product[] = [
     slug: "heritage-cap",
     description: "Low-profile cap with tonal embroidery.",
     longDescription:
-      "A structured six-panel cap in washed cotton canvas with tonal AMAMRE embroidery, antique gold adjuster, and a curved brim.",
+      "A structured six-panel cap in washed cotton canvas with tonal AMAMBRA embroidery, antique gold adjuster, and a curved brim.",
     price: 54,
     images: capColors[0]?.images ?? [],
     variants: createVariants({
@@ -374,7 +374,7 @@ export const MOCK_PRODUCTS: Product[] = [
     care: "Spot clean only. Do not bleach. Air dry.",
     fit: "Low-profile six-panel fit with adjustable back strap.",
     story:
-      "The Heritage Cap compresses the AMAMRE visual language into an everyday object: subtle linework, calm proportion, and a Stuttgart streetwear attitude.",
+      "The Heritage Cap compresses the AMAMBRA visual language into an everyday object: subtle linework, calm proportion, and a Stuttgart streetwear attitude.",
     features: [
       "Tonal border embroidery",
       "Matte metal adjuster",
@@ -391,10 +391,10 @@ export const MOCK_PRODUCTS: Product[] = [
     publishedAt: "2026-02-28T09:00:00.000Z",
     metadata: {
       seo: {
-        title: "Heritage Cap | AMAMRE",
+        title: "Heritage Cap | AMAMBRA",
         description:
-          "Low-profile AMAMRE heritage cap in washed cotton canvas with tonal embroidery.",
-        keywords: ["heritage cap", "luxury cap", "AMAMRE accessories"],
+          "Low-profile AMAMBRA heritage cap in washed cotton canvas with tonal embroidery.",
+        keywords: ["heritage cap", "luxury cap", "AMAMBRA accessories"],
         ogImage: CAMPAIGN_IMAGE,
       },
     },
@@ -440,13 +440,13 @@ export const MOCK_PRODUCTS: Product[] = [
     publishedAt: "2026-01-05T09:00:00.000Z",
     metadata: {
       seo: {
-        title: "Premium Essential Tee | AMAMRE",
+        title: "Premium Essential Tee | AMAMBRA",
         description:
-          "Heavyweight AMAMRE premium essential tee in compact organic cotton.",
+          "Heavyweight AMAMBRA premium essential tee in compact organic cotton.",
         keywords: [
           "premium tee",
           "organic cotton t-shirt",
-          "AMAMRE essentials",
+          "AMAMBRA essentials",
         ],
         ogImage: CAMPAIGN_IMAGE,
       },
@@ -460,7 +460,7 @@ export const MOCK_COLLECTIONS: Collection[] = [
     title: "Signature Collection",
     slug: "signature",
     description:
-      "The defining AMAMRE pieces: satin-lined essentials, tactile warmth, and quiet luxury streetwear.",
+      "The defining AMAMBRA pieces: satin-lined essentials, tactile warmth, and quiet luxury streetwear.",
     image: imageSet("signature", "Signature Collection")[0],
     products: MOCK_PRODUCTS.filter(
       (product) => product.collection === "signature",

@@ -3,7 +3,7 @@ import { createMetadata } from "@/lib/seo";
 
 export const metadata = createMetadata({
   title: "Wishlist",
-  description: "Saved AMAMRE pieces.",
+  description: "Saved AMAMBRA pieces.",
   path: "/wishlist",
   noIndex: true,
 });

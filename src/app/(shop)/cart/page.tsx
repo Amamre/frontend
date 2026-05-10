@@ -3,7 +3,7 @@ import { createMetadata } from "@/lib/seo";
 
 export const metadata = createMetadata({
   title: "Cart",
-  description: "Review your AMAMRE shopping bag and continue to checkout.",
+  description: "Review your AMAMBRA shopping bag and continue to checkout.",
   path: "/cart",
   noIndex: true,
 });

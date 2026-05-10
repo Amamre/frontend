@@ -1,4 +1,4 @@
-# AMAMRE
+# AMAMBRA
 
 Luxury Afro-European accessible premium streetwear storefront built with Next.js 16, TypeScript, Framer Motion, Zustand, Zod, React Hook Form, Shopify Storefront API boundaries, and Sanity CMS schema scaffolding.
 
@@ -25,7 +25,7 @@ Set Shopify and Sanity values in `.env.local` when moving from mock catalog data
 
 - `src/app` - App Router routes, metadata, server actions, SEO files.
 - `src/components` - storefront UI, product, cart, checkout, search, layout, and form components.
-- `src/data/products.ts` - AMAMRE launch mock catalog.
+- `src/data/products.ts` - AMAMBRA launch mock catalog.
 - `src/services/shopify.ts` - typed Storefront API Cart integration.
 - `src/services/sanity.ts` - typed Sanity fetch helpers.
 - `src/cms/sanity-schemas.ts` - CMS schema definitions.

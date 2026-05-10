@@ -4,7 +4,7 @@ import { createMetadata } from "@/lib/seo";
 
 export const metadata = createMetadata({
   title: "Impressum",
-  description: "Legal disclosure for AMAMRE in Germany.",
+  description: "Legal disclosure for AMAMBRA in Germany.",
   path: "/impressum",
 });
 

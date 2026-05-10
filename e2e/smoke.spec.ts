@@ -15,7 +15,7 @@ const routes = [
   ["contact", "/contact", "Customer care"],
   ["size guide", "/size-guide", "Size guide"],
   ["shipping returns", "/shipping-returns", "Shipping and returns"],
-  ["search", "/search", "Find your AMAMRE piece"],
+  ["search", "/search", "Find your AMAMBRA piece"],
   ["account", "/account", "Client account center"],
   ["orders", "/account/orders", "Order history connects here"],
   ["profile", "/account/profile", "Profile and consent preferences"],
@@ -38,7 +38,7 @@ test.describe("route coverage", () => {
       await expect(
         page.getByText(expectedText, { exact: false }).first(),
       ).toBeVisible();
-      await expect(page.locator("body")).toContainText("AMAMRE");
+      await expect(page.locator("body")).toContainText("AMAMBRA");
       expect(pageErrors).toEqual([]);
     });
   }

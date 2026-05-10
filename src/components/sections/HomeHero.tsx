@@ -1,7 +1,5 @@
 "use client";
 
-import { Box, Typography } from "@mui/material";
-import { motion } from "framer-motion";
 import ProductCard from "@/components/product/ProductCard";
 import { LuxuryHero } from "@/components/sections/luxury-hero";
 import {
@@ -19,6 +17,8 @@ import {
   Surface,
 } from "@/components/ui/Primitives";
 import { getAllCollections, getFeaturedProducts } from "@/lib/catalog";
+import { Box, Typography } from "@mui/material";
+import { motion } from "framer-motion";
 
 const featuredProducts = getFeaturedProducts(4);
 const collections = getAllCollections();
@@ -70,7 +70,7 @@ export function CollectionEditorialSection() {
           </Box>
           <Subhead>
             Every piece is designed to layer across Signature, Heritage,
-            Essentials, and Atelier, giving AMAMRE a scalable merchandising
+            Essentials, and Atelier, giving AMAMBRA a scalable merchandising
             foundation from launch.
           </Subhead>
         </SectionHeading>

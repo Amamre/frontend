@@ -5,7 +5,7 @@ import { createMetadata } from "@/lib/seo";
 export const metadata = createMetadata({
   title: "Search",
   description:
-    "Search AMAMRE products, collections, materials, and accessories.",
+    "Search AMAMBRA products, collections, materials, and accessories.",
   path: "/search",
 });
 

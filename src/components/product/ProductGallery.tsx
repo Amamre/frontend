@@ -20,7 +20,7 @@ function resolveProductColor(product: Product): ProductColorOption {
       name: product.colors[0]?.name ?? "Obsidian Black",
       slug: "obsidian-black",
       code: product.colors[0]?.code ?? brandColors.obsidian,
-      description: "AMAMRE product colorway.",
+      description: "AMAMBRA product colorway.",
       images: product.images,
     }
   );

@@ -1,25 +1,25 @@
 import type { NavigationItem, ProductSort } from "@/types";
 
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? "https://amamre.com";
+  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? "https://amambra.com";
 
 export const BRAND = {
-  name: "AMAMRE",
+  name: "AMAMBRA",
   tagline: "Afro-European Accessible Premium Streetwear",
   description:
     "Modern European minimalism meets subtle African heritage inspiration in accessible premium streetwear.",
   location: "Stuttgart, Germany",
   founded: 2024,
-  email: "hello@amamre.com",
+  email: "hello@amambra.com",
   phone: "+49 711 0000 0000",
-  address: "AMAMRE Studio, Stuttgart, Germany",
+  address: "AMAMBRA Studio, Stuttgart, Germany",
 };
 
 export const SOCIAL_LINKS = {
-  instagram: "https://instagram.com/amamre",
-  tiktok: "https://tiktok.com/@amamre",
-  youtube: "https://youtube.com/@amamre",
-  linkedin: "https://linkedin.com/company/amamre",
+  instagram: "https://instagram.com/amambra",
+  tiktok: "https://tiktok.com/@amambra",
+  youtube: "https://youtube.com/@amambra",
+  linkedin: "https://linkedin.com/company/amambra",
 };
 
 export const MAIN_NAVIGATION: NavigationItem[] = [
@@ -37,7 +37,7 @@ export const MAIN_NAVIGATION: NavigationItem[] = [
   {
     title: "About",
     href: "/about",
-    description: "The Afro-European AMAMRE story",
+    description: "The Afro-European AMAMBRA story",
   },
   {
     title: "FAQ",
@@ -60,7 +60,7 @@ export const FOOTER_NAVIGATION = {
     { title: "Accessories", href: "/shop?category=accessories" },
   ],
   company: [
-    { title: "About AMAMRE", href: "/about" },
+    { title: "About AMAMBRA", href: "/about" },
     { title: "Collections", href: "/collections" },
     { title: "Account", href: "/account" },
     { title: "Contact", href: "/contact" },
@@ -91,7 +91,7 @@ export const COLLECTIONS = [
     id: "signature",
     name: "Signature",
     slug: "signature",
-    description: "The defining satin-lined AMAMRE pieces.",
+    description: "The defining satin-lined AMAMBRA pieces.",
   },
   {
     id: "heritage",
@@ -175,18 +175,18 @@ export const SHIPPING_OPTIONS = [
 ];
 
 export const SEO_DEFAULTS = {
-  title: "AMAMRE | Afro-European Accessible Premium Streetwear",
+  title: "AMAMBRA | Afro-European Accessible Premium Streetwear",
   description:
-    "Shop AMAMRE, a Stuttgart-based Afro-European premium streetwear brand combining modern minimalism, subtle African heritage, and luxury everyday pieces.",
+    "Shop AMAMBRA, a Stuttgart-based Afro-European premium streetwear brand combining modern minimalism, subtle African heritage, and luxury everyday pieces.",
   keywords: [
-    "AMAMRE",
+    "AMAMBRA",
     "Afro-European fashion",
     "luxury streetwear",
     "premium hoodie",
     "satin lined hoodie",
     "Stuttgart fashion",
   ],
-  ogImage: "/editorial/amamre-hero-campaign.png",
+  ogImage: "/editorial/amambra-hero-campaign.png",
 };
 
 export const BRAND_META = {

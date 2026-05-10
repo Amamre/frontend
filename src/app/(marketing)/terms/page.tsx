@@ -3,7 +3,7 @@ import { createMetadata } from "@/lib/seo";
 
 export const metadata = createMetadata({
   title: "Terms",
-  description: "AMAMRE terms and conditions.",
+  description: "AMAMBRA terms and conditions.",
   path: "/terms",
 });
 
@@ -15,7 +15,7 @@ export default function TermsPage() {
       sections={[
         {
           title: "Scope",
-          body: "These terms apply to purchases made through the AMAMRE online store once checkout is live.",
+          body: "These terms apply to purchases made through the AMAMBRA online store once checkout is live.",
         },
         {
           title: "Prices and payment",

@@ -1,8 +1,5 @@
 "use client";
 
-import SearchIcon from "@mui/icons-material/Search";
-import { Box, TextField } from "@mui/material";
-import { useMemo, useState } from "react";
 import ProductCard from "@/components/product/ProductCard";
 import {
   AppContainer,
@@ -16,6 +13,9 @@ import {
 } from "@/components/ui/Primitives";
 import { filterProducts } from "@/lib/catalog";
 import type { Product } from "@/types";
+import SearchIcon from "@mui/icons-material/Search";
+import { Box, TextField } from "@mui/material";
+import { useMemo, useState } from "react";
 
 export function SearchClient({
   products,
@@ -40,7 +40,7 @@ export function SearchClient({
         <SectionHeading>
           <Box>
             <Eyebrow>Search</Eyebrow>
-            <Headline>Find your AMAMRE piece</Headline>
+            <Headline>Find your AMAMBRA piece</Headline>
           </Box>
         </SectionHeading>
 

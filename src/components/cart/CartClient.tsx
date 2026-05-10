@@ -1,10 +1,5 @@
 "use client";
 
-import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
-import { Box, Stack, TextField, Typography } from "@mui/material";
-import Image from "next/image";
-import { useState, useTransition } from "react";
-import toast from "react-hot-toast";
 import { startShopifyCheckout } from "@/app/actions";
 import {
   AppButton,
@@ -27,6 +22,11 @@ import { calculateOrderSummary } from "@/lib/cart";
 import { formatPrice } from "@/lib/utils";
 import { useCartStore } from "@/store/cartStore";
 import { brandColors } from "@/styles/theme";
+import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
+import { Box, Stack, TextField, Typography } from "@mui/material";
+import Image from "next/image";
+import { useState, useTransition } from "react";
+import toast from "react-hot-toast";
 
 export function CartClient() {
   const { items, removeItem, updateQuantity } = useCartStore();
@@ -65,7 +65,7 @@ export function CartClient() {
           <Headline>Your cart is empty.</Headline>
           <BodyCopy>
             Start with the Signature Satin Hood Hoodie or explore the full
-            AMAMRE launch collection.
+            AMAMBRA launch collection.
           </BodyCopy>
           <AppButton href="/shop" variant="primary">
             Continue shopping
@@ -119,7 +119,7 @@ export function CartClient() {
                     sizes="120px"
                     src={
                       item.product.images[0]?.url ??
-                      "/editorial/amamre-hero-campaign.png"
+                      "/editorial/amambra-hero-campaign.png"
                     }
                     style={{ objectFit: "cover" }}
                   />
@@ -211,7 +211,7 @@ export function CartClient() {
                 <FieldTitle>Promo code</FieldTitle>
                 <TextField
                   onChange={(event) => setPromoCode(event.target.value)}
-                  placeholder="AMAMRE"
+                  placeholder="AMAMBRA"
                   value={promoCode}
                 />
               </Box>

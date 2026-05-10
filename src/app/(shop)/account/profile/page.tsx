@@ -10,7 +10,7 @@ import { createMetadata } from "@/lib/seo";
 
 export const metadata = createMetadata({
   title: "Profile",
-  description: "AMAMRE customer profile settings.",
+  description: "AMAMBRA customer profile settings.",
   path: "/account/profile",
   noIndex: true,
 });

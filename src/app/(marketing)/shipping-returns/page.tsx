@@ -1,4 +1,3 @@
-import { Typography } from "@mui/material";
 import {
   AppContainer,
   BodyCopy,
@@ -10,10 +9,11 @@ import {
 } from "@/components/ui/Primitives";
 import { SHIPPING_OPTIONS } from "@/constants/config";
 import { createMetadata } from "@/lib/seo";
+import { Typography } from "@mui/material";
 
 export const metadata = createMetadata({
   title: "Shipping & Returns",
-  description: "AMAMRE shipping, delivery, returns, and exchanges.",
+  description: "AMAMBRA shipping, delivery, returns, and exchanges.",
   path: "/shipping-returns",
 });
 
@@ -35,7 +35,7 @@ export default function ShippingReturnsPage() {
           Returns
         </Typography>
         <BodyCopy sx={{ pt: 2 }}>
-          AMAMRE should support the statutory EU withdrawal period and a clear
+          AMAMBRA should support the statutory EU withdrawal period and a clear
           return portal before launch. Items must be unworn, unwashed, and
           returned with original tags.
         </BodyCopy>

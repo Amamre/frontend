@@ -1,11 +1,4 @@
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-} from "@mui/material";
-import {
   AppContainer,
   Eyebrow,
   Headline,
@@ -16,10 +9,17 @@ import {
 import { SIZE_CHART } from "@/constants/config";
 import { createMetadata } from "@/lib/seo";
 import { brandColors } from "@/styles/theme";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+} from "@mui/material";
 
 export const metadata = createMetadata({
   title: "Size Guide",
-  description: "AMAMRE size guide for clothing and accessories.",
+  description: "AMAMBRA size guide for clothing and accessories.",
   path: "/size-guide",
 });
 
@@ -30,7 +30,7 @@ export default function SizeGuidePage() {
         <Eyebrow>Fit</Eyebrow>
         <Headline>Size guide</Headline>
         <Subhead sx={{ mt: 2.25 }}>
-          AMAMRE pieces are designed with relaxed premium streetwear
+          AMAMBRA pieces are designed with relaxed premium streetwear
           proportions. Choose your normal size for intended volume or size down
           for a closer fit.
         </Subhead>

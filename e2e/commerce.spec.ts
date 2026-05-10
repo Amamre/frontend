@@ -2,10 +2,10 @@ import { expect, test } from "@playwright/test";
 
 test.beforeEach(async ({ page }) => {
   await page.addInitScript(() => {
-    localStorage.removeItem("amamre-cart");
-    localStorage.removeItem("amamre-wishlist");
+    localStorage.removeItem("amambra-cart");
+    localStorage.removeItem("amambra-wishlist");
     localStorage.setItem(
-      "amamre-consent",
+      "amambra-consent",
       JSON.stringify({
         analytics: false,
         essential: true,
@@ -103,9 +103,9 @@ test("contact form and newsletter actions validate successfully", async ({
   ).toBeVisible();
 
   await page.getByPlaceholder("Email address").fill("drop@example.com");
-  await page.getByLabel(/I agree to receive AMAMRE editorial emails/i).check();
+  await page.getByLabel(/I agree to receive AMAMBRA editorial emails/i).check();
   await page.getByRole("button", { name: "Join the list" }).click();
   await expect(
-    page.getByText("You are on the AMAMRE list", { exact: false }),
+    page.getByText("You are on the AMAMBRA list", { exact: false }),
   ).toBeVisible();
 });
