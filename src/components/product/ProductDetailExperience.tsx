@@ -301,11 +301,8 @@ export function ProductDetailExperience({
               aria-label="Choose color"
               sx={{
                 display: "grid",
-                gridTemplateColumns: {
-                  xs: "1fr",
-                  sm: "repeat(2, minmax(0, 1fr))",
-                },
-                gap: 1,
+                gridTemplateColumns: "1fr",
+                gap: 0.85,
               }}
             >
               {colorOptions.map((color) => {
@@ -318,57 +315,78 @@ export function ProductDetailExperience({
                     key={color.slug}
                     onClick={() => selectColor(color)}
                     sx={{
-                      display: "grid",
-                      minHeight: 64,
-                      gridTemplateColumns: "22px 1fr",
-                      gap: 1.25,
+                      display: "inline-flex",
+                      minHeight: 52,
+                      gap: 1.45,
                       alignItems: "center",
+                      justifyContent: "flex-start",
+                      appearance: "none",
                       border: `1px solid ${
                         selected
-                          ? "rgba(216, 198, 165, 0.86)"
+                          ? "rgba(216, 198, 165, 0.88)"
                           : brandColors.border
                       }`,
-                      borderRadius: "8px",
+                      borderRadius: "6px",
                       color: theme.palette.text.primary,
                       background: selected
-                        ? "rgba(216, 198, 165, 0.1)"
-                        : "rgba(250, 248, 241, 0.035)",
-                      p: "12px 14px",
+                        ? "#E5D2B0"
+                        : "rgba(250, 248, 241, 0.018)",
+
+                      boxShadow: "none",
+                      cursor: "pointer",
+                      font: "inherit",
+                      opacity: selected ? 1 : 0.88,
+                      p: "13px 17px",
                       textAlign: "left",
-                      transition: `border-color 180ms ${transitions.ease}, background 180ms ${transitions.ease}, transform 180ms ${transitions.ease}, box-shadow 180ms ${transitions.ease}`,
+                      transition: `border-color 220ms ${transitions.ease}, background 220ms ${transitions.ease}, box-shadow 220ms ${transitions.ease}, opacity 220ms ${transitions.ease}, transform 220ms ${transitions.ease}`,
                       "&:hover": {
-                        borderColor: "rgba(216, 198, 165, 0.68)",
-                        boxShadow: "0 12px 42px rgba(216, 198, 165, 0.08)",
+                        borderColor: "rgba(216, 198, 165, 0.72)",
+                        boxShadow: selected
+                          ? "0 0 0 1px rgba(216, 198, 165, 0.2), 0 20px 58px rgba(216, 198, 165, 0.09)"
+                          : "0 14px 42px rgba(216, 198, 165, 0.052)",
+                        opacity: 1,
                         transform: "translateY(-1px)",
+                      },
+                      "&:focus-visible": {
+                        borderColor: "rgba(216, 198, 165, 0.94)",
+                        boxShadow:
+                          "0 0 0 3px rgba(216, 198, 165, 0.18), 0 18px 54px rgba(216, 198, 165, 0.08)",
+                        outline: "none",
                       },
                     }}
                     type="button"
                   >
-                    <Swatch color={color.code} sx={{ width: 22, height: 22 }} />
-                    <Box>
-                      <Typography
-                        component="span"
-                        sx={{
-                          display: "block",
-                          fontSize: "0.9rem",
-                          fontWeight: 800,
-                        }}
-                      >
-                        {color.name}
-                      </Typography>
-                      <Typography
-                        component="span"
-                        sx={{
-                          display: "block",
-                          mt: 0.25,
-                          color: theme.palette.text.secondary,
-                          fontSize: "0.72rem",
-                          lineHeight: 1.35,
-                        }}
-                      >
-                        {color.description}
-                      </Typography>
-                    </Box>
+                    <Swatch
+                      aria-hidden="true"
+                      color={color.code}
+                      sx={{
+                        width: 24,
+                        height: 24,
+                        border: `1px solid ${
+                          selected
+                            ? "rgba(11, 11, 10, 0.18)"
+                            : "rgba(250, 248, 241, 0.32)"
+                        }`,
+                        background: `radial-gradient(circle at 34% 24%, rgba(255, 255, 255, 0.42), transparent 30%), linear-gradient(145deg, rgba(255, 255, 255, 0.16), rgba(0, 0, 0, 0.28)), ${color.code}`,
+                        boxShadow:
+                          "inset 0 1px 5px rgba(255, 255, 255, 0.2), inset 0 -6px 10px rgba(0, 0, 0, 0.28)",
+                        transition: `border-color 220ms ${transitions.ease}, box-shadow 220ms ${transitions.ease}, opacity 220ms ${transitions.ease}`,
+                      }}
+                    />
+                    <Typography
+                      component="span"
+                      sx={{
+                        color: selected
+                          ? "#0B0B0A"
+                          : "rgba(250, 248, 241, 0.82)",
+                        fontSize: "0.92rem",
+                        fontWeight: 750,
+                        letterSpacing: "0.015em",
+                        lineHeight: 1.2,
+                      }}
+                    >
+                      {color.name}
+                    </Typography>
                   </Box>
                 );
               })}
@@ -385,7 +403,7 @@ export function ProductDetailExperience({
                   xs: "repeat(3, minmax(0, 1fr))",
                   sm: "repeat(6, minmax(0, 1fr))",
                 },
-                gap: 0.85,
+                gap: { xs: 0.95, sm: 1.1 },
               }}
             >
               {product.sizes.map((size) => {
@@ -406,29 +424,44 @@ export function ProductDetailExperience({
                     onClick={() => selectSize(size)}
                     sx={{
                       display: "grid",
-                      minHeight: 48,
+                      minHeight: 52,
                       placeItems: "center",
                       border: `1px solid ${
                         selected
-                          ? "rgba(216, 198, 165, 0.9)"
+                          ? "rgba(216, 198, 165, 0.86)"
                           : brandColors.border
                       }`,
                       borderRadius: "6px",
                       color: soldOut
                         ? "rgba(250, 248, 241, 0.28)"
-                        : theme.palette.text.primary,
+                        : selected
+                          ? "#0B0B0A"
+                          : theme.palette.text.primary,
                       background: selected
-                        ? brandColors.goldSoft
-                        : "rgba(250, 248, 241, 0.035)",
+                        ? "#E5D2B0"
+                        : "rgba(250, 248, 241, 0.024)",
+
+                      boxShadow: "none",
+                      cursor: soldOut ? "not-allowed" : "pointer",
+                      fontSize: "0.82rem",
                       fontWeight: 800,
+                      letterSpacing: "0.08em",
                       opacity: soldOut ? 0.5 : 1,
-                      transition: `border-color 180ms ${transitions.ease}, background 180ms ${transitions.ease}, transform 180ms ${transitions.ease}`,
+                      px: { xs: 2, sm: 2.25 },
+                      transition: `border-color 220ms ${transitions.ease}, background 220ms ${transitions.ease}, box-shadow 220ms ${transitions.ease}, opacity 220ms ${transitions.ease}, transform 220ms ${transitions.ease}`,
                       "&:hover": soldOut
                         ? undefined
                         : {
-                            borderColor: "rgba(216, 198, 165, 0.7)",
+                            borderColor: "rgba(216, 198, 165, 0.68)",
+                            boxShadow: "none",
+                            opacity: 0.94,
                             transform: "translateY(-1px)",
                           },
+                      "&:focus-visible": {
+                        borderColor: "rgba(216, 198, 165, 0.94)",
+                        boxShadow: "none",
+                        outline: "none",
+                      },
                     }}
                     type="button"
                   >
@@ -584,15 +617,25 @@ function OptionHeading({ label, value }: { label: string; value: string }) {
         component="h2"
         sx={{
           m: 0,
-          fontSize: "0.74rem",
+          color: "rgba(216, 198, 165, 0.82)",
+          fontSize: "0.68rem",
           fontWeight: 900,
-          letterSpacing: "0.16em",
+          letterSpacing: "0.22em",
           textTransform: "uppercase",
         }}
       >
         {label}
       </Typography>
-      <Muted sx={{ fontSize: "0.78rem" }}>{value}</Muted>
+      <Muted
+        sx={{
+          color: "rgba(250, 248, 241, 0.82)",
+          fontSize: "0.86rem",
+          fontWeight: 700,
+          letterSpacing: "0.02em",
+        }}
+      >
+        {value}
+      </Muted>
     </Stack>
   );
 }
