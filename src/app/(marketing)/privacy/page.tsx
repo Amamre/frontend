@@ -1,33 +1,41 @@
 import { LegalPage } from "@/components/marketing/LegalPage";
-import { createMetadata } from "@/lib/seo";
+import { getTypedTranslations } from "@/i18n/getTypedTranslations";
+import { createLocalizedMetadata } from "@/lib/localized-seo";
 
-export const metadata = createMetadata({
-  title: "Privacy",
-  description: "AMAMBRA privacy policy and GDPR information.",
-  path: "/privacy",
-});
+export async function generateMetadata() {
+  return createLocalizedMetadata({
+    descriptionKey: "pages.privacyDescription",
+    path: "/privacy",
+    titleKey: "pages.privacyTitle",
+  });
+}
 
-export default function PrivacyPage() {
+export default async function PrivacyPage() {
+  const common = await getTypedTranslations("common");
+  const t = await getTypedTranslations("marketing");
+
   return (
     <LegalPage
-      title="Privacy policy"
-      intro="GDPR-oriented privacy structure for an AMAMBRA production launch."
+      eyebrow={common("brand.name")}
+      title={t("legal.privacyTitle")}
+      intro={t("legal.privacyIntro")}
+      tocLabel={common("labels.onThisPage")}
       sections={[
         {
-          title: "Data controller",
-          body: "AMAMBRA must add the final legal entity, address, and data protection contact before launch.",
+          title: t("legal.dataController"),
+          body: t("legal.dataControllerBody"),
         },
         {
-          title: "Storefront data",
-          body: "The storefront processes contact form data, newsletter consent, cart state, checkout profile data, analytics consent state, and order data once Shopify is connected.",
+          title: t("legal.storefrontData"),
+          body: t("legal.storefrontDataBody"),
         },
         {
-          title: "Legal basis",
-          body: "Processing should be mapped to contract performance, consent, legitimate interest, and legal obligations under GDPR Articles 6 and 7.",
+          title: t("legal.legalBasis"),
+          body: t("legal.legalBasisBody"),
         },
         {
-          title: "Customer rights",
-          body: "Customers can request access, correction, deletion, restriction, portability, and objection. Production should connect these requests to a support workflow.",
+          title: t("legal.customerRights"),
+          body: t("legal.customerRightsBody"),
         },
       ]}
     />

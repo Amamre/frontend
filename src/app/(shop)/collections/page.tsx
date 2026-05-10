@@ -1,16 +1,21 @@
 import { CollectionStoryLayout } from "@/components/collections/collection-story-layout";
+import { getTypedTranslations } from "@/i18n/getTypedTranslations";
 import { getAllCollections } from "@/lib/catalog";
-import { createMetadata } from "@/lib/seo";
+import { localizeCollections } from "@/lib/catalog-i18n";
+import { createLocalizedMetadata } from "@/lib/localized-seo";
 
-export const metadata = createMetadata({
-  title: "Collections",
-  description:
-    "Explore AMAMBRA Atelier, Heritage, and Essentials as a cinematic editorial collection system.",
-  path: "/collections",
-});
+export async function generateMetadata() {
+  return createLocalizedMetadata({
+    descriptionKey: "pages.collectionsDescription",
+    path: "/collections",
+    titleKey: "pages.collectionsTitle",
+  });
+}
 
-export default function CollectionsPage() {
-  const collections = getAllCollections();
+export default async function CollectionsPage() {
+  const common = await getTypedTranslations("common");
+  const catalog = await getTypedTranslations("catalog");
+  const collections = localizeCollections(getAllCollections(), catalog, common);
 
   return <CollectionStoryLayout collections={collections} />;
 }

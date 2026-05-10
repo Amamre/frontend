@@ -24,7 +24,7 @@ export default defineConfig({
     screenshot: "only-on-failure",
   },
   webServer: {
-    command: `pnpm run build && pnpm run start -- --port ${playwrightPort}`,
+    command: `pnpm run build && PORT=${playwrightPort} pnpm run start`,
     url: baseURL,
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
@@ -34,6 +34,20 @@ export default defineConfig({
       name: "desktop-chromium",
       use: {
         ...devices["Desktop Chrome"],
+        viewport: { height: 1100, width: 1440 },
+      },
+    },
+    {
+      name: "desktop-firefox",
+      use: {
+        ...devices["Desktop Firefox"],
+        viewport: { height: 1100, width: 1440 },
+      },
+    },
+    {
+      name: "desktop-webkit",
+      use: {
+        ...devices["Desktop Safari"],
         viewport: { height: 1100, width: 1440 },
       },
     },

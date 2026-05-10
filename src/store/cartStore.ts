@@ -1,6 +1,6 @@
-import type { Cart, CartItem } from "@/types";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import type { Cart, CartItem } from "@/types";
 
 interface CartStore {
   cart: Cart | null;

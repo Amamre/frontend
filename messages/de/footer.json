@@ -1,0 +1,31 @@
+{
+  "description": "{description} Entworfen in {location} für moderne tägliche Bewegung.",
+  "copyright": "© {year} AMAMBRA. Alle Rechte vorbehalten.",
+  "columns": {
+    "shop": "Shop",
+    "company": "Unternehmen",
+    "support": "Support",
+    "legal": "Rechtliches"
+  },
+  "links": {
+    "newArrivals": "Neuheiten",
+    "bestsellers": "Bestseller",
+    "hoodies": "Hoodies",
+    "tops": "Tops",
+    "accessories": "Accessoires",
+    "about": "Über AMAMBRA",
+    "collections": "Kollektionen",
+    "account": "Konto",
+    "contact": "Kontakt",
+    "faq": "FAQ",
+    "sizeGuide": "Größenguide",
+    "shippingReturns": "Versand & Retouren",
+    "search": "Suche",
+    "accessibility": "Barrierefreiheit",
+    "imprint": "Imprint",
+    "privacyPolicy": "Datenschutzerklärung",
+    "refundPolicy": "Rückerstattung",
+    "terms": "AGB",
+    "cookies": "Cookies"
+  }
+}

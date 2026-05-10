@@ -8,6 +8,7 @@ import {
   Eyebrow,
   Headline,
 } from "@/components/ui/Primitives";
+import { useTypedTranslations } from "@/i18n/useTypedTranslations";
 
 export default function ErrorBoundary({
   error,
@@ -16,6 +17,9 @@ export default function ErrorBoundary({
   error: Error & { digest?: string };
   unstable_retry: () => void;
 }) {
+  const common = useTypedTranslations("common");
+  const t = useTypedTranslations("errors");
+
   useEffect(() => {
     console.error(error);
   }, [error]);
@@ -23,14 +27,15 @@ export default function ErrorBoundary({
   return (
     <EmptyState>
       <div>
-        <Eyebrow>Error</Eyebrow>
-        <Headline>Something interrupted the experience.</Headline>
+        <Eyebrow>{t("boundary.eyebrow")}</Eyebrow>
+        <Headline>{t("boundary.headline")}</Headline>
         <BodyCopy>
-          Retry the segment. If it persists, check the deployment logs with
-          digest {error.digest ?? "unavailable"}.
+          {t("boundary.body", {
+            digest: error.digest ?? common("states.unavailable"),
+          })}
         </BodyCopy>
         <AppButton onClick={unstable_retry} type="button" variant="primary">
-          Try again
+          {common("actions.tryAgain")}
         </AppButton>
       </div>
     </EmptyState>

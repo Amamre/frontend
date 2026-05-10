@@ -1,0 +1,63 @@
+{
+  "actions": {
+    "addToBag": "Add to bag",
+    "addToCart": "Add to cart",
+    "addToWishlist": "Add to wishlist",
+    "removeFromWishlist": "Remove from wishlist",
+    "quickAdd": "Quick add {title}",
+    "savePiece": "Save piece",
+    "saved": "Saved"
+  },
+  "aria": {
+    "chooseColor": "Choose color",
+    "chooseSize": "Choose size",
+    "colors": "{title} colors",
+    "decreaseQuantity": "Decrease quantity",
+    "increaseQuantity": "Increase quantity",
+    "openImage": "Open {alt}",
+    "closeImage": "Close image",
+    "viewThumbnail": "View {alt}",
+    "mediaThumbnails": "{title} media thumbnails"
+  },
+  "labels": {
+    "care": "Care",
+    "color": "Color",
+    "fit": "Fit",
+    "material": "Material",
+    "materialAndCare": "Material and care",
+    "quantity": "Quantity",
+    "recommended": "Recommended",
+    "size": "Size",
+    "sizeAndColor": "Size and color",
+    "story": "Story"
+  },
+  "inventory": {
+    "available": "{count} available",
+    "inStock": "In stock",
+    "left": "{count} left",
+    "outOfStock": "Out of stock"
+  },
+  "support": {
+    "shipping": "Free Germany shipping over EUR 100. Duties and taxes are shown at checkout for EU customers.",
+    "shopify": "Secure Shopify checkout activates once live Storefront credentials are connected.",
+    "checkout": "Secure checkout through Shopify once live credentials are connected."
+  },
+  "sections": {
+    "completeSilhouette": "Complete the silhouette"
+  },
+  "toasts": {
+    "addedToCart": "Added to cart",
+    "savedToWishlist": "Saved to wishlist",
+    "removedFromWishlist": "Removed from wishlist",
+    "unavailable": "This piece is currently unavailable",
+    "selectedUnavailable": "Selected variant is unavailable"
+  },
+  "metadata": {
+    "notFound": "Product not found"
+  },
+  "fallbackColor": {
+    "name": "Obsidian Black",
+    "description": "Matte black AMAMBRA colorway.",
+    "productDescription": "AMAMBRA product colorway."
+  }
+}

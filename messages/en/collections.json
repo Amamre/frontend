@@ -1,0 +1,39 @@
+{
+  "hero": {
+    "eyebrow": "Three lineages",
+    "headline": "Collections",
+    "body": "Each collection carries its own discipline: atelier outer layers, heritage rhythm, and essential foundations designed to move through a modern European wardrobe with restraint."
+  },
+  "chapters": {
+    "atelier": {
+      "chapter": "01",
+      "kicker": "Atelier",
+      "title": "Atelier",
+      "copy": "Limited utility pieces shaped for editorial layering: structured, quiet, and made to carry the atmosphere of the studio into the street.",
+      "mood": "Limited releases, brushed surfaces, handcrafted restraint, and elevated outer layers with a calm silhouette."
+    },
+    "heritage": {
+      "chapter": "02",
+      "kicker": "Heritage",
+      "title": "Heritage",
+      "copy": "Afro-European craft translated through restrained linework, warm utility, and silhouettes that feel composed without becoming ceremonial.",
+      "mood": "Subtle textile rhythm, tonal hardware, warm function, and structured pieces built for movement."
+    },
+    "essentials": {
+      "chapter": "03",
+      "kicker": "Essentials",
+      "title": "Essentials",
+      "copy": "The foundation layer of the AMAMBRA wardrobe: clean, tactile, and deliberately minimal so the rest of the system can breathe.",
+      "mood": "Everyday premium cotton, quiet proportions, calm luxury, and pieces that hold their shape in daily rotation."
+    }
+  },
+  "labels": {
+    "mood": "Mood",
+    "curatedPieces": "Curated pieces",
+    "completeSystem": "Complete the system",
+    "moveStory": "Move from story to wardrobe.",
+    "shopCollection": "Shop the collection",
+    "collection": "Collection",
+    "notFound": "Collection not found"
+  }
+}

@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import { ContactForm } from "@/components/forms/ContactForm";
 import {
   AppContainer,
@@ -11,43 +12,44 @@ import {
   Surface,
 } from "@/components/ui/Primitives";
 import { BRAND } from "@/constants/config";
-import { createMetadata } from "@/lib/seo";
-import { Box } from "@mui/material";
+import { getTypedTranslations } from "@/i18n/getTypedTranslations";
+import { createLocalizedMetadata } from "@/lib/localized-seo";
 
-export const metadata = createMetadata({
-  title: "Contact",
-  description:
-    "Contact AMAMBRA customer care, press, and wholesale from Stuttgart, Germany.",
-  path: "/contact",
-});
+export async function generateMetadata() {
+  return createLocalizedMetadata({
+    descriptionKey: "pages.contactDescription",
+    path: "/contact",
+    titleKey: "pages.contactTitle",
+  });
+}
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const common = await getTypedTranslations("common");
+  const t = await getTypedTranslations("marketing");
+
   return (
     <PageSection>
       <AppContainer>
         <SplitLayout>
           <Box>
-            <Eyebrow>Contact</Eyebrow>
-            <Headline>Customer care, press, and partnerships.</Headline>
-            <Subhead sx={{ mt: 2.25 }}>
-              Send us a note for sizing, order questions, editorial requests, or
-              wholesale conversations.
-            </Subhead>
+            <Eyebrow>{t("contact.eyebrow")}</Eyebrow>
+            <Headline>{t("contact.headline")}</Headline>
+            <Subhead sx={{ mt: 2.25 }}>{t("contact.body")}</Subhead>
 
             <ContentGrid sx={{ mt: 4.5 }}>
               <Surface>
-                <Eyebrow>Email</Eyebrow>
+                <Eyebrow>{common("labels.email")}</Eyebrow>
                 <a href={`mailto:${BRAND.email}`}>{BRAND.email}</a>
               </Surface>
               <Surface>
-                <Eyebrow>Phone</Eyebrow>
+                <Eyebrow>{common("labels.phone")}</Eyebrow>
                 <a href={`tel:${BRAND.phone.replaceAll(" ", "")}`}>
                   {BRAND.phone}
                 </a>
               </Surface>
               <Surface>
-                <Eyebrow>Studio</Eyebrow>
-                <BodyCopy sx={{ m: 0 }}>{BRAND.location}</BodyCopy>
+                <Eyebrow>{common("labels.studio")}</Eyebrow>
+                <BodyCopy sx={{ m: 0 }}>{common("brand.location")}</BodyCopy>
               </Surface>
             </ContentGrid>
           </Box>

@@ -1,0 +1,148 @@
+{
+  "variantFormat": "{title} / {color} / {size}",
+  "imageAlt": "{title} in {color}, {label}",
+  "imageRoles": {
+    "hero": "cinematic hero study",
+    "hover": "alternate campaign frame",
+    "front": "front view",
+    "back": "back view",
+    "side": "side profile",
+    "detailSleeve": "sleeve detail",
+    "detailEmbroidery": "tonal embroidery detail",
+    "detailTrim": "heritage trim detail",
+    "hoodLining": "satin lining close-up",
+    "texture": "textile texture macro",
+    "lifestyle": "editorial lifestyle image",
+    "folded": "folded garment study",
+    "flatlay": "premium flatlay"
+  },
+  "colorDescriptions": {
+    "obsidianBlack": "Matte black fleece with warm ivory and tonal trim.",
+    "deepOlive": "Muted olive with a quiet studio utility character.",
+    "softIvory": "Warm ivory with a clean gallery-light finish.",
+    "darkCocoa": "Deep cocoa with restrained European tailoring energy.",
+    "mutedGold": "Soft gold knit with a subdued satin interior.",
+    "mutedWarmGold": "Soft warm gold with a quiet satin interior.",
+    "fallback": "Editorial colorway with understated AMAMBRA detailing."
+  },
+  "collections": {
+    "signature": {
+      "title": "Signature Collection",
+      "shortTitle": "Signature",
+      "description": "The defining AMAMBRA pieces: satin-lined essentials, tactile warmth, and quiet luxury streetwear."
+    },
+    "heritage": {
+      "title": "Heritage Collection",
+      "shortTitle": "Heritage",
+      "description": "Minimal silhouettes with subtle African textile rhythm, built for a modern European wardrobe."
+    },
+    "essentials": {
+      "title": "Essentials",
+      "shortTitle": "Essentials",
+      "description": "Everyday premium layers that make the whole wardrobe feel considered."
+    },
+    "atelier": {
+      "title": "Atelier",
+      "shortTitle": "Atelier",
+      "description": "Tailored utility pieces designed with an editorial eye and year-round function."
+    }
+  },
+  "products": {
+    "signatureSatinHood": {
+      "title": "Signature Satin Hood Hoodie",
+      "description": "Heavy fleece with a quiet satin-lined hood.",
+      "longDescription": "A dense 480 GSM cotton fleece hoodie cut with a relaxed European shoulder, deep ribbing, and AMAMBRA's satin-lined hood for a smooth luxury finish. It is the first signature piece: minimal, weighty, and built for daily city wear.",
+      "material": "480 GSM organic cotton fleece, recycled satin hood lining, ribbed cotton cuffs",
+      "care": "Wash inside out at 30C. Do not tumble dry. Steam gently from reverse side.",
+      "fit": "Relaxed streetwear fit with dropped shoulder and structured hood.",
+      "story": "Designed in Stuttgart as the first AMAMBRA signature piece, the satin hood references ceremonial polish without turning heritage into costume.",
+      "feature1": "Satin-lined hood designed for comfort and hair protection",
+      "feature2": "Dense 480 GSM organic cotton fleece",
+      "feature3": "Muted warm-gold embroidery inspired by geometric textile borders",
+      "feature4": "Deep ribbing engineered to hold shape after repeated wear",
+      "seoTitle": "Signature Satin Hood Hoodie | AMAMBRA",
+      "seoDescription": "AMAMBRA's heavyweight satin-lined hoodie in obsidian black and deep olive. Premium Afro-European streetwear from Stuttgart.",
+      "seoKeywords": "satin lined hoodie,luxury streetwear,AMAMBRA hoodie"
+    },
+    "heritageTracksuit": {
+      "title": "Heritage Tracksuit",
+      "description": "A tailored tracksuit with understated heritage piping.",
+      "longDescription": "A coordinated jacket and trouser set in compact double-knit fabric with tonal paneling, muted gold zip pulls, and a clean straight-leg profile. Built for travel, studio days, and considered off-duty dressing.",
+      "material": "Organic cotton double knit, recycled polyester stretch yarn",
+      "care": "Wash at 30C with similar colors. Dry flat. Avoid fabric softener.",
+      "fit": "Jacket is boxy and cropped at the hip. Trouser is straight with a clean break.",
+      "story": "The tracksuit carries AMAMBRA's Afro-European balance: functional Stuttgart minimalism, movement-first comfort, and restrained trim inspired by ceremonial linework.",
+      "feature1": "Two-piece set with jacket and trouser",
+      "feature2": "Tonal heritage piping at pocket and side seam",
+      "feature3": "Muted gold zip pulls",
+      "feature4": "Brushed pocketing for all-day comfort",
+      "seoTitle": "Heritage Tracksuit | AMAMBRA",
+      "seoDescription": "Premium AMAMBRA heritage tracksuit with tonal linework, muted gold hardware, and a tailored streetwear fit.",
+      "seoKeywords": "luxury tracksuit,heritage streetwear,AMAMBRA set"
+    },
+    "atelierOvershirt": {
+      "title": "Atelier Overshirt",
+      "description": "Structured overshirt for an editorial layering system.",
+      "longDescription": "A brushed cotton-twill overshirt with a sharp camp collar, hidden placket, matte snaps, and oversized patch pockets engineered for clean utility.",
+      "material": "Brushed organic cotton twill, corozo-style recycled buttons",
+      "care": "Machine wash cold. Hang dry. Iron on low from reverse.",
+      "fit": "Oversized through the body with a straight hem and relaxed sleeve.",
+      "story": "The Atelier Overshirt is the AMAMBRA answer to European minimal outerwear: grounded color, quiet utility, and a silhouette with calm authority.",
+      "feature1": "Hidden placket",
+      "feature2": "Matte recycled snaps",
+      "feature3": "Oversized utility pockets",
+      "feature4": "Subtle chest embroidery",
+      "seoTitle": "Atelier Overshirt | AMAMBRA",
+      "seoDescription": "Structured premium overshirt by AMAMBRA with brushed twill, utility pockets, and a relaxed editorial silhouette.",
+      "seoKeywords": "atelier overshirt,premium overshirt,AMAMBRA tops"
+    },
+    "satinLinedBeanie": {
+      "title": "Satin-Lined Beanie",
+      "description": "Soft rib knit outside, smooth satin inside.",
+      "longDescription": "A premium rib-knit beanie with a discreet AMAMBRA tab and satin lining designed to reduce friction while keeping a sculpted profile.",
+      "material": "Merino blend rib knit, recycled satin lining, woven AMAMBRA tab",
+      "care": "Hand wash cold. Reshape while damp. Dry flat.",
+      "fit": "One size with a close luxury rib profile.",
+      "story": "Made as a daily accessory with beauty and practicality in mind, the satin lining nods to hair care rituals and the intimacy of heritage-informed design.",
+      "feature1": "Smooth satin interior",
+      "feature2": "Soft folded cuff",
+      "feature3": "Low-profile AMAMBRA tab",
+      "feature4": "Gift-ready packaging",
+      "seoTitle": "Satin-Lined Beanie | AMAMBRA",
+      "seoDescription": "AMAMBRA satin-lined rib knit beanie with a premium soft interior and minimal tab branding.",
+      "seoKeywords": "satin lined beanie,luxury beanie,AMAMBRA accessory"
+    },
+    "heritageCap": {
+      "title": "Heritage Cap",
+      "description": "Low-profile cap with tonal embroidery.",
+      "longDescription": "A structured six-panel cap in washed cotton canvas with tonal AMAMBRA embroidery, antique gold adjuster, and a curved brim.",
+      "material": "Washed organic cotton canvas, recycled metal adjuster",
+      "care": "Spot clean only. Do not bleach. Air dry.",
+      "fit": "Low-profile six-panel fit with adjustable back strap.",
+      "story": "The Heritage Cap compresses the AMAMBRA visual language into an everyday object: subtle linework, calm proportion, and a Stuttgart streetwear attitude.",
+      "feature1": "Tonal border embroidery",
+      "feature2": "Matte metal adjuster",
+      "feature3": "Curved brim",
+      "feature4": "Breathable internal sweatband",
+      "seoTitle": "Heritage Cap | AMAMBRA",
+      "seoDescription": "Low-profile AMAMBRA heritage cap in washed cotton canvas with tonal embroidery.",
+      "seoKeywords": "heritage cap,luxury cap,AMAMBRA accessories"
+    },
+    "premiumEssentialTee": {
+      "title": "Premium Essential Tee",
+      "description": "A refined heavyweight tee with a dry hand feel.",
+      "longDescription": "A 260 GSM compact cotton tee with a clean collar, slightly boxy body, and understated chest mark for daily uniform dressing.",
+      "material": "260 GSM organic compact cotton, ribbed collar",
+      "care": "Wash inside out at 30C. Do not tumble dry. Iron low.",
+      "fit": "Slightly boxy with a clean sleeve length and straight hem.",
+      "story": "The Essential Tee is intentionally restrained. It is designed to sit under the overshirt, work beneath the hoodie, and hold its own with tailored trousers.",
+      "feature1": "Dense organic compact cotton",
+      "feature2": "Reinforced neckline",
+      "feature3": "Side seam construction",
+      "feature4": "Subtle tonal chest mark",
+      "seoTitle": "Premium Essential Tee | AMAMBRA",
+      "seoDescription": "Heavyweight AMAMBRA premium essential tee in compact organic cotton.",
+      "seoKeywords": "premium tee,organic cotton t-shirt,AMAMBRA essentials"
+    }
+  }
+}

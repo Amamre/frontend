@@ -1,5 +1,11 @@
 "use client";
 
+import AddIcon from "@mui/icons-material/Add";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { Box, Chip, Stack, Typography, useTheme } from "@mui/material";
+import Image from "next/image";
+import toast from "react-hot-toast";
 import {
   IconAction,
   Muted,
@@ -8,18 +14,13 @@ import {
 } from "@/components/ui/Primitives";
 import { IMAGE_CONFIG } from "@/constants/config";
 import { useIsMounted } from "@/hooks/useUtils";
+import { Link } from "@/i18n/navigation";
+import { useTypedTranslations } from "@/i18n/useTypedTranslations";
 import { formatPrice } from "@/lib/utils";
 import { useCartStore } from "@/store/cartStore";
 import { useWishlistStore } from "@/store/wishlistStore";
 import { brandColors, transitions } from "@/styles/theme";
 import type { Product } from "@/types";
-import AddIcon from "@mui/icons-material/Add";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { Box, Chip, Stack, Typography, useTheme } from "@mui/material";
-import Image from "next/image";
-import Link from "next/link";
-import toast from "react-hot-toast";
 
 interface ProductCardProps {
   product: Product;
@@ -33,6 +34,8 @@ export default function ProductCard({
   onViewDetails,
 }: ProductCardProps) {
   const theme = useTheme();
+  const productT = useTypedTranslations("product");
+  const catalog = useTypedTranslations("catalog");
   const mounted = useIsMounted();
   const addToCart = useCartStore((state) => state.addItem);
   const { addItem, isInWishlist, removeItem } = useWishlistStore();
@@ -43,17 +46,17 @@ export default function ProductCard({
   const toggleWishlist = () => {
     if (inWishlist) {
       removeItem(product.id);
-      toast.success("Removed from wishlist");
+      toast.success(productT("toasts.removedFromWishlist"));
       return;
     }
 
     addItem(product);
-    toast.success("Saved to wishlist");
+    toast.success(productT("toasts.savedToWishlist"));
   };
 
   const quickAdd = () => {
     if (!firstVariant || firstVariant.inventory <= 0) {
-      toast.error("This piece is currently unavailable");
+      toast.error(productT("toasts.unavailable"));
       return;
     }
 
@@ -64,7 +67,7 @@ export default function ProductCard({
       price: firstVariant.price,
       product,
     });
-    toast.success("Added to cart");
+    toast.success(productT("toasts.addedToCart"));
   };
 
   const content = (
@@ -101,7 +104,11 @@ export default function ProductCard({
           sx={{ position: "absolute", top: 12, right: 12, zIndex: 2 }}
         >
           <IconAction
-            aria-label={inWishlist ? "Remove from wishlist" : "Add to wishlist"}
+            aria-label={
+              inWishlist
+                ? productT("actions.removeFromWishlist")
+                : productT("actions.addToWishlist")
+            }
             onClick={(event) => {
               event.preventDefault();
               toggleWishlist();
@@ -114,7 +121,7 @@ export default function ProductCard({
             )}
           </IconAction>
           <IconAction
-            aria-label={`Quick add ${product.title}`}
+            aria-label={productT("actions.quickAdd", { title: product.title })}
             onClick={(event) => {
               event.preventDefault();
               quickAdd();
@@ -126,7 +133,10 @@ export default function ProductCard({
       </Box>
 
       <Box sx={{ display: "grid", gap: 1.5, p: 2.25 }}>
-        <Chip label={product.collection} sx={{ width: "fit-content" }} />
+        <Chip
+          label={collectionLabel(product.collection, catalog)}
+          sx={{ width: "fit-content" }}
+        />
         <Stack
           direction="row"
           spacing={1.5}
@@ -148,7 +158,7 @@ export default function ProductCard({
           {product.description}
         </Muted>
         <Stack
-          aria-label={`${product.title} colors`}
+          aria-label={productT("aria.colors", { title: product.title })}
           component="ul"
           direction="row"
           spacing="7px"
@@ -187,4 +197,21 @@ export default function ProductCard({
       {content}
     </Box>
   );
+}
+
+function collectionLabel(
+  collection: string,
+  t: ReturnType<typeof useTypedTranslations<"catalog">>,
+) {
+  const keys: Record<
+    string,
+    Parameters<ReturnType<typeof useTypedTranslations<"catalog">>>[0]
+  > = {
+    atelier: "collections.atelier.shortTitle",
+    essentials: "collections.essentials.shortTitle",
+    heritage: "collections.heritage.shortTitle",
+    signature: "collections.signature.shortTitle",
+  };
+
+  return keys[collection] ? t(keys[collection]) : collection;
 }

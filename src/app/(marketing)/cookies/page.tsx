@@ -1,29 +1,41 @@
 import { LegalPage } from "@/components/marketing/LegalPage";
-import { createMetadata } from "@/lib/seo";
+import { getTypedTranslations } from "@/i18n/getTypedTranslations";
+import { createLocalizedMetadata } from "@/lib/localized-seo";
 
-export const metadata = createMetadata({
-  title: "Cookies",
-  description: "AMAMBRA cookie and consent policy.",
-  path: "/cookies",
-});
+export async function generateMetadata() {
+  return createLocalizedMetadata({
+    descriptionKey: "pages.cookiesDescription",
+    path: "/cookies",
+    titleKey: "pages.cookiesTitle",
+  });
+}
 
-export default function CookiesPage() {
+export default async function CookiesPage() {
+  const common = await getTypedTranslations("common");
+  const t = await getTypedTranslations("cookies");
+
   return (
     <LegalPage
-      title="Cookie policy"
-      intro="Consent structure for analytics, marketing, and essential ecommerce cookies."
+      eyebrow={common("brand.name")}
+      title={t("page.title")}
+      intro={t("page.intro")}
+      tocLabel={common("labels.onThisPage")}
       sections={[
         {
-          title: "Essential cookies",
-          body: "Required for cart persistence, checkout security, account sessions, and fraud prevention.",
+          title: t("page.essentialTitle"),
+          body: t("page.essentialBody"),
         },
         {
-          title: "Analytics cookies",
-          body: "Analytics should load only after consent. The codebase includes a structure for consent-aware analytics integration.",
+          title: t("page.analyticsTitle"),
+          body: t("page.analyticsBody"),
         },
         {
-          title: "Marketing cookies",
-          body: "Marketing pixels and retargeting tags should remain disabled until explicit consent is granted.",
+          title: t("page.marketingTitle"),
+          body: t("page.marketingBody"),
+        },
+        {
+          title: t("page.preferencesTitle"),
+          body: t("page.preferencesBody"),
         },
       ]}
     />

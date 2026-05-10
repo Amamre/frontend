@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { BRAND, SEO_DEFAULTS, SITE_URL } from "@/constants/config";
+import { type Locale } from "@/i18n/locales";
 
 type MetadataInput = {
   title?: string;
@@ -7,7 +8,9 @@ type MetadataInput = {
   path?: string;
   image?: string;
   keywords?: string[];
+  locale?: Locale;
   noIndex?: boolean;
+  ogImageAlt?: string;
 };
 
 export const absoluteUrl = (path: string): string => {
@@ -24,7 +27,9 @@ export const createMetadata = ({
   path = "/",
   image = SEO_DEFAULTS.ogImage,
   keywords = SEO_DEFAULTS.keywords,
+  locale = "en-US",
   noIndex = false,
+  ogImageAlt,
 }: MetadataInput = {}): Metadata => {
   const resolvedTitle = title ? `${title} | ${BRAND.name}` : SEO_DEFAULTS.title;
   const canonical = absoluteUrl(path);
@@ -48,10 +53,10 @@ export const createMetadata = ({
           url: imageUrl,
           width: 1792,
           height: 1024,
-          alt: `${BRAND.name} editorial campaign`,
+          alt: ogImageAlt ?? `${BRAND.name} editorial campaign`,
         },
       ],
-      locale: "de_DE",
+      locale,
       type: "website",
     },
     twitter: {

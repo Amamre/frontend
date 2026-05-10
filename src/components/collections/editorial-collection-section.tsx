@@ -5,6 +5,7 @@ import { alpha, styled } from "@mui/material/styles";
 import { motion } from "framer-motion";
 import { CollectionImagePanel } from "@/components/collections/collection-image-panel";
 import { CollectionProductLinks } from "@/components/collections/collection-product-links";
+import { useTypedTranslations } from "@/i18n/useTypedTranslations";
 import { brandColors, transitions } from "@/styles/theme";
 import type { Collection } from "@/types";
 
@@ -38,6 +39,7 @@ export function EditorialCollectionSection({
   collection,
   priority = false,
 }: EditorialCollectionSectionProps) {
+  const t = useTypedTranslations("collections");
   const image = (
     <Grid size={{ xs: 12, md: 6 }}>
       <Box
@@ -131,7 +133,7 @@ export function EditorialCollectionSection({
               textTransform: "uppercase",
             }}
           >
-            Mood
+            {t("labels.mood")}
           </Typography>
           <Typography
             sx={{
@@ -157,7 +159,7 @@ export function EditorialCollectionSection({
               textTransform: "uppercase",
             }}
           >
-            Curated pieces
+            {t("labels.curatedPieces")}
           </Typography>
           <CollectionProductLinks products={collection.products} />
         </Box>

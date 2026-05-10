@@ -15,6 +15,7 @@ import {
 import { StickyThumbnailRail } from "@/components/product/sticky-thumbnail-rail";
 import { IconAction } from "@/components/ui/Primitives";
 import { IMAGE_CONFIG } from "@/constants/config";
+import { useTypedTranslations } from "@/i18n/useTypedTranslations";
 import { brandColors, shadows, transitions } from "@/styles/theme";
 import type { ProductColorOption, ProductImage } from "@/types";
 
@@ -37,6 +38,7 @@ export function ProductMediaGallery({
   images,
   productTitle,
 }: ProductMediaGalleryProps) {
+  const t = useTypedTranslations("product");
   const prefersReducedMotion = useReducedMotion();
   const galleryImages = useMemo(() => images.slice(0, 12), [images]);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -188,7 +190,7 @@ export function ProductMediaGallery({
         }}
       >
         <Box
-          aria-label={`Open ${activeImage.alt}`}
+          aria-label={t("aria.openImage", { alt: activeImage.alt })}
           component="button"
           onClick={() => {
             markInteraction();
@@ -331,6 +333,8 @@ function MediaLightbox({
   image: ProductImage | null;
   onClose: () => void;
 }) {
+  const t = useTypedTranslations("product");
+
   return (
     <Dialog
       fullScreen
@@ -347,7 +351,7 @@ function MediaLightbox({
     >
       <Box sx={{ position: "relative", minHeight: "100svh" }}>
         <IconAction
-          aria-label="Close image"
+          aria-label={t("aria.closeImage")}
           onClick={onClose}
           sx={{ position: "fixed", top: 20, right: 20, zIndex: 2 }}
         >

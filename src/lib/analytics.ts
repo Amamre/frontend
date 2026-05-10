@@ -1,3 +1,4 @@
+import { readCookieConsent } from "@/lib/consent";
 import type { AnalyticsEvent, PageViewEvent } from "@/types";
 
 type ConsentState = {
@@ -15,17 +16,16 @@ export const getConsentState = (): ConsentState => {
     return defaultConsent;
   }
 
-  const raw = window.localStorage.getItem("amambra-consent");
+  const consent = readCookieConsent();
 
-  if (!raw) {
+  if (!consent) {
     return defaultConsent;
   }
 
-  try {
-    return { ...defaultConsent, ...JSON.parse(raw) };
-  } catch {
-    return defaultConsent;
-  }
+  return {
+    analytics: consent.categories.analytics,
+    marketing: consent.categories.marketing,
+  };
 };
 
 export const trackEvent = (event: AnalyticsEvent): void => {

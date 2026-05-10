@@ -1,12 +1,14 @@
 import { CartClient } from "@/components/cart/CartClient";
-import { createMetadata } from "@/lib/seo";
+import { createLocalizedMetadata } from "@/lib/localized-seo";
 
-export const metadata = createMetadata({
-  title: "Cart",
-  description: "Review your AMAMBRA shopping bag and continue to checkout.",
-  path: "/cart",
-  noIndex: true,
-});
+export async function generateMetadata() {
+  return createLocalizedMetadata({
+    descriptionKey: "pages.cartDescription",
+    noIndex: true,
+    path: "/cart",
+    titleKey: "pages.cartTitle",
+  });
+}
 
 export default function CartPage() {
   return <CartClient />;

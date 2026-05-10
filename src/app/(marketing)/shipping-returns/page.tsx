@@ -1,3 +1,4 @@
+import { Typography } from "@mui/material";
 import {
   AppContainer,
   BodyCopy,
@@ -7,38 +8,39 @@ import {
   PageSection,
   Surface,
 } from "@/components/ui/Primitives";
-import { SHIPPING_OPTIONS } from "@/constants/config";
-import { createMetadata } from "@/lib/seo";
-import { Typography } from "@mui/material";
+import { getTypedTranslations } from "@/i18n/getTypedTranslations";
+import { createLocalizedMetadata } from "@/lib/localized-seo";
 
-export const metadata = createMetadata({
-  title: "Shipping & Returns",
-  description: "AMAMBRA shipping, delivery, returns, and exchanges.",
-  path: "/shipping-returns",
-});
+export async function generateMetadata() {
+  return createLocalizedMetadata({
+    descriptionKey: "pages.shippingReturnsDescription",
+    path: "/shipping-returns",
+    titleKey: "pages.shippingReturnsTitle",
+  });
+}
 
-export default function ShippingReturnsPage() {
+const SHIPPING_OPTION_KEYS = ["standard", "express"] as const;
+
+export default async function ShippingReturnsPage() {
+  const t = await getTypedTranslations("marketing");
+
   return (
     <PageSection>
       <AppContainer sx={{ maxWidth: 860 }}>
-        <Eyebrow>Support</Eyebrow>
-        <Headline>Shipping and returns</Headline>
+        <Eyebrow>{t("shipping.eyebrow")}</Eyebrow>
+        <Headline>{t("shipping.headline")}</Headline>
         <ContentGrid sx={{ mt: 4.5 }}>
-          {SHIPPING_OPTIONS.map((option) => (
-            <Surface component="article" key={option.id}>
-              <Eyebrow>{option.name}</Eyebrow>
-              <BodyCopy>{option.description}</BodyCopy>
+          {SHIPPING_OPTION_KEYS.map((option) => (
+            <Surface component="article" key={option}>
+              <Eyebrow>{t(`shipping.${option}`)}</Eyebrow>
+              <BodyCopy>{t(`shipping.${option}Description`)}</BodyCopy>
             </Surface>
           ))}
         </ContentGrid>
         <Typography variant="h2" sx={{ mt: 4.25, fontWeight: 600 }}>
-          Returns
+          {t("shipping.returnsTitle")}
         </Typography>
-        <BodyCopy sx={{ pt: 2 }}>
-          AMAMBRA should support the statutory EU withdrawal period and a clear
-          return portal before launch. Items must be unworn, unwashed, and
-          returned with original tags.
-        </BodyCopy>
+        <BodyCopy sx={{ pt: 2 }}>{t("shipping.returnsBody")}</BodyCopy>
       </AppContainer>
     </PageSection>
   );

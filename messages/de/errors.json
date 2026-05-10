@@ -1,0 +1,12 @@
+{
+  "boundary": {
+    "eyebrow": "Fehler",
+    "headline": "Etwas hat das Erlebnis unterbrochen.",
+    "body": "Versuche das Segment erneut. Wenn es bestehen bleibt, prüfe die Deployment-Logs mit Digest {digest}."
+  },
+  "notFound": {
+    "eyebrow": "404",
+    "headline": "Diese Seite ist nicht in der Kollektion.",
+    "body": "Die Route wurde möglicherweise verschoben oder das Produkt ist nicht mehr verfügbar."
+  }
+}

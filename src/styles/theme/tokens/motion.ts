@@ -5,6 +5,9 @@ export const motion = {
     easeOutQuad: "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
     easeInQuad: "cubic-bezier(0.55, 0.085, 0.68, 0.53)",
     easeInOutCubic: "cubic-bezier(0.645, 0.045, 0.355, 1)",
+
+    smooth: "ease",
+    sharp: "cubic-bezier(0.4, 0, 0.2, 1)",
   },
   duration: {
     instant: "0.001ms",
@@ -12,6 +15,7 @@ export const motion = {
     base: "220ms",
     hover: "240ms",
     calm: "320ms",
+    slow: "420ms",
     reveal: "550ms",
     editorial: "720ms",
     cinematic: "740ms",

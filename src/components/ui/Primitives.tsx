@@ -19,8 +19,8 @@ import {
   useTheme,
 } from "@mui/material";
 import type { SxProps, Theme } from "@mui/material/styles";
-import NextLink from "next/link";
 import type { ElementType, ReactNode } from "react";
+import { Link } from "@/i18n/navigation";
 import { brandColors, shadows, transitions } from "@/styles/theme";
 
 const sxList = (sx?: SxProps<Theme>) =>
@@ -270,7 +270,7 @@ export function AppButton({
   if (href?.startsWith("/")) {
     return (
       <MuiButton
-        component={NextLink}
+        component={Link}
         href={href}
         variant={muiVariant}
         sx={buttonSx}

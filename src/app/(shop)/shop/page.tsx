@@ -1,20 +1,25 @@
 import { ShopClient } from "@/components/shop/ShopClient";
+import { getTypedTranslations } from "@/i18n/getTypedTranslations";
 import { getAllProducts, normalizeParam, parseSort } from "@/lib/catalog";
-import { createMetadata } from "@/lib/seo";
+import { localizeProducts } from "@/lib/catalog-i18n";
+import { createLocalizedMetadata } from "@/lib/localized-seo";
 import type { ProductFilter } from "@/types";
 
-export const metadata = createMetadata({
-  title: "Shop",
-  description:
-    "Shop AMAMBRA launch pieces: satin-lined hoodies, premium tracksuits, atelier overshirts, tees, caps, and beanies.",
-  path: "/shop",
-});
+export async function generateMetadata() {
+  return createLocalizedMetadata({
+    descriptionKey: "pages.shopDescription",
+    path: "/shop",
+    titleKey: "pages.shopTitle",
+  });
+}
 
 type ShopPageProps = {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
 
 export default async function ShopPage({ searchParams }: ShopPageProps) {
+  const common = await getTypedTranslations("common");
+  const catalog = await getTypedTranslations("catalog");
   const params = await searchParams;
   const category = normalizeParam(params.category);
   const collection = normalizeParam(params.collection);
@@ -28,6 +33,9 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
   };
 
   return (
-    <ShopClient initialFilter={initialFilter} products={getAllProducts()} />
+    <ShopClient
+      initialFilter={initialFilter}
+      products={localizeProducts(getAllProducts(), catalog, common)}
+    />
   );
 }

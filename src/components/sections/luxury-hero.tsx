@@ -1,12 +1,12 @@
 "use client";
 
-import { AppButton, AppContainer, Eyebrow } from "@/components/ui/Primitives";
-import { CinematicBackground } from "@/components/video/cinematic-background";
-import { BRAND } from "@/constants/config";
-import { brandColors } from "@/styles/theme";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Box, Stack, Typography } from "@mui/material";
 import { MotionConfig, motion } from "framer-motion";
+import { AppButton, AppContainer, Eyebrow } from "@/components/ui/Primitives";
+import { CinematicBackground } from "@/components/video/cinematic-background";
+import { useTypedTranslations } from "@/i18n/useTypedTranslations";
+import { brandColors } from "@/styles/theme";
 
 const heroTransition = {
   duration: 0.95,
@@ -14,12 +14,18 @@ const heroTransition = {
 };
 
 const campaignNotes = [
-  { label: "Atelier", value: "Satin-lined essentials" },
-  { label: "Origin", value: "Stuttgart, DE" },
-  { label: "Position", value: "Accessible premium" },
+  { label: "campaignNotes.atelierLabel", value: "campaignNotes.atelierValue" },
+  { label: "campaignNotes.originLabel", value: "campaignNotes.originValue" },
+  {
+    label: "campaignNotes.positionLabel",
+    value: "campaignNotes.positionValue",
+  },
 ] as const;
 
 export function LuxuryHero() {
+  const common = useTypedTranslations("common");
+  const hero = useTypedTranslations("hero");
+
   return (
     <MotionConfig reducedMotion="user">
       <Box
@@ -56,7 +62,7 @@ export function LuxuryHero() {
         }}
       >
         <CinematicBackground
-          posterAlt="AMAMBRA cinematic Afro-European atelier campaign"
+          posterAlt={hero("posterAlt")}
           posterSrc="/editorial/amambra-hero-campaign.png"
           videoSrc="/videos/amambra-atelier-loop.mp4"
         />
@@ -86,7 +92,7 @@ export function LuxuryHero() {
               transition={heroTransition}
             >
               <Eyebrow sx={{ color: "rgba(216, 198, 165, 0.9)" }}>
-                {BRAND.location} / Afro-European Atelier
+                {hero("eyebrow", { location: common("brand.location") })}
               </Eyebrow>
               <Typography
                 component="h1"
@@ -101,7 +107,7 @@ export function LuxuryHero() {
                   textWrap: "balance",
                 }}
               >
-                Quiet luxury, cut between cultures.
+                {hero("headline")}
               </Typography>
             </motion.div>
 
@@ -121,9 +127,7 @@ export function LuxuryHero() {
                   lineHeight: 1.72,
                 }}
               >
-                Afro-European streetwear from Stuttgart: satin-lined essentials
-                and sculpted layers for a modern European wardrobe with a
-                restrained African textile memory.
+                {hero("body")}
               </Typography>
             </motion.div>
 
@@ -138,15 +142,18 @@ export function LuxuryHero() {
                 sx={{ flexWrap: "wrap", mt: { xs: 3, md: 4 } }}
               >
                 <AppButton href="/shop" variant="primary">
-                  Enter the atelier <ArrowForwardIcon fontSize="small" />
+                  {hero("actions.enterAtelier")}{" "}
+                  <ArrowForwardIcon fontSize="small" />
                 </AppButton>
-                <AppButton href="/collections">View the edit</AppButton>
+                <AppButton href="/collections">
+                  {hero("actions.viewEdit")}
+                </AppButton>
               </Stack>
             </motion.div>
           </Box>
 
           <Box
-            aria-label="AMAMBRA campaign notes"
+            aria-label={hero("campaignNotesAria")}
             component="dl"
             sx={{
               display: { xs: "none", sm: "grid" },
@@ -182,7 +189,7 @@ export function LuxuryHero() {
                       textTransform: "uppercase",
                     }}
                   >
-                    {note.label}
+                    {hero(note.label)}
                   </Typography>
                   <Typography
                     component="dd"
@@ -193,7 +200,7 @@ export function LuxuryHero() {
                       lineHeight: 1.45,
                     }}
                   >
-                    {note.value}
+                    {hero(note.value)}
                   </Typography>
                 </Box>
               </motion.div>

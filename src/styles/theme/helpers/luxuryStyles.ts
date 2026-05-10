@@ -1,8 +1,8 @@
 import type { SxProps, Theme } from "@mui/material/styles";
 import {
   alphaColors,
-  brandColors,
   borders,
+  brandColors,
   gradients,
   radius,
   shadows,

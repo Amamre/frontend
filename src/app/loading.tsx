@@ -5,13 +5,14 @@ import {
   PageSection,
   Surface,
 } from "@/components/ui/Primitives";
+import { messages } from "@/i18n/messages";
 
 export default function Loading() {
   return (
     <PageSection>
       <AppContainer>
         <Surface sx={{ minHeight: 360 }}>
-          <Eyebrow>Loading</Eyebrow>
+          <Eyebrow>{messages.common.states.loading}</Eyebrow>
           <Box sx={{ display: "grid", gap: 2, maxWidth: 720 }}>
             <Box
               sx={{

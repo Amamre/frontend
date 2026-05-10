@@ -1,6 +1,5 @@
-export { fadeUp, editorialReveal } from "./animations";
+export { editorialReveal, fadeUp } from "./animations";
 export { luxuryGlass, railGlass } from "./glass";
-export { cinematicOverlay, fixedOverlay } from "./overlays";
 export {
   editorialHeading,
   luxuryButton,
@@ -9,3 +8,4 @@ export {
   luxuryHover,
   mutedGoldBorder,
 } from "./luxuryStyles";
+export { cinematicOverlay, fixedOverlay } from "./overlays";

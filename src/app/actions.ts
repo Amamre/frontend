@@ -1,13 +1,15 @@
 "use server";
 
+import { redirect } from "next/navigation";
+import { getTypedTranslations } from "@/i18n/getTypedTranslations";
 import {
-  checkoutSchema,
-  contactFormSchema,
-  newsletterSchema,
+  createCheckoutSchema,
+  createContactFormSchema,
+  createNewsletterSchema,
+  type ValidationMessages,
 } from "@/lib/validation";
 import { createCart } from "@/services/shopify";
 import type { ActionState } from "@/types";
-import { redirect } from "next/navigation";
 
 const validationError = (
   message: string,
@@ -18,11 +20,38 @@ const validationError = (
   fieldErrors: error.flatten().fieldErrors,
 });
 
+const getValidationMessages = async (): Promise<ValidationMessages> => {
+  const forms = await getTypedTranslations("forms");
+
+  return {
+    cityRequired: forms("validation.cityRequired"),
+    consentRequired: forms("validation.consentRequired"),
+    countryRequired: forms("validation.countryRequired"),
+    emailInvalid: forms("validation.emailInvalid"),
+    firstNameRequired: forms("validation.firstNameRequired"),
+    lastNameRequired: forms("validation.lastNameRequired"),
+    messageMin: forms("validation.messageMin"),
+    nameMin: forms("validation.nameMin"),
+    passwordMin: forms("validation.passwordMin"),
+    passwordsMatch: forms("validation.passwordsMatch"),
+    postalCodeRequired: forms("validation.postalCodeRequired"),
+    reviewMin: forms("validation.reviewMin"),
+    searchRequired: forms("validation.searchRequired"),
+    stateRequired: forms("validation.stateRequired"),
+    streetRequired: forms("validation.streetRequired"),
+    subjectMin: forms("validation.subjectMin"),
+    titleMin: forms("validation.titleMin"),
+  };
+};
+
 export const subscribeNewsletter = async (
   _previousState: ActionState,
   formData: FormData,
 ): Promise<ActionState> => {
-  const parsed = newsletterSchema.safeParse({
+  const newsletter = await getTypedTranslations("newsletter");
+  const parsed = createNewsletterSchema(
+    await getValidationMessages(),
+  ).safeParse({
     email: formData.get("email"),
     firstName: formData.get("firstName") || undefined,
     country: formData.get("country") || "DE",
@@ -30,16 +59,12 @@ export const subscribeNewsletter = async (
   });
 
   if (!parsed.success) {
-    return validationError(
-      "Please check your email and consent.",
-      parsed.error,
-    );
+    return validationError(newsletter("messages.invalid"), parsed.error);
   }
 
   return {
     ok: true,
-    message:
-      "You are on the AMAMBRA list. Collection notes and launch access will arrive by email.",
+    message: newsletter("messages.success"),
   };
 };
 
@@ -47,7 +72,10 @@ export const submitContact = async (
   _previousState: ActionState,
   formData: FormData,
 ): Promise<ActionState> => {
-  const parsed = contactFormSchema.safeParse({
+  const forms = await getTypedTranslations("forms");
+  const parsed = createContactFormSchema(
+    await getValidationMessages(),
+  ).safeParse({
     name: formData.get("name"),
     email: formData.get("email"),
     subject: formData.get("subject"),
@@ -55,16 +83,12 @@ export const submitContact = async (
   });
 
   if (!parsed.success) {
-    return validationError(
-      "Please complete the required fields.",
-      parsed.error,
-    );
+    return validationError(forms("contact.invalid"), parsed.error);
   }
 
   return {
     ok: true,
-    message:
-      "Message received. AMAMBRA customer care will respond within one business day.",
+    message: forms("contact.success"),
   };
 };
 
@@ -85,7 +109,8 @@ export const submitCheckoutLead = async (
   _previousState: ActionState,
   formData: FormData,
 ): Promise<ActionState> => {
-  const parsed = checkoutSchema.safeParse({
+  const checkout = await getTypedTranslations("checkout");
+  const parsed = createCheckoutSchema(await getValidationMessages()).safeParse({
     email: formData.get("email"),
     firstName: formData.get("firstName"),
     lastName: formData.get("lastName"),
@@ -100,15 +125,11 @@ export const submitCheckoutLead = async (
   });
 
   if (!parsed.success) {
-    return validationError(
-      "Please review your checkout details.",
-      parsed.error,
-    );
+    return validationError(checkout("messages.invalid"), parsed.error);
   }
 
   return {
     ok: true,
-    message:
-      "Checkout profile validated. Connect Shopify credentials to redirect directly into Shopify Checkout.",
+    message: checkout("messages.success"),
   };
 };

@@ -1,5 +1,7 @@
 "use client";
 
+import { Box, Typography } from "@mui/material";
+import { motion } from "framer-motion";
 import ProductCard from "@/components/product/ProductCard";
 import { LuxuryHero } from "@/components/sections/luxury-hero";
 import {
@@ -16,27 +18,33 @@ import {
   Subhead,
   Surface,
 } from "@/components/ui/Primitives";
+import { useTypedTranslations } from "@/i18n/useTypedTranslations";
 import { getAllCollections, getFeaturedProducts } from "@/lib/catalog";
-import { Box, Typography } from "@mui/material";
-import { motion } from "framer-motion";
-
-const featuredProducts = getFeaturedProducts(4);
-const collections = getAllCollections();
+import { localizeCollections, localizeProducts } from "@/lib/catalog-i18n";
 
 export function HeroSection() {
   return <LuxuryHero />;
 }
 
 export function FeaturedProductsSection() {
+  const t = useTypedTranslations("home");
+  const common = useTypedTranslations("common");
+  const catalog = useTypedTranslations("catalog");
+  const featuredProducts = localizeProducts(
+    getFeaturedProducts(4),
+    catalog,
+    common,
+  );
+
   return (
     <PageSection>
       <AppContainer>
         <SectionHeading>
           <Box>
-            <Eyebrow>Launch pieces</Eyebrow>
-            <Headline component="h2">Signature wardrobe</Headline>
+            <Eyebrow>{t("featured.eyebrow")}</Eyebrow>
+            <Headline component="h2">{t("featured.headline")}</Headline>
           </Box>
-          <AppButton href="/shop">Shop all</AppButton>
+          <AppButton href="/shop">{common("actions.shopAll")}</AppButton>
         </SectionHeading>
 
         <ProductGrid>
@@ -58,21 +66,20 @@ export function FeaturedProductsSection() {
 }
 
 export function CollectionEditorialSection() {
+  const t = useTypedTranslations("home");
+  const common = useTypedTranslations("common");
+  const catalog = useTypedTranslations("catalog");
+  const collections = localizeCollections(getAllCollections(), catalog, common);
+
   return (
     <PageSection>
       <AppContainer>
         <SectionHeading>
           <Box>
-            <Eyebrow>Collection architecture</Eyebrow>
-            <Headline component="h2">
-              Built as a system, not isolated drops.
-            </Headline>
+            <Eyebrow>{t("collections.eyebrow")}</Eyebrow>
+            <Headline component="h2">{t("collections.headline")}</Headline>
           </Box>
-          <Subhead>
-            Every piece is designed to layer across Signature, Heritage,
-            Essentials, and Atelier, giving AMAMBRA a scalable merchandising
-            foundation from launch.
-          </Subhead>
+          <Subhead>{t("collections.body")}</Subhead>
         </SectionHeading>
 
         <ContentGrid>
@@ -81,7 +88,9 @@ export function CollectionEditorialSection() {
               href={`/collections/${collection.slug}`}
               key={collection.id}
             >
-              <Eyebrow>{collection.products.length} pieces</Eyebrow>
+              <Eyebrow>
+                {common("counts.pieces", { count: collection.products.length })}
+              </Eyebrow>
               <Typography component="h3" sx={{ mt: 0 }}>
                 {collection.title}
               </Typography>
@@ -95,21 +104,19 @@ export function CollectionEditorialSection() {
 }
 
 export function ValuePropositionSection() {
+  const t = useTypedTranslations("home");
   const values = [
     {
-      title: "Material honesty",
-      description:
-        "Heavy organic cotton, merino, satin linings, and trims chosen for daily function.",
+      title: t("values.materialTitle"),
+      description: t("values.materialBody"),
     },
     {
-      title: "Subtle heritage",
-      description:
-        "African textile references are expressed as restrained borders, embroidery, and rhythm.",
+      title: t("values.heritageTitle"),
+      description: t("values.heritageBody"),
     },
     {
-      title: "Shopify-ready",
-      description:
-        "Cart, checkout handoff, product variants, inventory states, and merchandising hooks are structured for Storefront API.",
+      title: t("values.shopifyTitle"),
+      description: t("values.shopifyBody"),
     },
   ];
 

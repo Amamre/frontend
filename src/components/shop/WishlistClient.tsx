@@ -1,5 +1,6 @@
 "use client";
 
+import { Box } from "@mui/material";
 import ProductCard from "@/components/product/ProductCard";
 import {
   AppButton,
@@ -14,10 +15,12 @@ import {
   Subhead,
 } from "@/components/ui/Primitives";
 import { useIsMounted } from "@/hooks/useUtils";
+import { useTypedTranslations } from "@/i18n/useTypedTranslations";
 import { useWishlistStore } from "@/store/wishlistStore";
-import { Box } from "@mui/material";
 
 export function WishlistClient() {
+  const account = useTypedTranslations("account");
+  const common = useTypedTranslations("common");
   const items = useWishlistStore((state) => state.items);
   const mounted = useIsMounted();
   const visibleItems = mounted ? items : [];
@@ -26,13 +29,11 @@ export function WishlistClient() {
     return (
       <EmptyState>
         <div>
-          <Eyebrow>Wishlist</Eyebrow>
-          <Headline>No saved pieces yet.</Headline>
-          <BodyCopy sx={{ py: 2 }}>
-            Save products while you browse and return to them before checkout.
-          </BodyCopy>
+          <Eyebrow>{account("wishlist.emptyEyebrow")}</Eyebrow>
+          <Headline>{account("wishlist.emptyHeadline")}</Headline>
+          <BodyCopy sx={{ py: 2 }}>{account("wishlist.emptyBody")}</BodyCopy>
           <AppButton href="/shop" variant="primary">
-            Explore collection
+            {common("actions.exploreCollection")}
           </AppButton>
         </div>
       </EmptyState>
@@ -44,10 +45,12 @@ export function WishlistClient() {
       <AppContainer>
         <SectionHeading>
           <Box>
-            <Eyebrow>Wishlist</Eyebrow>
-            <Headline>Saved pieces</Headline>
+            <Eyebrow>{account("wishlist.eyebrow")}</Eyebrow>
+            <Headline>{account("wishlist.headline")}</Headline>
           </Box>
-          <Subhead>{visibleItems.length} AMAMBRA pieces saved.</Subhead>
+          <Subhead>
+            {common("counts.savedPieces", { count: visibleItems.length })}
+          </Subhead>
         </SectionHeading>
         <ProductGrid>
           {visibleItems.map((product) => (

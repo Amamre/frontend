@@ -1,4 +1,7 @@
-import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from "@/constants/cookie";
+import {
+  DEFAULT_LOCALE,
+  SUPPORTED_LOCALES,
+} from "@/constants/cookie";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
@@ -6,7 +9,9 @@ type Locale = (typeof SUPPORTED_LOCALES)[number];
 
 function detectLocale(header: string | null): Locale {
   if (!header) return DEFAULT_LOCALE;
-  const languages = header.split(",").map((l) => l.split(";")[0]?.trim().toLowerCase() ?? "");
+  const languages = header
+    .split(",")
+    .map((l) => l.split(";")[0]?.trim().toLowerCase() ?? "");
 
   for (const lang of languages) {
     for (const supported of SUPPORTED_LOCALES) {
@@ -66,7 +71,11 @@ export function proxy(req: NextRequest): NextResponse {
     pathname.startsWith("/scan") ||
     pathname.startsWith("/me");
 
-  if (pathname.startsWith("/_next") || pathname.startsWith("/api") || pathname.includes(".")) {
+  if (
+    pathname.startsWith("/_next") ||
+    pathname.startsWith("/api") ||
+    pathname.includes(".")
+  ) {
     return res;
   }
 

@@ -5,6 +5,7 @@ import { Box, TextField } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { FieldTitle, IconAction } from "@/components/ui/Primitives";
 import { useDebounce } from "@/hooks/useUtils";
+import { useTypedTranslations } from "@/i18n/useTypedTranslations";
 
 interface SearchInputProps {
   placeholder?: string;
@@ -17,8 +18,10 @@ export default function SearchInput({
   autoFocus = false,
   loading = false,
   onSearch,
-  placeholder = "Search products...",
+  placeholder,
 }: SearchInputProps) {
+  const common = useTypedTranslations("common");
+  const search = useTypedTranslations("search");
   const [value, setValue] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const debouncedValue = useDebounce(value, 300);
@@ -35,16 +38,18 @@ export default function SearchInput({
 
   return (
     <Box component="label" sx={{ display: "block" }}>
-      <FieldTitle>{loading ? "Searching" : "Search"}</FieldTitle>
+      <FieldTitle>
+        {loading ? search("loadingLabel") : search("eyebrow")}
+      </FieldTitle>
       <Box sx={{ display: "grid", gridTemplateColumns: "1fr auto", gap: 1.25 }}>
         <TextField
           inputRef={inputRef}
           onChange={(event) => setValue(event.target.value)}
-          placeholder={placeholder}
+          placeholder={placeholder ?? search("placeholder")}
           type="search"
           value={value}
         />
-        <IconAction type="button" aria-label="Search">
+        <IconAction type="button" aria-label={common("aria.search")}>
           <SearchIcon fontSize="small" />
         </IconAction>
       </Box>

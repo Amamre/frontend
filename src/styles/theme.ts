@@ -3,7 +3,6 @@ import type { CSSProperties } from "react";
 import { customThemeTokens } from "./theme/custom";
 import {
   alphaColors,
-  blur,
   borders,
   brandColors,
   gradients,
@@ -11,13 +10,13 @@ import {
   motion,
   opacity,
   radius,
-  semanticSpacing,
   shadows,
   spacing as tokenSpacing,
   transitions,
   typographyTokens,
 } from "./theme/tokens";
 
+export * from "./theme/helpers";
 export {
   alphaColors,
   blur,
@@ -34,7 +33,6 @@ export {
   typographyTokens,
   zIndex,
 } from "./theme/tokens";
-export * from "./theme/helpers";
 
 export const theme = responsiveFontSizes(
   createTheme({
@@ -172,8 +170,7 @@ export const theme = responsiveFontSizes(
             zIndex: -1,
             pointerEvents: "none",
             content: '""',
-            backgroundImage:
-              gradients.scanline,
+            backgroundImage: gradients.scanline,
             backgroundSize: "100% 4px",
             opacity: 0.18,
           },

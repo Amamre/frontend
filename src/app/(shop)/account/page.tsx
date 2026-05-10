@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import {
   AppContainer,
   BodyCopy,
@@ -9,45 +10,46 @@ import {
   SectionHeading,
   Subhead,
 } from "@/components/ui/Primitives";
-import { createMetadata } from "@/lib/seo";
-import { Box } from "@mui/material";
+import { getTypedTranslations } from "@/i18n/getTypedTranslations";
+import { createLocalizedMetadata } from "@/lib/localized-seo";
 
-export const metadata = createMetadata({
-  title: "Account",
-  description:
-    "AMAMBRA account area for orders, profile, wishlist, and returns.",
-  path: "/account",
-  noIndex: true,
-});
+export async function generateMetadata() {
+  return createLocalizedMetadata({
+    descriptionKey: "pages.accountDescription",
+    noIndex: true,
+    path: "/account",
+    titleKey: "pages.accountTitle",
+  });
+}
 
-export default function AccountPage() {
+export default async function AccountPage() {
+  const account = await getTypedTranslations("account");
+
   return (
     <PageSection>
       <AppContainer>
         <SectionHeading>
           <Box>
-            <Eyebrow>Account</Eyebrow>
-            <Headline>Client account center</Headline>
+            <Eyebrow>{account("page.eyebrow")}</Eyebrow>
+            <Headline>{account("page.headline")}</Headline>
           </Box>
-          <Subhead>
-            Ready for Shopify Customer Account API or a headless auth provider.
-          </Subhead>
+          <Subhead>{account("page.body")}</Subhead>
         </SectionHeading>
         <ContentGrid>
           {[
             {
-              title: "Orders",
-              body: "View order status, tracking, returns, and receipts.",
+              title: account("cards.ordersTitle"),
+              body: account("cards.ordersBody"),
               href: "/account/orders",
             },
             {
-              title: "Profile",
-              body: "Manage email, address book, preferences, and GDPR export.",
+              title: account("cards.profileTitle"),
+              body: account("cards.profileBody"),
               href: "/account/profile",
             },
             {
-              title: "Wishlist",
-              body: "Return to saved AMAMBRA pieces before checkout.",
+              title: account("cards.wishlistTitle"),
+              body: account("cards.wishlistBody"),
               href: "/wishlist",
             },
           ].map((item) => (

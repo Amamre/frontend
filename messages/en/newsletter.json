@@ -1,0 +1,21 @@
+{
+  "emailPlaceholder": "Email address",
+  "emailAria": "Email address",
+  "consent": "I agree to receive AMAMBRA editorial emails and can unsubscribe at any time.",
+  "actions": {
+    "join": "Join",
+    "joining": "Joining",
+    "joinList": "Join the list"
+  },
+  "home": {
+    "eyebrow": "Studio notes",
+    "headline": "Stay close to the studio.",
+    "body": "Early access to drops, editorials, private Stuttgart releases, and collection notes from the AMAMBRA world."
+  },
+  "messages": {
+    "invalid": "Please check your email and consent.",
+    "success": "You are on the AMAMBRA list. Collection notes and launch access will arrive by email.",
+    "emailFallback": "Please check your email address.",
+    "simpleSuccess": "You are on the AMAMBRA list."
+  }
+}

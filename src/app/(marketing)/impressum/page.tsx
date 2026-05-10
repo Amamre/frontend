@@ -1,30 +1,44 @@
 import { LegalPage } from "@/components/marketing/LegalPage";
 import { BRAND } from "@/constants/config";
-import { createMetadata } from "@/lib/seo";
+import { getTypedTranslations } from "@/i18n/getTypedTranslations";
+import { createLocalizedMetadata } from "@/lib/localized-seo";
 
-export const metadata = createMetadata({
-  title: "Impressum",
-  description: "Legal disclosure for AMAMBRA in Germany.",
-  path: "/impressum",
-});
+export async function generateMetadata() {
+  return createLocalizedMetadata({
+    descriptionKey: "pages.impressumDescription",
+    path: "/impressum",
+    titleKey: "pages.impressumTitle",
+  });
+}
 
-export default function ImpressumPage() {
+export default async function ImpressumPage() {
+  const common = await getTypedTranslations("common");
+  const t = await getTypedTranslations("marketing");
+
   return (
     <LegalPage
-      title="Impressum"
-      intro="German legal disclosure placeholder for production completion."
+      eyebrow={common("brand.name")}
+      title={t("legal.impressumTitle")}
+      intro={t("legal.impressumIntro")}
+      tocLabel={common("labels.onThisPage")}
       sections={[
         {
-          title: "Provider",
-          body: `${BRAND.name}, ${BRAND.address}. Replace this placeholder with the registered legal entity, managing director, registration court, VAT ID, and responsible contact before launch.`,
+          title: t("legal.provider"),
+          body: t("legal.providerBody", {
+            address: common("brand.address"),
+            brand: common("brand.name"),
+          }),
         },
         {
-          title: "Contact",
-          body: `Email: ${BRAND.email}. Phone: ${BRAND.phone}.`,
+          title: common("labels.contact"),
+          body: t("legal.contactBody", {
+            email: BRAND.email,
+            phone: BRAND.phone,
+          }),
         },
         {
-          title: "Editorial responsibility",
-          body: "Name and address of the person responsible under German press law must be added before public launch.",
+          title: t("legal.editorialResponsibility"),
+          body: t("legal.editorialResponsibilityBody"),
         },
       ]}
     />

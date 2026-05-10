@@ -1,0 +1,35 @@
+{
+  "items": {
+    "shop": {
+      "title": "Shop",
+      "description": "Alle Premium-Streetwear-Pieces"
+    },
+    "collections": {
+      "title": "Kollektionen",
+      "description": "Signature, Heritage, Essentials und Atelier"
+    },
+    "about": {
+      "title": "Über uns",
+      "description": "Die afro-europäische AMAMBRA Geschichte"
+    },
+    "faq": {
+      "title": "FAQ",
+      "description": "Versand, Retouren, Größen und Pflege"
+    },
+    "contact": {
+      "title": "Kontakt",
+      "description": "Customer Care und Wholesale-Anfragen"
+    }
+  },
+  "marquee": {
+    "announcements": "AMAMBRA Atelier-Ankündigungen",
+    "atelierCollection": "ATELIER KOLLEKTION - LIMITED DROP",
+    "madeIn": "GEFERTIGT IN PORTUGAL & ITALIEN",
+    "origin": "STUTTGART, DE",
+    "shipping": "VERSAND IN EUROPA",
+    "essentials": "SATIN-LINED ESSENTIALS",
+    "culture": "KULTUR OHNE KOSTÜM",
+    "premium": "ACCESSIBLE PREMIUM",
+    "atelier": "AMAMBRA ATELIER"
+  }
+}

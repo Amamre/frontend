@@ -5,18 +5,20 @@ import {
   Eyebrow,
   Headline,
 } from "@/components/ui/Primitives";
+import { getTypedTranslations } from "@/i18n/getTypedTranslations";
 
-export default function NotFound() {
+export default async function NotFound() {
+  const common = await getTypedTranslations("common");
+  const t = await getTypedTranslations("errors");
+
   return (
     <EmptyState>
       <div>
-        <Eyebrow>404</Eyebrow>
-        <Headline>This page is not in the collection.</Headline>
-        <BodyCopy sx={{ py: 2 }}>
-          The route may have moved, or the product is no longer available.
-        </BodyCopy>
+        <Eyebrow>{t("notFound.eyebrow")}</Eyebrow>
+        <Headline>{t("notFound.headline")}</Headline>
+        <BodyCopy sx={{ py: 2 }}>{t("notFound.body")}</BodyCopy>
         <AppButton href="/shop" variant="primary">
-          Return to shop
+          {common("actions.returnToShop")}
         </AppButton>
       </div>
     </EmptyState>

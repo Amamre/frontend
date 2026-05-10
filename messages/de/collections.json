@@ -1,0 +1,39 @@
+{
+  "hero": {
+    "eyebrow": "Drei Linien",
+    "headline": "Kollektionen",
+    "body": "Jede Kollektion trägt ihre eigene Disziplin: Atelier Outer Layers, Heritage-Rhythmus und essentielle Foundations, entworfen für eine moderne europäische Garderobe mit Zurückhaltung."
+  },
+  "chapters": {
+    "atelier": {
+      "chapter": "01",
+      "kicker": "Atelier",
+      "title": "Atelier",
+      "copy": "Limitierte Utility-Pieces für editorial Layering: strukturiert, ruhig und gemacht, um die Atmosphäre des Studios auf die Straße zu tragen.",
+      "mood": "Limitierte Releases, gebürstete Oberflächen, handwerkliche Zurückhaltung und erhöhte Outer Layers mit ruhiger Silhouette."
+    },
+    "heritage": {
+      "chapter": "02",
+      "kicker": "Heritage",
+      "title": "Heritage",
+      "copy": "Afro-europäisches Handwerk, übersetzt durch zurückhaltende Linienführung, warme Utility und Silhouetten, die komponiert wirken, ohne zeremoniell zu werden.",
+      "mood": "Subtiler Textilrhythmus, tonale Hardware, warme Funktion und strukturierte Pieces für Bewegung."
+    },
+    "essentials": {
+      "chapter": "03",
+      "kicker": "Essentials",
+      "title": "Essentials",
+      "copy": "Die Foundation Layer der AMAMBRA Garderobe: clean, taktil und bewusst minimal, damit das restliche System atmen kann.",
+      "mood": "Everyday Premium Cotton, ruhige Proportionen, stille Luxury und Pieces, die im täglichen Rhythmus ihre Form halten."
+    }
+  },
+  "labels": {
+    "mood": "Mood",
+    "curatedPieces": "Kuratierte Pieces",
+    "completeSystem": "System komplettieren",
+    "moveStory": "Von Story zu Garderobe.",
+    "shopCollection": "Kollektion shoppen",
+    "collection": "Kollektion",
+    "notFound": "Kollektion nicht gefunden"
+  }
+}

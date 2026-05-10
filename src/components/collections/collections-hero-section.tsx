@@ -3,9 +3,12 @@
 import { Box, Container, Stack, Typography } from "@mui/material";
 import { alpha } from "@mui/material/styles";
 import { motion } from "framer-motion";
+import { useTypedTranslations } from "@/i18n/useTypedTranslations";
 import { brandColors } from "@/styles/theme";
 
 export function CollectionsHeroSection() {
+  const t = useTypedTranslations("collections");
+
   return (
     <Box
       component="section"
@@ -24,7 +27,7 @@ export function CollectionsHeroSection() {
           width: "min(100% - 32px, var(--container))",
           minHeight: { xs: "68svh", md: "76svh" },
           display: "grid",
-          alignItems: "end",
+          alignItems: "start",
           mx: "auto",
           py: { xs: 8, md: 12 },
         }}
@@ -32,10 +35,12 @@ export function CollectionsHeroSection() {
         <Stack
           component={motion.div}
           initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: 0.9,
+            ease: [0.22, 1, 0.36, 1],
+          }}
           spacing={{ xs: 3, md: 4 }}
-          transition={{ duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
-          viewport={{ once: true, margin: "-80px" }}
-          whileInView={{ opacity: 1, y: 0 }}
         >
           <Typography
             component="p"
@@ -48,10 +53,10 @@ export function CollectionsHeroSection() {
               textTransform: "uppercase",
             }}
           >
-            Three lineages
+            {t("hero.eyebrow")}
           </Typography>
           <Typography
-            component="h1"
+            variant="h1"
             sx={{
               maxWidth: 980,
               m: 0,
@@ -66,7 +71,7 @@ export function CollectionsHeroSection() {
               lineHeight: { xs: 0.86, md: 0.82 },
             }}
           >
-            Collections
+            {t("hero.headline")}
           </Typography>
           <Typography
             sx={{
@@ -76,9 +81,7 @@ export function CollectionsHeroSection() {
               lineHeight: 1.8,
             }}
           >
-            Each collection carries its own discipline: atelier outer layers,
-            heritage rhythm, and essential foundations designed to move through
-            a modern European wardrobe with restraint.
+            {t("hero.body")}
           </Typography>
         </Stack>
       </Container>

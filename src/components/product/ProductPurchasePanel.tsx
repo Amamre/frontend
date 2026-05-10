@@ -16,6 +16,7 @@ import {
   Subhead,
   Surface,
 } from "@/components/ui/Primitives";
+import { useTypedTranslations } from "@/i18n/useTypedTranslations";
 import { formatPrice } from "@/lib/utils";
 import { useCartStore } from "@/store/cartStore";
 import { useWishlistStore } from "@/store/wishlistStore";
@@ -24,6 +25,7 @@ import type { Product } from "@/types";
 
 export function ProductPurchasePanel({ product }: { product: Product }) {
   const theme = useTheme();
+  const t = useTypedTranslations("product");
   const [variantId, setVariantId] = useState(product.variants[0]?.id ?? "");
   const [quantity, setQuantity] = useState(1);
   const addToCart = useCartStore((state) => state.addItem);
@@ -38,7 +40,7 @@ export function ProductPurchasePanel({ product }: { product: Product }) {
 
   const add = () => {
     if (!selectedVariant || selectedVariant.inventory < quantity) {
-      toast.error("Selected variant is unavailable");
+      toast.error(t("toasts.selectedUnavailable"));
       return;
     }
 
@@ -49,18 +51,18 @@ export function ProductPurchasePanel({ product }: { product: Product }) {
       price: selectedVariant.price,
       product,
     });
-    toast.success("Added to cart");
+    toast.success(t("toasts.addedToCart"));
   };
 
   const toggleWishlist = () => {
     if (inWishlist) {
       removeItem(product.id);
-      toast.success("Removed from wishlist");
+      toast.success(t("toasts.removedFromWishlist"));
       return;
     }
 
     addItem(product);
-    toast.success("Saved to wishlist");
+    toast.success(t("toasts.savedToWishlist"));
   };
 
   return (
@@ -96,7 +98,7 @@ export function ProductPurchasePanel({ product }: { product: Product }) {
       <DividerLine />
 
       <Stack spacing={2}>
-        <Typography component="strong">Size and color</Typography>
+        <Typography component="strong">{t("labels.sizeAndColor")}</Typography>
         <Box
           sx={{
             display: "grid",
@@ -134,7 +136,7 @@ export function ProductPurchasePanel({ product }: { product: Product }) {
       </Stack>
 
       <Stack spacing={2}>
-        <Typography component="strong">Quantity</Typography>
+        <Typography component="strong">{t("labels.quantity")}</Typography>
         <Box
           sx={{
             display: "grid",
@@ -144,7 +146,7 @@ export function ProductPurchasePanel({ product }: { product: Product }) {
           }}
         >
           <IconAction
-            aria-label="Decrease quantity"
+            aria-label={t("aria.decreaseQuantity")}
             onClick={() => setQuantity((value) => Math.max(1, value - 1))}
           >
             -
@@ -161,7 +163,7 @@ export function ProductPurchasePanel({ product }: { product: Product }) {
             {quantity}
           </Box>
           <IconAction
-            aria-label="Increase quantity"
+            aria-label={t("aria.increaseQuantity")}
             onClick={() =>
               setQuantity((value) =>
                 Math.min(selectedVariant?.inventory ?? 1, value + 1),
@@ -173,8 +175,8 @@ export function ProductPurchasePanel({ product }: { product: Product }) {
         </Box>
         <Muted>
           {selectedVariant?.inventory
-            ? `${selectedVariant.inventory} available`
-            : "Out of stock"}
+            ? t("inventory.available", { count: selectedVariant.inventory })
+            : t("inventory.outOfStock")}
         </Muted>
       </Stack>
 
@@ -185,7 +187,7 @@ export function ProductPurchasePanel({ product }: { product: Product }) {
         type="button"
         variant="primary"
       >
-        Add to cart
+        {t("actions.addToCart")}
       </AppButton>
 
       <AppButton fullWidth onClick={toggleWishlist} type="button">
@@ -194,19 +196,14 @@ export function ProductPurchasePanel({ product }: { product: Product }) {
         ) : (
           <FavoriteBorderIcon fontSize="small" />
         )}
-        {inWishlist ? "Saved" : "Add to wishlist"}
+        {inWishlist ? t("actions.saved") : t("actions.addToWishlist")}
       </AppButton>
 
       <DividerLine />
 
       <Stack spacing={2}>
-        <BodyCopy sx={{ m: 0 }}>
-          Free Germany shipping over EUR 100. Duties and taxes are shown at
-          checkout for EU customers.
-        </BodyCopy>
-        <BodyCopy sx={{ m: 0 }}>
-          Secure checkout through Shopify once live credentials are connected.
-        </BodyCopy>
+        <BodyCopy sx={{ m: 0 }}>{t("support.shipping")}</BodyCopy>
+        <BodyCopy sx={{ m: 0 }}>{t("support.checkout")}</BodyCopy>
       </Stack>
     </Surface>
   );

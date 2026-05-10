@@ -1,0 +1,31 @@
+{
+  "contact": {
+    "name": "Name",
+    "email": "Email",
+    "subject": "Subject",
+    "message": "Message",
+    "sending": "Sending",
+    "send": "Send message",
+    "invalid": "Please complete the required fields.",
+    "success": "Message received. AMAMBRA customer care will respond within one business day."
+  },
+  "validation": {
+    "nameMin": "Name must be at least 2 characters",
+    "emailInvalid": "Invalid email address",
+    "subjectMin": "Subject must be at least 5 characters",
+    "messageMin": "Message must be at least 10 characters",
+    "consentRequired": "Consent is required",
+    "firstNameRequired": "First name is required",
+    "lastNameRequired": "Last name is required",
+    "streetRequired": "Street is required",
+    "cityRequired": "City is required",
+    "stateRequired": "State is required",
+    "postalCodeRequired": "Postal code is required",
+    "countryRequired": "Country is required",
+    "titleMin": "Title must be at least 5 characters",
+    "reviewMin": "Review must be at least 10 characters",
+    "searchRequired": "Search query required",
+    "passwordMin": "Password must be at least 8 characters",
+    "passwordsMatch": "Passwords do not match"
+  }
+}

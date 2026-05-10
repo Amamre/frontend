@@ -1,0 +1,51 @@
+{
+  "banner": {
+    "aria": "Cookie-Zustimmung",
+    "eyebrow": "Privatsphäre",
+    "body": "Essenzielle Cookies halten die Storefront funktionsfähig. Analytics-, Marketing- und Preference-Cookies bleiben aus, bis du sie erlaubst.",
+    "manage": "Einstellungen",
+    "decline": "Optionale ablehnen",
+    "accept": "Alle akzeptieren"
+  },
+  "settings": {
+    "eyebrow": "Consent",
+    "title": "Cookie-Präferenzen",
+    "description": "Wähle, welche optionalen Cookies AMAMBRA verwenden darf. Essenzielle Cookies sind für Warenkorb, Checkout, Sicherheit und zentrale Storefront-Funktionen immer aktiv.",
+    "alwaysActive": "Immer aktiv",
+    "save": "Präferenzen speichern",
+    "policy": "Cookie-Richtlinie",
+    "close": "Cookie-Präferenzen schließen",
+    "reopen": "Cookie-Präferenzen öffnen",
+    "shortLabel": "Cookies"
+  },
+  "categories": {
+    "essential": {
+      "title": "Essentiell",
+      "body": "Erforderlich für Warenkorb-Persistenz, Checkout-Handoff, Kontositzungen, Betrugsprävention, Accessibility-Präferenzen und Consent-Nachweise."
+    },
+    "analytics": {
+      "title": "Analytics",
+      "body": "Hilft AMAMBRA nach ausdrücklicher Zustimmung, Seitenperformance, Produktentdeckung und Storefront-Qualität zu verstehen."
+    },
+    "marketing": {
+      "title": "Marketing",
+      "body": "Erlaubt zukünftige Kampagnenmessung, Retargeting und Partner-Pixel nur nach ausdrücklicher Zustimmung."
+    },
+    "preferences": {
+      "title": "Präferenzen",
+      "body": "Speichert optionale Storefront-Präferenzen wie Sprache, Fit-Darstellung und Shopping-Experience-Verfeinerungen."
+    }
+  },
+  "page": {
+    "title": "Cookie-Richtlinie",
+    "intro": "Zustimmungsstruktur für Analytics-, Marketing- und essenzielle Ecommerce-Cookies.",
+    "essentialTitle": "Essenzielle Cookies",
+    "essentialBody": "Erforderlich für Warenkorb-Persistenz, Checkout-Sicherheit, Kontositzungen und Betrugsprävention.",
+    "analyticsTitle": "Analytics-Cookies",
+    "analyticsBody": "Analytics sollten erst nach Zustimmung geladen werden. Die Codebasis enthält eine Struktur für consent-aware Analytics.",
+    "marketingTitle": "Marketing-Cookies",
+    "marketingBody": "Marketing-Pixel und Retargeting-Tags bleiben bis zur ausdrücklichen Zustimmung deaktiviert.",
+    "preferencesTitle": "Preference-Cookies",
+    "preferencesBody": "Preference-Cookies unterstützen optionale Storefront-Entscheidungen wie Sprache, Experience-Verfeinerungen und consent-aware Personalisierung."
+  }
+}

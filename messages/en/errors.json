@@ -1,0 +1,12 @@
+{
+  "boundary": {
+    "eyebrow": "Error",
+    "headline": "Something interrupted the experience.",
+    "body": "Retry the segment. If it persists, check the deployment logs with digest {digest}."
+  },
+  "notFound": {
+    "eyebrow": "404",
+    "headline": "This page is not in the collection.",
+    "body": "The route may have moved, or the product is no longer available."
+  }
+}

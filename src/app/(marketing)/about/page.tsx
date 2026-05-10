@@ -1,3 +1,5 @@
+import { Box } from "@mui/material";
+import Image from "next/image";
 import {
   AppContainer,
   BodyCopy,
@@ -9,43 +11,37 @@ import {
   SplitLayout,
   Surface,
 } from "@/components/ui/Primitives";
-import { BRAND } from "@/constants/config";
-import { createMetadata } from "@/lib/seo";
-import { Box } from "@mui/material";
-import Image from "next/image";
+import { getTypedTranslations } from "@/i18n/getTypedTranslations";
+import { createLocalizedMetadata } from "@/lib/localized-seo";
 
-export const metadata = createMetadata({
-  title: "About",
-  description:
-    "AMAMBRA is a Stuttgart-based Afro-European accessible premium streetwear brand.",
-  path: "/about",
-});
+export async function generateMetadata() {
+  return createLocalizedMetadata({
+    descriptionKey: "pages.aboutDescription",
+    path: "/about",
+    titleKey: "pages.aboutTitle",
+  });
+}
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const common = await getTypedTranslations("common");
+  const t = await getTypedTranslations("marketing");
+
   return (
     <>
       <PageSection>
         <AppContainer>
           <SplitLayout>
             <Box>
-              <Eyebrow>{BRAND.location}</Eyebrow>
-              <DisplayHeading>
-                A modern wardrobe between cultures.
-              </DisplayHeading>
+              <Eyebrow>
+                {t("about.eyebrow", { location: common("brand.location") })}
+              </Eyebrow>
+              <DisplayHeading>{t("about.headline")}</DisplayHeading>
             </Box>
             <Surface>
               <BodyCopy>
-                {BRAND.name} was created for people who live in the overlap:
-                African heritage, European restraint, streetwear confidence, and
-                a practical everyday rhythm. The brand is premium by
-                construction, not by exclusion.
+                {t("about.bodyOne", { brand: common("brand.name") })}
               </BodyCopy>
-              <BodyCopy sx={{ pt: 2 }}>
-                The launch collection focuses on pieces with a real reason to
-                exist: satin-lined hoods and beanies, structured layers, precise
-                trims, and understated details that carry heritage without
-                noise.
-              </BodyCopy>
+              <BodyCopy sx={{ pt: 2 }}>{t("about.bodyTwo")}</BodyCopy>
             </Surface>
           </SplitLayout>
         </AppContainer>
@@ -55,7 +51,7 @@ export default function AboutPage() {
         <AppContainer>
           <ImageFrame sx={{ aspectRatio: "16 / 7" }}>
             <Image
-              alt="AMAMBRA campaign photographed in a minimal atelier"
+              alt={common("brand.campaignAlt")}
               fill
               priority
               sizes="100vw"
@@ -70,16 +66,16 @@ export default function AboutPage() {
           <ContentGrid>
             {[
               {
-                title: "European minimalism",
-                body: "A restrained visual language: matte black, soft ivory, decisive proportions, and enough whitespace to let materials speak.",
+                title: t("about.minimalismTitle"),
+                body: t("about.minimalismBody"),
               },
               {
-                title: "African heritage",
-                body: "References appear through border rhythm, embroidery placement, satin interiors, and subtle pattern language.",
+                title: t("about.heritageTitle"),
+                body: t("about.heritageBody"),
               },
               {
-                title: "Accessible premium",
-                body: "The goal is a luxury feeling at a price point designed for real wardrobes, repeat wear, and long-term loyalty.",
+                title: t("about.premiumTitle"),
+                body: t("about.premiumBody"),
               },
             ].map((item) => (
               <Surface component="article" key={item.title}>

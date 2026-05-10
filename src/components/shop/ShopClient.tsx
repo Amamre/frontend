@@ -29,6 +29,7 @@ import {
   Swatch,
 } from "@/components/ui/Primitives";
 import { CATEGORIES, COLLECTIONS, FILTER_OPTIONS } from "@/constants/config";
+import { useTypedTranslations } from "@/i18n/useTypedTranslations";
 import { filterProducts } from "@/lib/catalog";
 import type { Product, ProductFilter, ProductSort } from "@/types";
 
@@ -39,6 +40,8 @@ export function ShopClient({
   products: Product[];
   initialFilter: ProductFilter;
 }) {
+  const common = useTypedTranslations("common");
+  const shop = useTypedTranslations("shop");
   const [filters, setFilters] = useState<ProductFilter>(initialFilter);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const filtered = useMemo(
@@ -77,12 +80,11 @@ export function ShopClient({
       <AppContainer>
         <SectionHeading>
           <Box>
-            <Eyebrow>Shop</Eyebrow>
-            <Headline>Launch collection</Headline>
+            <Eyebrow>{shop("eyebrow")}</Eyebrow>
+            <Headline>{shop("headline")}</Headline>
           </Box>
           <Subhead>
-            {filtered.length} pieces across satin-lined essentials, heritage
-            sets, atelier layers, and accessories.
+            {common("counts.piecesAcross", { count: filtered.length })}
           </Subhead>
         </SectionHeading>
 
@@ -100,10 +102,12 @@ export function ShopClient({
             onClick={() => setMobileFiltersOpen((value) => !value)}
             type="button"
           >
-            <TuneIcon fontSize="small" /> Filters
+            <TuneIcon fontSize="small" /> {shop("filters.button")}
           </AppButton>
           <Box component="label" sx={{ minWidth: 220 }}>
-            <Eyebrow sx={{ display: "block", mb: 1 }}>Sort</Eyebrow>
+            <Eyebrow sx={{ display: "block", mb: 1 }}>
+              {shop("filters.sort")}
+            </Eyebrow>
             <Select
               fullWidth
               onChange={(event) =>
@@ -116,7 +120,7 @@ export function ShopClient({
             >
               {FILTER_OPTIONS.sortOptions.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
-                  {option.label}
+                  {sortLabel(common, option.value)}
                 </MenuItem>
               ))}
             </Select>
@@ -168,17 +172,15 @@ export function ShopClient({
               >
                 <Box>
                   <Typography component="h2">
-                    No pieces match those filters.
+                    {shop("empty.headline")}
                   </Typography>
-                  <BodyCopy>
-                    Reset filters or search across the full launch collection.
-                  </BodyCopy>
+                  <BodyCopy>{shop("empty.body")}</BodyCopy>
                   <AppButton
                     onClick={() => setFilters({ sortBy: "featured" })}
                     type="button"
                     variant="primary"
                   >
-                    Reset filters
+                    {shop("empty.reset")}
                   </AppButton>
                 </Box>
               </Surface>
@@ -205,6 +207,9 @@ function FilterPanel({
   ) => void;
 }) {
   const theme = useTheme();
+  const common = useTypedTranslations("common");
+  const shop = useTypedTranslations("shop");
+  const catalog = useTypedTranslations("catalog");
   const controlLabelSx = {
     m: 0,
     color: theme.palette.text.secondary,
@@ -214,7 +219,7 @@ function FilterPanel({
   return (
     <Stack spacing={3.25}>
       <Stack spacing={1.5}>
-        <FieldTitle>Sort by</FieldTitle>
+        <FieldTitle>{shop("filters.sortBy")}</FieldTitle>
         {FILTER_OPTIONS.sortOptions.map((option) => (
           <FormControlLabel
             control={
@@ -225,14 +230,14 @@ function FilterPanel({
               />
             }
             key={option.value}
-            label={option.label}
+            label={sortLabel(common, option.value)}
             sx={controlLabelSx}
           />
         ))}
       </Stack>
 
       <Stack spacing={1.5}>
-        <FieldTitle>Category</FieldTitle>
+        <FieldTitle>{shop("filters.category")}</FieldTitle>
         {CATEGORIES.map((category) => (
           <FormControlLabel
             control={
@@ -242,14 +247,14 @@ function FilterPanel({
               />
             }
             key={category.id}
-            label={category.name}
+            label={categoryLabel(common, category.id)}
             sx={controlLabelSx}
           />
         ))}
       </Stack>
 
       <Stack spacing={1.5}>
-        <FieldTitle>Collection</FieldTitle>
+        <FieldTitle>{shop("filters.collection")}</FieldTitle>
         {COLLECTIONS.map((collection) => (
           <FormControlLabel
             control={
@@ -259,14 +264,14 @@ function FilterPanel({
               />
             }
             key={collection.id}
-            label={collection.name}
+            label={collectionLabel(catalog, collection.id)}
             sx={controlLabelSx}
           />
         ))}
       </Stack>
 
       <Stack spacing={1.5}>
-        <FieldTitle>Color</FieldTitle>
+        <FieldTitle>{shop("filters.color")}</FieldTitle>
         {FILTER_OPTIONS.colors.map((color) => (
           <FormControlLabel
             control={
@@ -283,7 +288,7 @@ function FilterPanel({
                 sx={{ alignItems: "center" }}
               >
                 <Swatch aria-hidden="true" color={color.code} />
-                {color.name}
+                {colorLabel(common, color.name)}
               </Stack>
             }
             sx={controlLabelSx}
@@ -292,8 +297,68 @@ function FilterPanel({
       </Stack>
 
       <AppButton fullWidth onClick={onReset} type="button">
-        Clear filters
+        {common("actions.clearFilters")}
       </AppButton>
     </Stack>
   );
+}
+
+function sortLabel(
+  t: ReturnType<typeof useTypedTranslations<"common">>,
+  value: ProductSort,
+) {
+  const keys = {
+    featured: "sort.featured",
+    newest: "sort.newest",
+    popular: "sort.popular",
+    "price-low": "sort.priceLow",
+    "price-high": "sort.priceHigh",
+    rating: "sort.rating",
+  } as const;
+
+  return t(keys[value]);
+}
+
+function colorLabel(
+  t: ReturnType<typeof useTypedTranslations<"common">>,
+  name: string,
+) {
+  const keys: Record<string, Parameters<typeof t>[0]> = {
+    "Obsidian Black": "colors.obsidianBlack",
+    "Deep Olive": "colors.deepOlive",
+    "Soft Ivory": "colors.softIvory",
+    "Dark Cocoa": "colors.darkCocoa",
+    "Muted Gold": "colors.mutedGold",
+    "Muted Warm Gold": "colors.mutedWarmGold",
+  };
+
+  return keys[name] ? t(keys[name]) : name;
+}
+
+function categoryLabel(
+  t: ReturnType<typeof useTypedTranslations<"common">>,
+  id: string,
+) {
+  const keys: Record<string, Parameters<typeof t>[0]> = {
+    accessories: "categories.accessories",
+    hoodies: "categories.hoodies",
+    sets: "categories.sets",
+    tops: "categories.tops",
+  };
+
+  return keys[id] ? t(keys[id]) : id;
+}
+
+function collectionLabel(
+  t: ReturnType<typeof useTypedTranslations<"catalog">>,
+  id: string,
+) {
+  const keys: Record<string, Parameters<typeof t>[0]> = {
+    atelier: "collections.atelier.shortTitle",
+    essentials: "collections.essentials.shortTitle",
+    heritage: "collections.heritage.shortTitle",
+    signature: "collections.signature.shortTitle",
+  };
+
+  return keys[id] ? t(keys[id]) : id;
 }

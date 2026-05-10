@@ -1,0 +1,32 @@
+{
+  "page": {
+    "eyebrow": "Konto",
+    "headline": "Client Account Center",
+    "body": "Bereit für Shopify Customer Account API oder einen Headless Auth Provider."
+  },
+  "cards": {
+    "ordersTitle": "Bestellungen",
+    "ordersBody": "Bestellstatus, Tracking, Retouren und Belege ansehen.",
+    "profileTitle": "Profil",
+    "profileBody": "E-Mail, Adressbuch, Präferenzen und DSGVO-Export verwalten.",
+    "wishlistTitle": "Wunschliste",
+    "wishlistBody": "Vor dem Checkout zu gespeicherten AMAMBRA Pieces zurückkehren."
+  },
+  "orders": {
+    "eyebrow": "Bestellungen",
+    "headline": "Bestellhistorie verbindet sich hier.",
+    "body": "Production sollte Shopify Customer Accounts oder einen sicheren Account Provider verbinden, bevor Kundendaten angezeigt werden."
+  },
+  "profile": {
+    "eyebrow": "Profil",
+    "headline": "Profil- und Consent-Präferenzen",
+    "body": "Diese Seite ist strukturiert für Account-Präferenzen, Adressverwaltung, Marketing Consent, DSGVO-Datenexport und Löschanfragen. Verbinde Shopify Customer Accounts oder deinen Auth Provider vor dem Launch."
+  },
+  "wishlist": {
+    "emptyEyebrow": "Wunschliste",
+    "emptyHeadline": "Noch keine Pieces gespeichert.",
+    "emptyBody": "Speichere Produkte beim Browsen und kehre vor dem Checkout zu ihnen zurück.",
+    "eyebrow": "Wunschliste",
+    "headline": "Gespeicherte Pieces"
+  }
+}

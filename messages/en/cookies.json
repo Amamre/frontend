@@ -1,0 +1,51 @@
+{
+  "banner": {
+    "aria": "Cookie consent",
+    "eyebrow": "Privacy",
+    "body": "Essential cookies keep the storefront working. Analytics, marketing, and preference cookies stay off unless you allow them.",
+    "manage": "Settings",
+    "decline": "Reject optional",
+    "accept": "Accept all"
+  },
+  "settings": {
+    "eyebrow": "Consent",
+    "title": "Cookie preferences",
+    "description": "Choose which optional cookies AMAMBRA may use. Essential cookies are always active for cart, checkout, security, and core storefront behavior.",
+    "alwaysActive": "Always active",
+    "save": "Save preferences",
+    "policy": "Cookie policy",
+    "close": "Close cookie preferences",
+    "reopen": "Open cookie preferences",
+    "shortLabel": "Cookies"
+  },
+  "categories": {
+    "essential": {
+      "title": "Essential",
+      "body": "Required for cart persistence, checkout handoff, account sessions, fraud prevention, accessibility preferences, and consent records."
+    },
+    "analytics": {
+      "title": "Analytics",
+      "body": "Helps AMAMBRA understand page performance, product discovery, and storefront quality after explicit consent."
+    },
+    "marketing": {
+      "title": "Marketing",
+      "body": "Allows future campaign measurement, retargeting, and partner pixels only after explicit consent."
+    },
+    "preferences": {
+      "title": "Preferences",
+      "body": "Stores optional storefront preferences such as locale, fit display, and shopping experience refinements."
+    }
+  },
+  "page": {
+    "title": "Cookie policy",
+    "intro": "Consent structure for analytics, marketing, and essential ecommerce cookies.",
+    "essentialTitle": "Essential cookies",
+    "essentialBody": "Required for cart persistence, checkout security, account sessions, and fraud prevention.",
+    "analyticsTitle": "Analytics cookies",
+    "analyticsBody": "Analytics should load only after consent. The codebase includes a structure for consent-aware analytics integration.",
+    "marketingTitle": "Marketing cookies",
+    "marketingBody": "Marketing pixels and retargeting tags should remain disabled until explicit consent is granted.",
+    "preferencesTitle": "Preference cookies",
+    "preferencesBody": "Preference cookies support optional storefront choices such as locale, experience refinements, and consent-aware personalization."
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "empty": {
+    "eyebrow": "Checkout",
+    "headline": "Your bag is empty."
+  },
+  "page": {
+    "eyebrow": "Checkout",
+    "headline": "Launch checkout profile",
+    "body": "This form validates checkout data for launch. Production checkout is handed to Shopify Checkout from the cart when Storefront credentials are connected."
+  },
+  "fields": {
+    "email": "Email",
+    "phone": "Phone",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "street": "Street",
+    "postalCode": "Postal code",
+    "city": "City",
+    "state": "State",
+    "country": "Country"
+  },
+  "defaults": {
+    "country": "Germany",
+    "state": "Baden-Wurttemberg"
+  },
+  "marketingConsent": "Receive collection launches and editorial notes.",
+  "actions": {
+    "validating": "Validating",
+    "validate": "Validate checkout profile"
+  },
+  "summary": {
+    "eyebrow": "Order summary",
+    "item": "{quantity} x {title}"
+  },
+  "messages": {
+    "invalid": "Please review your checkout details.",
+    "success": "Checkout profile validated. Connect Shopify credentials to redirect directly into Shopify Checkout."
+  }
+}

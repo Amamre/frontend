@@ -1,56 +1,46 @@
 "use client";
 
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { Box, Container, Stack, Typography } from "@mui/material";
+import { alpha } from "@mui/material/styles";
 import { CollectionsHeroSection } from "@/components/collections/collections-hero-section";
 import {
   type CollectionChapter,
   collectionCtaLinkSx,
   EditorialCollectionSection,
 } from "@/components/collections/editorial-collection-section";
+import { Link } from "@/i18n/navigation";
+import { useTypedTranslations } from "@/i18n/useTypedTranslations";
 import { brandColors } from "@/styles/theme";
 import type { Collection } from "@/types";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { Box, Container, Stack, Typography } from "@mui/material";
-import { alpha } from "@mui/material/styles";
-import NextLink from "next/link";
 
 type CollectionStoryLayoutProps = {
   collections: Collection[];
 };
 
-const CHAPTERS: CollectionChapter[] = [
+const CHAPTERS = [
   {
-    chapter: "01",
-    copy: "Limited utility pieces shaped for editorial layering: structured, quiet, and made to carry the atmosphere of the studio into the street.",
+    key: "atelier",
     imagePosition: "58% 50%",
-    kicker: "Atelier",
-    mood: "Limited releases, brushed surfaces, handcrafted restraint, and elevated outer layers with a calm silhouette.",
     slug: "atelier",
-    title: "Atelier",
   },
   {
-    chapter: "02",
-    copy: "Afro-European craft translated through restrained linework, warm utility, and silhouettes that feel composed without becoming ceremonial.",
+    key: "heritage",
     imagePosition: "48% 50%",
-    kicker: "Heritage",
-    mood: "Subtle textile rhythm, tonal hardware, warm function, and structured pieces built for movement.",
     reverse: true,
     slug: "heritage",
-    title: "Heritage",
   },
   {
-    chapter: "03",
-    copy: "The foundation layer of the AMAMBRA wardrobe: clean, tactile, and deliberately minimal so the rest of the system can breathe.",
+    key: "essentials",
     imagePosition: "66% 50%",
-    kicker: "Essentials",
-    mood: "Everyday premium cotton, quiet proportions, calm luxury, and pieces that hold their shape in daily rotation.",
     slug: "essentials",
-    title: "Essentials",
   },
-];
+] as const;
 
 export function CollectionStoryLayout({
   collections,
 }: CollectionStoryLayoutProps) {
+  const t = useTypedTranslations("collections");
   const collectionBySlug = new Map(
     collections.map((collection) => [collection.slug, collection]),
   );
@@ -58,18 +48,27 @@ export function CollectionStoryLayout({
   return (
     <>
       <CollectionsHeroSection />
-      {CHAPTERS.map((chapter, index) => {
-        const collection = collectionBySlug.get(chapter.slug);
+      {CHAPTERS.map((chapterConfig, index) => {
+        const collection = collectionBySlug.get(chapterConfig.slug);
 
         if (!collection) {
           return null;
         }
 
+        const chapter: CollectionChapter = {
+          ...chapterConfig,
+          chapter: t(`chapters.${chapterConfig.key}.chapter`),
+          copy: t(`chapters.${chapterConfig.key}.copy`),
+          kicker: t(`chapters.${chapterConfig.key}.kicker`),
+          mood: t(`chapters.${chapterConfig.key}.mood`),
+          title: t(`chapters.${chapterConfig.key}.title`),
+        };
+
         return (
           <EditorialCollectionSection
             chapter={chapter}
             collection={collection}
-            key={chapter.slug}
+            key={chapterConfig.slug}
             priority={index === 0}
           />
         );
@@ -110,7 +109,7 @@ export function CollectionStoryLayout({
                   textTransform: "uppercase",
                 }}
               >
-                Complete the system
+                {t("labels.completeSystem")}
               </Typography>
               <Typography
                 component="h2"
@@ -125,11 +124,11 @@ export function CollectionStoryLayout({
                   lineHeight: 0.94,
                 }}
               >
-                Move from story to wardrobe.
+                {t("labels.moveStory")}
               </Typography>
             </Box>
-            <Box component={NextLink} href="/shop" sx={collectionCtaLinkSx}>
-              Shop the collection
+            <Box component={Link} href="/shop" sx={collectionCtaLinkSx}>
+              {t("labels.shopCollection")}
               <ArrowForwardIcon fontSize="small" />
             </Box>
           </Stack>

@@ -1,15 +1,5 @@
 "use client";
 
-import { subscribeNewsletter } from "@/app/actions";
-import {
-  AppButton,
-  AppContainer,
-  BodyCopy,
-  FieldError,
-  Muted,
-} from "@/components/ui/Primitives";
-import { BRAND, FOOTER_NAVIGATION, SOCIAL_LINKS } from "@/constants/config";
-import { brandColors } from "@/styles/theme";
 import {
   Box,
   Checkbox,
@@ -20,6 +10,18 @@ import {
   useTheme,
 } from "@mui/material";
 import { useActionState } from "react";
+import { subscribeNewsletter } from "@/app/actions";
+import {
+  AppButton,
+  AppContainer,
+  BodyCopy,
+  FieldError,
+  Muted,
+} from "@/components/ui/Primitives";
+import { SOCIAL_LINKS } from "@/constants/config";
+import { Link } from "@/i18n/navigation";
+import { useTypedTranslations } from "@/i18n/useTypedTranslations";
+import { brandColors } from "@/styles/theme";
 
 const initialState = {
   ok: false,
@@ -28,8 +30,44 @@ const initialState = {
 
 const COPYRIGHT_YEAR = 2026;
 
+const FOOTER_NAVIGATION = {
+  shop: [
+    { key: "newArrivals", href: "/shop?sort=newest" },
+    { key: "bestsellers", href: "/shop?tag=bestseller" },
+    { key: "hoodies", href: "/shop?category=hoodies" },
+    { key: "tops", href: "/shop?category=tops" },
+    { key: "accessories", href: "/shop?category=accessories" },
+  ],
+  company: [
+    { key: "about", href: "/about" },
+    { key: "collections", href: "/collections" },
+    { key: "account", href: "/account" },
+    { key: "contact", href: "/contact" },
+  ],
+  support: [
+    { key: "faq", href: "/faq" },
+    { key: "sizeGuide", href: "/size-guide" },
+    { key: "shippingReturns", href: "/shipping-returns" },
+    { key: "search", href: "/search" },
+  ],
+  legal: [
+    { key: "imprint", href: "/imprint" },
+    { key: "privacyPolicy", href: "/privacy-policy" },
+    { key: "terms", href: "/terms" },
+    { key: "cookies", href: "/cookies" },
+    { key: "refundPolicy", href: "/refund-policy" },
+    { key: "accessibility", href: "/accessibility" },
+  ],
+} as const;
+
+type FooterLinkKey =
+  (typeof FOOTER_NAVIGATION)[keyof typeof FOOTER_NAVIGATION][number]["key"];
+
 export function Footer() {
   const theme = useTheme();
+  const common = useTypedTranslations("common");
+  const footer = useTypedTranslations("footer");
+  const newsletter = useTypedTranslations("newsletter");
   const [state, formAction, pending] = useActionState(
     subscribeNewsletter,
     initialState,
@@ -70,51 +108,32 @@ export function Footer() {
               fontWeight: 700,
             }}
           >
-            {BRAND.name}
+            {common("brand.name")}
           </Typography>
           <BodyCopy sx={{ maxWidth: 420 }}>
-            {BRAND.description} Designed in {BRAND.location} for modern daily
-            movement.
+            {footer("description", {
+              description: common("brand.description"),
+              location: common("brand.location"),
+            })}
           </BodyCopy>
-          <Box
-            action={formAction}
-            component="form"
-            sx={{ display: "grid", gap: 2, mt: 2.75 }}
-          >
-            <TextField
-              name="email"
-              placeholder="Email address"
-              required
-              type="email"
-            />
-            <FormControlLabel
-              control={<Checkbox name="consent" required />}
-              label="I agree to receive AMAMBRA editorial emails and can unsubscribe at any time."
-              sx={{
-                alignItems: "flex-start",
-                color: theme.palette.text.secondary,
-                fontSize: "0.9rem",
-                m: 0,
-                "& .MuiFormControlLabel-label": { fontSize: "0.9rem" },
-              }}
-            />
-            <AppButton disabled={pending} type="submit" variant="primary">
-              {pending ? "Joining" : "Join the list"}
-            </AppButton>
-            {state.message ? (
-              state.ok ? (
-                <Muted>{state.message}</Muted>
-              ) : (
-                <FieldError>{state.message}</FieldError>
-              )
-            ) : null}
-          </Box>
         </Box>
 
-        <FooterColumn title="Shop" links={FOOTER_NAVIGATION.shop} />
-        <FooterColumn title="Company" links={FOOTER_NAVIGATION.company} />
-        <FooterColumn title="Support" links={FOOTER_NAVIGATION.support} />
-        <FooterColumn title="Legal" links={FOOTER_NAVIGATION.legal} />
+        <FooterColumn
+          title={footer("columns.shop")}
+          links={FOOTER_NAVIGATION.shop}
+        />
+        <FooterColumn
+          title={footer("columns.company")}
+          links={FOOTER_NAVIGATION.company}
+        />
+        <FooterColumn
+          title={footer("columns.support")}
+          links={FOOTER_NAVIGATION.support}
+        />
+        <FooterColumn
+          title={footer("columns.legal")}
+          links={FOOTER_NAVIGATION.legal}
+        />
       </AppContainer>
 
       <AppContainer
@@ -129,14 +148,39 @@ export function Footer() {
           fontSize: "0.82rem",
         }}
       >
+        <span>{footer("copyright", { year: COPYRIGHT_YEAR })}</span>
         <span>
-          © {COPYRIGHT_YEAR} {BRAND.name}. All rights reserved.
-        </span>
-        <span>
-          <a href={SOCIAL_LINKS.instagram}>Instagram</a> ·{" "}
-          <a href={SOCIAL_LINKS.tiktok}>TikTok</a> ·{" "}
-          <a href={SOCIAL_LINKS.youtube}>YouTube</a> ·{" "}
-          <a href={SOCIAL_LINKS.linkedin}>LinkedIn</a>
+          <a
+            href={SOCIAL_LINKS.instagram}
+            rel="noreferrer noopener"
+            target="_blank"
+          >
+            Instagram
+          </a>{" "}
+          ·{" "}
+          <a
+            href={SOCIAL_LINKS.tiktok}
+            rel="noreferrer noopener"
+            target="_blank"
+          >
+            TikTok
+          </a>{" "}
+          ·{" "}
+          <a
+            href={SOCIAL_LINKS.youtube}
+            rel="noreferrer noopener"
+            target="_blank"
+          >
+            YouTube
+          </a>{" "}
+          ·{" "}
+          <a
+            href={SOCIAL_LINKS.linkedin}
+            rel="noreferrer noopener"
+            target="_blank"
+          >
+            LinkedIn
+          </a>
         </span>
       </AppContainer>
     </Box>
@@ -148,19 +192,25 @@ function FooterColumn({
   links,
 }: {
   title: string;
-  links: Array<{ title: string; href: string }>;
+  links: ReadonlyArray<{ key: FooterLinkKey; href: string }>;
 }) {
   const theme = useTheme();
+  const common = useTypedTranslations("common");
+  const footer = useTypedTranslations("footer");
 
   return (
     <Box>
       <Typography component="h4" sx={{ m: "0 0 14px", fontWeight: 700 }}>
         {title}
       </Typography>
-      <Stack component="nav" spacing={1.25} aria-label={`${title} links`}>
+      <Stack
+        component="nav"
+        spacing={1.25}
+        aria-label={common("aria.links", { title })}
+      >
         {links.map((link) => (
           <Typography
-            component="a"
+            component={Link}
             href={link.href}
             key={link.href}
             sx={{
@@ -169,7 +219,7 @@ function FooterColumn({
               "&:hover": { color: theme.palette.text.primary },
             }}
           >
-            {link.title}
+            {footer(`links.${link.key}`)}
           </Typography>
         ))}
       </Stack>

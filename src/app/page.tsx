@@ -5,11 +5,11 @@ import {
   HeroSection,
   ValuePropositionSection,
 } from "@/components/sections/HomeHero";
-import { createMetadata } from "@/lib/seo";
+import { createLocalizedMetadata } from "@/lib/localized-seo";
 
-export const metadata = createMetadata({
-  path: "/",
-});
+export async function generateMetadata() {
+  return createLocalizedMetadata({ path: "/" });
+}
 
 export default function HomePage() {
   return (

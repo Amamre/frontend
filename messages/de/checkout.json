@@ -1,0 +1,39 @@
+{
+  "empty": {
+    "eyebrow": "Checkout",
+    "headline": "Deine Bag ist leer."
+  },
+  "page": {
+    "eyebrow": "Checkout",
+    "headline": "Launch Checkout Profil",
+    "body": "Dieses Formular validiert Checkout-Daten für den Launch. Der Production Checkout wird aus dem Warenkorb an Shopify Checkout übergeben, sobald Storefront-Zugangsdaten verbunden sind."
+  },
+  "fields": {
+    "email": "E-Mail",
+    "phone": "Telefon",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "street": "Straße",
+    "postalCode": "Postleitzahl",
+    "city": "Stadt",
+    "state": "Bundesland",
+    "country": "Land"
+  },
+  "defaults": {
+    "country": "Deutschland",
+    "state": "Baden-Württemberg"
+  },
+  "marketingConsent": "Kollektion-Launches und Editorial Notes erhalten.",
+  "actions": {
+    "validating": "Validiert",
+    "validate": "Checkout Profil validieren"
+  },
+  "summary": {
+    "eyebrow": "Bestellübersicht",
+    "item": "{quantity} x {title}"
+  },
+  "messages": {
+    "invalid": "Bitte prüfe deine Checkout-Daten.",
+    "success": "Checkout-Profil validiert. Verbinde Shopify-Zugangsdaten, um direkt in Shopify Checkout weiterzuleiten."
+  }
+}

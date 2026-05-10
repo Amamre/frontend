@@ -1,0 +1,104 @@
+{
+  "brand": {
+    "name": "AMAMBRA",
+    "tagline": "Afro-European Accessible Premium Streetwear",
+    "description": "Modern European minimalism meets subtle African heritage inspiration in accessible premium streetwear.",
+    "location": "Stuttgart, Germany",
+    "address": "AMAMBRA Studio, Stuttgart, Germany",
+    "campaignAlt": "AMAMBRA campaign photographed in a minimal atelier",
+    "editorialCampaignAlt": "AMAMBRA editorial campaign"
+  },
+  "actions": {
+    "apply": "Apply",
+    "clearFilters": "Clear filters",
+    "continueShopping": "Continue shopping",
+    "exploreCollection": "Explore collection",
+    "returnToShop": "Return to shop",
+    "shopAll": "Shop all",
+    "shopAmambra": "Shop AMAMBRA",
+    "shopCollection": "Shop collection",
+    "tryAgain": "Try again"
+  },
+  "aria": {
+    "home": "AMAMBRA home",
+    "primaryNavigation": "Primary navigation",
+    "mobileNavigation": "Mobile navigation",
+    "search": "Search",
+    "account": "Account",
+    "wishlistWithCount": "Wishlist with {count} items",
+    "cartWithCount": "Cart with {count} items",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "links": "{title} links"
+  },
+  "labels": {
+    "account": "Account",
+    "cart": "Cart",
+    "collection": "Collection",
+    "contact": "Contact",
+    "email": "Email",
+    "fit": "Fit",
+    "phone": "Phone",
+    "profile": "Profile",
+    "search": "Search",
+    "studio": "Studio",
+    "support": "Support",
+    "onThisPage": "On this page",
+    "wishlist": "Wishlist"
+  },
+  "counts": {
+    "lineItems": "{count} line items ready for checkout.",
+    "pieces": "{count} pieces",
+    "piecesAcross": "{count} pieces across satin-lined essentials, heritage sets, atelier layers, and accessories.",
+    "savedPieces": "{count} AMAMBRA pieces saved."
+  },
+  "sizes": {
+    "oneSize": "ONE SIZE"
+  },
+  "sort": {
+    "featured": "Featured",
+    "newest": "Newest",
+    "popular": "Best Sellers",
+    "priceLow": "Price: Low to High",
+    "priceHigh": "Price: High to Low",
+    "rating": "Top Rated"
+  },
+  "categories": {
+    "hoodies": "Hoodies",
+    "sets": "Sets",
+    "tops": "Tops",
+    "accessories": "Accessories"
+  },
+  "colors": {
+    "obsidianBlack": "Obsidian Black",
+    "deepOlive": "Deep Olive",
+    "softIvory": "Soft Ivory",
+    "darkCocoa": "Dark Cocoa",
+    "mutedGold": "Muted Gold",
+    "mutedWarmGold": "Muted Warm Gold"
+  },
+  "productRoles": {
+    "outerwear": "Outerwear",
+    "set": "Set",
+    "foundation": "Foundation",
+    "accessories": "Accessories"
+  },
+  "summary": {
+    "subtotal": "Subtotal",
+    "vatEstimate": "VAT estimate",
+    "shipping": "Shipping",
+    "total": "Total"
+  },
+  "states": {
+    "loading": "Loading",
+    "unavailable": "unavailable"
+  },
+  "language": {
+    "aria": "Change language",
+    "current": "{language} selected",
+    "de": "Deutsch",
+    "en": "English",
+    "label": "Language",
+    "switchTo": "Switch to {language}"
+  }
+}

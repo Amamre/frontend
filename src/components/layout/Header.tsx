@@ -1,11 +1,5 @@
 "use client";
 
-import { AppContainer, IconAction } from "@/components/ui/Primitives";
-import { BRAND, COLLECTIONS, MAIN_NAVIGATION } from "@/constants/config";
-import { useIsMounted } from "@/hooks/useUtils";
-import { useCartStore } from "@/store/cartStore";
-import { useWishlistStore } from "@/store/wishlistStore";
-import { brandColors, transitions } from "@/styles/theme";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import CloseIcon from "@mui/icons-material/Close";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -13,21 +7,45 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import {
-  alpha,
   AppBar,
+  alpha,
   Box,
   Collapse,
   Stack,
   Typography,
   useTheme,
 } from "@mui/material";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { type ElementType, useState } from "react";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { AppContainer, IconAction } from "@/components/ui/Primitives";
+import { useIsMounted } from "@/hooks/useUtils";
+import { Link, usePathname } from "@/i18n/navigation";
+import { useTypedTranslations } from "@/i18n/useTypedTranslations";
+import { useCartStore } from "@/store/cartStore";
+import { useWishlistStore } from "@/store/wishlistStore";
+import { brandColors, transitions } from "@/styles/theme";
+
+const MAIN_NAVIGATION = [
+  { href: "/shop", key: "shop" },
+  { href: "/collections", key: "collections" },
+  { href: "/about", key: "about" },
+  { href: "/faq", key: "faq" },
+  { href: "/contact", key: "contact" },
+] as const;
+
+const COLLECTION_LINKS = [
+  { slug: "signature", key: "signature" },
+  { slug: "heritage", key: "heritage" },
+  { slug: "essentials", key: "essentials" },
+  { slug: "atelier", key: "atelier" },
+] as const;
 
 export function Header() {
   const pathname = usePathname();
   const theme = useTheme();
+  const common = useTypedTranslations("common");
+  const navbar = useTypedTranslations("navbar");
+  const catalog = useTypedTranslations("catalog");
   const [open, setOpen] = useState(false);
   const mounted = useIsMounted();
   const cartCount = useCartStore((state) => state.getItemCount());
@@ -60,7 +78,7 @@ export function Header() {
         }}
       >
         <Typography
-          aria-label="AMAMBRA home"
+          aria-label={common("aria.home")}
           component={Link}
           href="/"
           sx={{
@@ -70,11 +88,11 @@ export function Header() {
             letterSpacing: 0,
           }}
         >
-          {BRAND.name}
+          {common("brand.name")}
         </Typography>
 
         <Stack
-          aria-label="Primary navigation"
+          aria-label={common("aria.primaryNavigation")}
           component="nav"
           direction="row"
           spacing={4.5}
@@ -135,7 +153,7 @@ export function Header() {
                 },
               }}
             >
-              {item.title}
+              {navbar(`items.${item.key}.title`)}
             </Typography>
           ))}
         </Stack>
@@ -143,19 +161,25 @@ export function Header() {
         <Stack
           direction="row"
           spacing={1.25}
-          sx={{ justifyContent: "flex-end" }}
+          sx={{
+            alignItems: "center",
+            justifyContent: "flex-end",
+          }}
         >
+          <Box sx={{ display: { xs: "none", md: "block" }, mr: 0.5 }}>
+            <LanguageSwitcher />
+          </Box>
           <IconAction
             component={Link as ElementType}
             href="/search"
-            aria-label="Search"
+            aria-label={common("aria.search")}
           >
             <SearchIcon fontSize="small" />
           </IconAction>
           <IconAction
             component={Link as ElementType}
             href="/account"
-            aria-label="Account"
+            aria-label={common("aria.account")}
           >
             <AccountCircleOutlinedIcon fontSize="small" />
           </IconAction>
@@ -163,7 +187,9 @@ export function Header() {
             badgeContent={visibleWishlistCount}
             component={Link as ElementType}
             href="/wishlist"
-            aria-label={`Wishlist with ${visibleWishlistCount} items`}
+            aria-label={common("aria.wishlistWithCount", {
+              count: visibleWishlistCount,
+            })}
           >
             <FavoriteBorderIcon fontSize="small" />
           </IconAction>
@@ -171,12 +197,16 @@ export function Header() {
             badgeContent={visibleCartCount}
             component={Link as ElementType}
             href="/cart"
-            aria-label={`Cart with ${visibleCartCount} items`}
+            aria-label={common("aria.cartWithCount", {
+              count: visibleCartCount,
+            })}
           >
             <ShoppingBagOutlinedIcon fontSize="small" />
           </IconAction>
           <IconAction
-            aria-label={open ? "Close menu" : "Open menu"}
+            aria-label={
+              open ? common("aria.closeMenu") : common("aria.openMenu")
+            }
             aria-expanded={open}
             onClick={() => setOpen((value) => !value)}
             sx={{ display: { xs: "inline-flex", md: "none" } }}
@@ -192,7 +222,7 @@ export function Header() {
 
       <Collapse in={open} timeout={220} unmountOnExit>
         <Box
-          aria-label="Mobile navigation"
+          aria-label={common("aria.mobileNavigation")}
           component="nav"
           data-testid="mobile-menu"
           sx={{
@@ -214,18 +244,19 @@ export function Header() {
         >
           {MAIN_NAVIGATION.map((item) => (
             <Link href={item.href} key={item.href} onClick={close}>
-              {item.title}
+              {navbar(`items.${item.key}.title`)}
             </Link>
           ))}
-          {COLLECTIONS.map((collection) => (
+          {COLLECTION_LINKS.map((collection) => (
             <Link
               href={`/collections/${collection.slug}`}
               key={collection.slug}
               onClick={close}
             >
-              {collection.name}
+              {catalog(`collections.${collection.key}.shortTitle`)}
             </Link>
           ))}
+          <LanguageSwitcher variant="mobile" onLocaleChange={close} />
         </Box>
       </Collapse>
     </AppBar>

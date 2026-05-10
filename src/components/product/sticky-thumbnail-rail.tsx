@@ -2,6 +2,7 @@
 
 import { Box } from "@mui/material";
 import Image from "next/image";
+import { useTypedTranslations } from "@/i18n/useTypedTranslations";
 import { brandColors, transitions } from "@/styles/theme";
 import type { ProductImage } from "@/types";
 
@@ -20,11 +21,12 @@ export function StickyThumbnailRail({
   orientation = "vertical",
   productTitle,
 }: StickyThumbnailRailProps) {
+  const t = useTypedTranslations("product");
   const vertical = orientation === "vertical";
 
   return (
     <Box
-      aria-label={`${productTitle} media thumbnails`}
+      aria-label={t("aria.mediaThumbnails", { title: productTitle })}
       component="nav"
       sx={
         vertical
@@ -96,7 +98,7 @@ export function StickyThumbnailRail({
               sx={{ flex: vertical ? undefined : "0 0 auto" }}
             >
               <Box
-                aria-label={`View ${image.alt}`}
+                aria-label={t("aria.viewThumbnail", { alt: image.alt })}
                 aria-pressed={active}
                 component="button"
                 onClick={() => onSelect(index)}

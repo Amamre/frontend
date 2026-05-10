@@ -1,11 +1,12 @@
 "use client";
 
-import { NewsletterForm } from "@/components/newsletter/newsletter-form";
-import { AppContainer, Eyebrow } from "@/components/ui/Primitives";
-import { brandColors, transitions } from "@/styles/theme";
 import { Box, Paper, Stack, Typography } from "@mui/material";
 import { alpha, styled } from "@mui/material/styles";
 import { motion } from "framer-motion";
+import { NewsletterForm } from "@/components/newsletter/newsletter-form";
+import { AppContainer, Eyebrow } from "@/components/ui/Primitives";
+import { useTypedTranslations } from "@/i18n/useTypedTranslations";
+import { brandColors, transitions } from "@/styles/theme";
 
 const NewsletterSurface = styled(Paper)(({ theme }) => ({
   position: "relative",
@@ -47,6 +48,8 @@ const NewsletterSurface = styled(Paper)(({ theme }) => ({
 }));
 
 export function EditorialNewsletterSection() {
+  const t = useTypedTranslations("newsletter");
+
   return (
     <Box
       component="section"
@@ -86,7 +89,7 @@ export function EditorialNewsletterSection() {
                 <Eyebrow
                   sx={{ m: 0, color: alpha(brandColors.goldSoft, 0.92) }}
                 >
-                  Studio notes
+                  {t("home.eyebrow")}
                 </Eyebrow>
                 <Typography
                   component="h2"
@@ -104,7 +107,7 @@ export function EditorialNewsletterSection() {
                     lineHeight: { xs: 0.9, md: 0.86 },
                   }}
                 >
-                  Stay close to the studio.
+                  {t("home.headline")}
                 </Typography>
                 <Typography
                   sx={{
@@ -114,8 +117,7 @@ export function EditorialNewsletterSection() {
                     lineHeight: 1.78,
                   }}
                 >
-                  Early access to drops, editorials, private Stuttgart releases,
-                  and collection notes from the AMAMBRA world.
+                  {t("home.body")}
                 </Typography>
               </Stack>
 

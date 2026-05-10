@@ -1,0 +1,63 @@
+{
+  "actions": {
+    "addToBag": "In die Bag",
+    "addToCart": "In den Warenkorb",
+    "addToWishlist": "Zur Wunschliste",
+    "removeFromWishlist": "Aus Wunschliste entfernen",
+    "quickAdd": "{title} schnell hinzufügen",
+    "savePiece": "Piece speichern",
+    "saved": "Gespeichert"
+  },
+  "aria": {
+    "chooseColor": "Farbe wählen",
+    "chooseSize": "Größe wählen",
+    "colors": "{title} Farben",
+    "decreaseQuantity": "Menge verringern",
+    "increaseQuantity": "Menge erhöhen",
+    "openImage": "{alt} öffnen",
+    "closeImage": "Bild schließen",
+    "viewThumbnail": "{alt} ansehen",
+    "mediaThumbnails": "{title} Medien-Thumbnails"
+  },
+  "labels": {
+    "care": "Pflege",
+    "color": "Farbe",
+    "fit": "Passform",
+    "material": "Material",
+    "materialAndCare": "Material und Pflege",
+    "quantity": "Menge",
+    "recommended": "Empfohlen",
+    "size": "Größe",
+    "sizeAndColor": "Größe und Farbe",
+    "story": "Story"
+  },
+  "inventory": {
+    "available": "{count} verfügbar",
+    "inStock": "Auf Lager",
+    "left": "{count} übrig",
+    "outOfStock": "Ausverkauft"
+  },
+  "support": {
+    "shipping": "Kostenloser Versand in Deutschland ab EUR 100. Zölle und Steuern werden für EU-Kunden im Checkout angezeigt.",
+    "shopify": "Sicherer Shopify Checkout wird aktiviert, sobald Live Storefront-Zugangsdaten verbunden sind.",
+    "checkout": "Sicherer Checkout über Shopify, sobald Live-Zugangsdaten verbunden sind."
+  },
+  "sections": {
+    "completeSilhouette": "Silhouette komplettieren"
+  },
+  "toasts": {
+    "addedToCart": "Zum Warenkorb hinzugefügt",
+    "savedToWishlist": "In Wunschliste gespeichert",
+    "removedFromWishlist": "Aus Wunschliste entfernt",
+    "unavailable": "Dieses Piece ist derzeit nicht verfügbar",
+    "selectedUnavailable": "Ausgewählte Variante ist nicht verfügbar"
+  },
+  "metadata": {
+    "notFound": "Produkt nicht gefunden"
+  },
+  "fallbackColor": {
+    "name": "Obsidian Black",
+    "description": "Mattschwarze AMAMBRA Colorway.",
+    "productDescription": "AMAMBRA Produkt-Colorway."
+  }
+}

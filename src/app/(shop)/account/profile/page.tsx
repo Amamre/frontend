@@ -6,28 +6,28 @@ import {
   PageSection,
   Surface,
 } from "@/components/ui/Primitives";
-import { createMetadata } from "@/lib/seo";
+import { getTypedTranslations } from "@/i18n/getTypedTranslations";
+import { createLocalizedMetadata } from "@/lib/localized-seo";
 
-export const metadata = createMetadata({
-  title: "Profile",
-  description: "AMAMBRA customer profile settings.",
-  path: "/account/profile",
-  noIndex: true,
-});
+export async function generateMetadata() {
+  return createLocalizedMetadata({
+    descriptionKey: "pages.profileDescription",
+    noIndex: true,
+    path: "/account/profile",
+    titleKey: "pages.profileTitle",
+  });
+}
 
-export default function ProfilePage() {
+export default async function ProfilePage() {
+  const account = await getTypedTranslations("account");
+
   return (
     <PageSection>
       <AppContainer sx={{ maxWidth: 860 }}>
-        <Eyebrow>Profile</Eyebrow>
-        <Headline>Profile and consent preferences</Headline>
+        <Eyebrow>{account("profile.eyebrow")}</Eyebrow>
+        <Headline>{account("profile.headline")}</Headline>
         <Surface sx={{ mt: 4 }}>
-          <BodyCopy>
-            This page is structured for account preferences, address management,
-            marketing consent, GDPR data export, and deletion requests. Connect
-            Shopify Customer Accounts or your chosen auth provider before
-            launch.
-          </BodyCopy>
+          <BodyCopy>{account("profile.body")}</BodyCopy>
         </Surface>
       </AppContainer>
     </PageSection>

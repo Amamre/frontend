@@ -1,0 +1,19 @@
+{
+  "eyebrow": "{location} / Afro-European Atelier",
+  "headline": "Quiet luxury, cut between cultures.",
+  "body": "Afro-European streetwear from Stuttgart: satin-lined essentials and sculpted layers for a modern European wardrobe with a restrained African textile memory.",
+  "actions": {
+    "enterAtelier": "Enter the atelier",
+    "viewEdit": "View the edit"
+  },
+  "campaignNotesAria": "AMAMBRA campaign notes",
+  "campaignNotes": {
+    "atelierLabel": "Atelier",
+    "atelierValue": "Satin-lined essentials",
+    "originLabel": "Origin",
+    "originValue": "Stuttgart, DE",
+    "positionLabel": "Position",
+    "positionValue": "Accessible premium"
+  },
+  "posterAlt": "AMAMBRA cinematic Afro-European atelier campaign"
+}

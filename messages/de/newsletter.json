@@ -1,0 +1,21 @@
+{
+  "emailPlaceholder": "E-Mail-Adresse",
+  "emailAria": "E-Mail-Adresse",
+  "consent": "Ich stimme zu, AMAMBRA Editorial-E-Mails zu erhalten, und kann mich jederzeit abmelden.",
+  "actions": {
+    "join": "Eintragen",
+    "joining": "Wird eingetragen",
+    "joinList": "Zur Liste"
+  },
+  "home": {
+    "eyebrow": "Studio Notes",
+    "headline": "Bleib nah am Studio.",
+    "body": "Früher Zugang zu Drops, Editorials, privaten Stuttgart-Releases und Kollektion-Notizen aus der AMAMBRA Welt."
+  },
+  "messages": {
+    "invalid": "Bitte prüfe E-Mail und Zustimmung.",
+    "success": "Du bist auf der AMAMBRA Liste. Kollektion-Notizen und Launch-Zugang kommen per E-Mail.",
+    "emailFallback": "Bitte prüfe deine E-Mail-Adresse.",
+    "simpleSuccess": "Du bist auf der AMAMBRA Liste."
+  }
+}

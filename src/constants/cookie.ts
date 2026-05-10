@@ -1,3 +1,6 @@
-export const SUPPORTED_LOCALES = ["de-DE", "en-US"] as const;
-export const DEFAULT_LOCALE = "de-DE";
+export {
+  DEFAULT_LOCALE,
+  type Locale,
+  SUPPORTED_LOCALES,
+} from "@/i18n/locales";
 export const ONBOARDING = "amambra.onboardingDone";

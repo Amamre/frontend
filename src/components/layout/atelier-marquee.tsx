@@ -1,12 +1,16 @@
+"use client";
+
+import { useTypedTranslations } from "@/i18n/useTypedTranslations";
+
 const MARQUEE_ITEMS = [
-  "ATELIER COLLECTION - LIMITED DROP",
-  "MADE IN PORTUGAL & ITALY",
-  "STUTTGART, DE",
-  "SHIPPING ACROSS EUROPE",
-  "SATIN-LINED ESSENTIALS",
-  "CULTURE WITHOUT COSTUME",
-  "ACCESSIBLE PREMIUM",
-  "AMAMBRA ATELIER",
+  "atelierCollection",
+  "madeIn",
+  "origin",
+  "shipping",
+  "essentials",
+  "culture",
+  "premium",
+  "atelier",
 ] as const;
 
 const marqueeRows = [
@@ -15,11 +19,10 @@ const marqueeRows = [
 ] as const;
 
 export function AtelierMarquee() {
+  const t = useTypedTranslations("navbar");
+
   return (
-    <aside
-      aria-label="AMAMBRA atelier announcements"
-      className="atelier-marquee"
-    >
+    <aside aria-label={t("marquee.announcements")} className="atelier-marquee">
       <div className="atelier-marquee__fade" />
       <div className="atelier-marquee__track">
         {marqueeRows.map((row) => (
@@ -30,7 +33,7 @@ export function AtelierMarquee() {
           >
             {row.items.map((item) => (
               <span className="atelier-marquee__item" key={item}>
-                {item}
+                {t(`marquee.${item}`)}
               </span>
             ))}
           </span>

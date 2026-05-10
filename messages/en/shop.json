@@ -1,0 +1,17 @@
+{
+  "eyebrow": "Shop",
+  "headline": "Launch collection",
+  "filters": {
+    "button": "Filters",
+    "sort": "Sort",
+    "sortBy": "Sort by",
+    "category": "Category",
+    "collection": "Collection",
+    "color": "Color"
+  },
+  "empty": {
+    "headline": "No pieces match those filters.",
+    "body": "Reset filters or search across the full launch collection.",
+    "reset": "Reset filters"
+  }
+}

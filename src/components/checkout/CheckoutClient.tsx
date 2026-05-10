@@ -9,7 +9,7 @@ import {
   TextField,
 } from "@mui/material";
 import type { ReactNode } from "react";
-import { useState, useTransition } from "react";
+import { useMemo, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { submitCheckoutLead } from "@/app/actions";
 import {
@@ -29,13 +29,40 @@ import {
   Surface,
 } from "@/components/ui/Primitives";
 import { useIsMounted } from "@/hooks/useUtils";
+import { useTypedTranslations } from "@/i18n/useTypedTranslations";
 import { calculateOrderSummary } from "@/lib/cart";
 import { formatPrice } from "@/lib/utils";
-import { type CheckoutData, checkoutSchema } from "@/lib/validation";
+import { type CheckoutData, createCheckoutSchema } from "@/lib/validation";
 import { useCartStore } from "@/store/cartStore";
 import { brandColors } from "@/styles/theme";
 
 export function CheckoutClient() {
+  const checkout = useTypedTranslations("checkout");
+  const common = useTypedTranslations("common");
+  const forms = useTypedTranslations("forms");
+  const checkoutSchema = useMemo(
+    () =>
+      createCheckoutSchema({
+        cityRequired: forms("validation.cityRequired"),
+        consentRequired: forms("validation.consentRequired"),
+        countryRequired: forms("validation.countryRequired"),
+        emailInvalid: forms("validation.emailInvalid"),
+        firstNameRequired: forms("validation.firstNameRequired"),
+        lastNameRequired: forms("validation.lastNameRequired"),
+        messageMin: forms("validation.messageMin"),
+        nameMin: forms("validation.nameMin"),
+        passwordMin: forms("validation.passwordMin"),
+        passwordsMatch: forms("validation.passwordsMatch"),
+        postalCodeRequired: forms("validation.postalCodeRequired"),
+        reviewMin: forms("validation.reviewMin"),
+        searchRequired: forms("validation.searchRequired"),
+        stateRequired: forms("validation.stateRequired"),
+        streetRequired: forms("validation.streetRequired"),
+        subjectMin: forms("validation.subjectMin"),
+        titleMin: forms("validation.titleMin"),
+      }),
+    [forms],
+  );
   const items = useCartStore((state) => state.items);
   const mounted = useIsMounted();
   const visibleItems = mounted ? items : [];
@@ -49,8 +76,8 @@ export function CheckoutClient() {
   } = useForm<CheckoutData>({
     resolver: zodResolver(checkoutSchema),
     defaultValues: {
-      country: "Germany",
-      state: "Baden-Wurttemberg",
+      country: checkout("defaults.country"),
+      state: checkout("defaults.state"),
       sameAsShipping: true,
     },
   });
@@ -83,10 +110,10 @@ export function CheckoutClient() {
     return (
       <EmptyState>
         <div>
-          <Eyebrow>Checkout</Eyebrow>
-          <Headline>Your bag is empty.</Headline>
+          <Eyebrow>{checkout("empty.eyebrow")}</Eyebrow>
+          <Headline>{checkout("empty.headline")}</Headline>
           <AppButton href="/shop" variant="primary">
-            Shop collection
+            {common("actions.shopCollection")}
           </AppButton>
         </div>
       </EmptyState>
@@ -98,12 +125,10 @@ export function CheckoutClient() {
       <AppContainer>
         <SplitLayout>
           <Box>
-            <Eyebrow>Checkout</Eyebrow>
-            <Headline>Launch checkout profile</Headline>
+            <Eyebrow>{checkout("page.eyebrow")}</Eyebrow>
+            <Headline>{checkout("page.headline")}</Headline>
             <Subhead sx={{ mt: 2.25, mb: 4.25 }}>
-              This form validates checkout data for launch. Production checkout
-              is handed to Shopify Checkout from the cart when Storefront
-              credentials are connected.
+              {checkout("page.body")}
             </Subhead>
 
             <Surface
@@ -112,53 +137,80 @@ export function CheckoutClient() {
               sx={{ display: "grid", gap: 2 }}
             >
               <FormGrid>
-                <Field error={errors.email?.message} label="Email">
+                <Field
+                  error={errors.email?.message}
+                  label={checkout("fields.email")}
+                >
                   <TextField
                     {...register("email")}
                     autoComplete="email"
                     type="email"
                   />
                 </Field>
-                <Field error={errors.phone?.message} label="Phone">
+                <Field
+                  error={errors.phone?.message}
+                  label={checkout("fields.phone")}
+                >
                   <TextField {...register("phone")} autoComplete="tel" />
                 </Field>
-                <Field error={errors.firstName?.message} label="First name">
+                <Field
+                  error={errors.firstName?.message}
+                  label={checkout("fields.firstName")}
+                >
                   <TextField
                     {...register("firstName")}
                     autoComplete="given-name"
                   />
                 </Field>
-                <Field error={errors.lastName?.message} label="Last name">
+                <Field
+                  error={errors.lastName?.message}
+                  label={checkout("fields.lastName")}
+                >
                   <TextField
                     {...register("lastName")}
                     autoComplete="family-name"
                   />
                 </Field>
-                <Field error={errors.street?.message} label="Street">
+                <Field
+                  error={errors.street?.message}
+                  label={checkout("fields.street")}
+                >
                   <TextField
                     {...register("street")}
                     autoComplete="street-address"
                   />
                 </Field>
-                <Field error={errors.postalCode?.message} label="Postal code">
+                <Field
+                  error={errors.postalCode?.message}
+                  label={checkout("fields.postalCode")}
+                >
                   <TextField
                     {...register("postalCode")}
                     autoComplete="postal-code"
                   />
                 </Field>
-                <Field error={errors.city?.message} label="City">
+                <Field
+                  error={errors.city?.message}
+                  label={checkout("fields.city")}
+                >
                   <TextField
                     {...register("city")}
                     autoComplete="address-level2"
                   />
                 </Field>
-                <Field error={errors.state?.message} label="State">
+                <Field
+                  error={errors.state?.message}
+                  label={checkout("fields.state")}
+                >
                   <TextField
                     {...register("state")}
                     autoComplete="address-level1"
                   />
                 </Field>
-                <Field error={errors.country?.message} label="Country">
+                <Field
+                  error={errors.country?.message}
+                  label={checkout("fields.country")}
+                >
                   <TextField
                     {...register("country")}
                     autoComplete="country-name"
@@ -167,7 +219,7 @@ export function CheckoutClient() {
               </FormGrid>
               <FormControlLabel
                 control={<Checkbox {...register("marketingConsent")} />}
-                label="Receive collection launches and editorial notes."
+                label={checkout("marketingConsent")}
                 sx={{
                   m: 0,
                   color: brandColors.muted,
@@ -175,7 +227,9 @@ export function CheckoutClient() {
                 }}
               />
               <AppButton disabled={isPending} type="submit" variant="primary">
-                {isPending ? "Validating" : "Validate checkout profile"}
+                {isPending
+                  ? checkout("actions.validating")
+                  : checkout("actions.validate")}
               </AppButton>
               {message ? <BodyCopy>{message}</BodyCopy> : null}
             </Surface>
@@ -190,30 +244,33 @@ export function CheckoutClient() {
               gap: 2.75,
             }}
           >
-            <Eyebrow>Order summary</Eyebrow>
+            <Eyebrow>{checkout("summary.eyebrow")}</Eyebrow>
             <Stack spacing={1.5}>
               {visibleItems.map((item) => (
                 <SummaryRow
                   key={item.variantId}
-                  label={`${item.quantity} x ${item.product.title}`}
+                  label={checkout("summary.item", {
+                    quantity: item.quantity,
+                    title: item.product.title,
+                  })}
                   value={formatPrice(item.price * item.quantity)}
                 />
               ))}
               <DividerLine />
               <SummaryRow
-                label="Subtotal"
+                label={common("summary.subtotal")}
                 value={formatPrice(summary.subtotal)}
               />
               <SummaryRow
-                label="VAT estimate"
+                label={common("summary.vatEstimate")}
                 value={formatPrice(summary.tax)}
               />
               <SummaryRow
-                label="Shipping"
+                label={common("summary.shipping")}
                 value={formatPrice(summary.shipping)}
               />
               <SummaryRow
-                label="Total"
+                label={common("summary.total")}
                 value={formatPrice(summary.total)}
                 total
               />

@@ -1,0 +1,28 @@
+{
+  "empty": {
+    "eyebrow": "Cart",
+    "headline": "Your cart is empty.",
+    "body": "Start with the Signature Satin Hood Hoodie or explore the full AMAMBRA launch collection."
+  },
+  "page": {
+    "eyebrow": "Cart",
+    "headline": "Shopping bag"
+  },
+  "aria": {
+    "decrease": "Decrease {title}",
+    "increase": "Increase {title}",
+    "remove": "Remove {title}"
+  },
+  "summary": {
+    "eyebrow": "Summary",
+    "promoCode": "Promo code",
+    "placeholder": "AMAMBRA",
+    "checkoutPending": "Opening checkout",
+    "checkoutShopify": "Checkout with Shopify",
+    "launchCheckout": "Launch checkout form"
+  },
+  "toasts": {
+    "checkoutUnavailable": "Shopify checkout is not configured yet. Use the checkout page for the launch scaffold.",
+    "promoReady": "Promo logic is ready for Shopify Functions."
+  }
+}

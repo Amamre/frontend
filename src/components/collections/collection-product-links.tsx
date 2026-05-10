@@ -3,7 +3,8 @@
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import { Box, Stack, Typography } from "@mui/material";
 import { alpha } from "@mui/material/styles";
-import NextLink from "next/link";
+import { Link } from "@/i18n/navigation";
+import { useTypedTranslations } from "@/i18n/useTypedTranslations";
 import { brandColors, transitions } from "@/styles/theme";
 import type { Product } from "@/types";
 
@@ -14,6 +15,8 @@ type CollectionProductLinksProps = {
 export function CollectionProductLinks({
   products,
 }: CollectionProductLinksProps) {
+  const common = useTypedTranslations("common");
+
   return (
     <Stack
       component="ul"
@@ -28,7 +31,7 @@ export function CollectionProductLinks({
       {products.map((product) => (
         <Box component="li" key={product.id}>
           <Box
-            component={NextLink}
+            component={Link}
             href={`/product/${product.slug}`}
             sx={{
               position: "relative",
@@ -95,7 +98,7 @@ export function CollectionProductLinks({
                 textTransform: "uppercase",
               }}
             >
-              {productRole(product)}
+              {common(productRole(product))}
             </Typography>
             <ArrowOutwardIcon
               className="collection-link-icon"
@@ -113,22 +116,24 @@ export function CollectionProductLinks({
   );
 }
 
-function productRole(product: Product) {
+function productRole(
+  product: Product,
+): Parameters<ReturnType<typeof useTypedTranslations<"common">>>[0] {
   if (/overshirt|hoodie/i.test(product.title)) {
-    return "Outerwear";
+    return "productRoles.outerwear";
   }
 
   if (/tracksuit/i.test(product.title)) {
-    return "Set";
+    return "productRoles.set";
   }
 
   if (/tee/i.test(product.title)) {
-    return "Foundation";
+    return "productRoles.foundation";
   }
 
   if (/cap|beanie/i.test(product.title)) {
-    return "Accessories";
+    return "productRoles.accessories";
   }
 
-  return product.category.replace(/-/g, " ");
+  return "productRoles.foundation";
 }

@@ -2,6 +2,7 @@
 
 import type { ButtonProps as MuiButtonProps } from "@mui/material";
 import { AppButton } from "@/components/ui/Primitives";
+import { useTypedTranslations } from "@/i18n/useTypedTranslations";
 
 export interface ButtonProps extends Omit<MuiButtonProps, "variant"> {
   loading?: boolean;
@@ -17,6 +18,8 @@ export function Button({
   variant = "secondary",
   ...props
 }: ButtonProps) {
+  const common = useTypedTranslations("common");
+
   return (
     <AppButton
       disabled={disabled || loading}
@@ -25,7 +28,7 @@ export function Button({
       variant={variant}
       {...props}
     >
-      {loading ? "Loading" : children}
+      {loading ? common("states.loading") : children}
     </AppButton>
   );
 }

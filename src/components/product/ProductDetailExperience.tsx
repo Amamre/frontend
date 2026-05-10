@@ -1,5 +1,11 @@
 "use client";
 
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { Box, Stack, Typography, useTheme } from "@mui/material";
+import { MotionConfig } from "framer-motion";
+import { useEffect, useMemo, useState } from "react";
+import toast from "react-hot-toast";
 import { ProductMediaGallery } from "@/components/product/product-media-gallery";
 import {
   AppButton,
@@ -14,18 +20,13 @@ import {
   Swatch,
 } from "@/components/ui/Primitives";
 import { useIsMounted } from "@/hooks/useUtils";
+import { useRouter } from "@/i18n/navigation";
+import { useTypedTranslations } from "@/i18n/useTypedTranslations";
 import { formatPrice } from "@/lib/utils";
 import { useCartStore } from "@/store/cartStore";
 import { useWishlistStore } from "@/store/wishlistStore";
 import { brandColors, transitions } from "@/styles/theme";
 import type { Product, ProductColorOption, ProductVariant } from "@/types";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { Box, Stack, Typography, useTheme } from "@mui/material";
-import { MotionConfig } from "framer-motion";
-import { useRouter } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
-import toast from "react-hot-toast";
 
 type ProductDetailExperienceProps = {
   initialColor?: string;
@@ -40,13 +41,29 @@ export function ProductDetailExperience({
 }: ProductDetailExperienceProps) {
   const router = useRouter();
   const theme = useTheme();
+  const t = useTypedTranslations("product");
   const mounted = useIsMounted();
   const colorOptions = product.colorOptions;
-  const initialColorOption = resolveColor(colorOptions, initialColor);
+  const fallbackColor = {
+    name: t("fallbackColor.name"),
+    slug: "obsidian-black",
+    code: brandColors.obsidian,
+    description: t("fallbackColor.description"),
+    images: [],
+  };
+  const initialColorOption = resolveColor(
+    colorOptions,
+    initialColor,
+    fallbackColor,
+  );
   const [selectedColorSlug, setSelectedColorSlug] = useState(
     initialColorOption.slug,
   );
-  const selectedColor = resolveColor(colorOptions, selectedColorSlug);
+  const selectedColor = resolveColor(
+    colorOptions,
+    selectedColorSlug,
+    fallbackColor,
+  );
   const [selectedSize, setSelectedSize] = useState(() =>
     resolveSize(product, initialColorOption, initialSize),
   );
@@ -93,7 +110,7 @@ export function ProductDetailExperience({
 
   const add = () => {
     if (!selectedVariant || selectedVariant.inventory < quantity) {
-      toast.error("Selected variant is unavailable");
+      toast.error(t("toasts.selectedUnavailable"));
       return;
     }
 
@@ -104,18 +121,18 @@ export function ProductDetailExperience({
       price: selectedVariant.price,
       product,
     });
-    toast.success("Added to cart");
+    toast.success(t("toasts.addedToCart"));
   };
 
   const toggleWishlist = () => {
     if (inWishlist) {
       removeItem(product.id);
-      toast.success("Removed from wishlist");
+      toast.success(t("toasts.removedFromWishlist"));
       return;
     }
 
     addItem(product);
-    toast.success("Saved to wishlist");
+    toast.success(t("toasts.savedToWishlist"));
   };
 
   return (
@@ -164,9 +181,12 @@ export function ProductDetailExperience({
           <DividerLine />
 
           <Stack spacing={1.45}>
-            <OptionHeading label="Color" value={selectedColor.name} />
+            <OptionHeading
+              label={t("labels.color")}
+              value={selectedColor.name}
+            />
             <Box
-              aria-label="Choose color"
+              aria-label={t("aria.chooseColor")}
               sx={{
                 display: "grid",
                 gridTemplateColumns: "1fr",
@@ -262,9 +282,9 @@ export function ProductDetailExperience({
           </Stack>
 
           <Stack spacing={1.45}>
-            <OptionHeading label="Size" value={selectedSize} />
+            <OptionHeading label={t("labels.size")} value={selectedSize} />
             <Box
-              aria-label="Choose size"
+              aria-label={t("aria.chooseSize")}
               sx={{
                 display: "grid",
                 gridTemplateColumns: {
@@ -342,8 +362,8 @@ export function ProductDetailExperience({
 
           <Stack spacing={1.25}>
             <OptionHeading
-              label="Quantity"
-              value={inventoryLabel(selectedVariant)}
+              label={t("labels.quantity")}
+              value={inventoryLabel(selectedVariant, t)}
             />
             <Box
               sx={{
@@ -355,7 +375,7 @@ export function ProductDetailExperience({
               }}
             >
               <IconAction
-                aria-label="Decrease quantity"
+                aria-label={t("aria.decreaseQuantity")}
                 onClick={() => setQuantity((value) => Math.max(1, value - 1))}
               >
                 -
@@ -373,7 +393,7 @@ export function ProductDetailExperience({
                 {quantity}
               </Box>
               <IconAction
-                aria-label="Increase quantity"
+                aria-label={t("aria.increaseQuantity")}
                 disabled={
                   !selectedVariant || selectedVariant.inventory <= quantity
                 }
@@ -390,18 +410,20 @@ export function ProductDetailExperience({
 
           <Stack spacing={1.15}>
             <AppButton
-              aria-label="Add to cart"
+              aria-label={t("actions.addToCart")}
               disabled={!selectedVariant || selectedVariant.inventory <= 0}
               fullWidth
               onClick={add}
               type="button"
               variant="primary"
             >
-              Add to bag
+              {t("actions.addToBag")}
             </AppButton>
             <AppButton
               aria-label={
-                inWishlist ? "Remove from wishlist" : "Add to wishlist"
+                inWishlist
+                  ? t("actions.removeFromWishlist")
+                  : t("actions.addToWishlist")
               }
               fullWidth
               onClick={toggleWishlist}
@@ -412,21 +434,15 @@ export function ProductDetailExperience({
               ) : (
                 <FavoriteBorderIcon fontSize="small" />
               )}
-              {inWishlist ? "Saved" : "Save piece"}
+              {inWishlist ? t("actions.saved") : t("actions.savePiece")}
             </AppButton>
           </Stack>
 
           <DividerLine />
 
           <Stack spacing={1.5}>
-            <BodyCopy sx={{ m: 0 }}>
-              Free Germany shipping over EUR 100. Duties and taxes are shown at
-              checkout for EU customers.
-            </BodyCopy>
-            <BodyCopy sx={{ m: 0 }}>
-              Secure Shopify checkout activates once live Storefront credentials
-              are connected.
-            </BodyCopy>
+            <BodyCopy sx={{ m: 0 }}>{t("support.shipping")}</BodyCopy>
+            <BodyCopy sx={{ m: 0 }}>{t("support.shopify")}</BodyCopy>
           </Stack>
         </Box>
       </SplitLayout>
@@ -471,16 +487,18 @@ function OptionHeading({ label, value }: { label: string; value: string }) {
 function resolveColor(
   colorOptions: ProductColorOption[],
   colorSlug?: string,
+  fallback?: ProductColorOption,
 ): ProductColorOption {
   return (
     colorOptions.find(
       (color) => color.slug === colorSlug || color.name === colorSlug,
     ) ??
-    colorOptions[0] ?? {
-      name: "Obsidian Black",
+    colorOptions[0] ??
+    fallback ?? {
+      name: "",
       slug: "obsidian-black",
       code: brandColors.obsidian,
-      description: "Matte black AMAMBRA colorway.",
+      description: "",
       images: [],
     }
   );
@@ -524,14 +542,17 @@ function findVariant(
   );
 }
 
-function inventoryLabel(variant?: ProductVariant) {
+function inventoryLabel(
+  variant: ProductVariant | undefined,
+  t: ReturnType<typeof useTypedTranslations<"product">>,
+) {
   if (!variant || variant.inventory <= 0) {
-    return "Out of stock";
+    return t("inventory.outOfStock");
   }
 
   if (variant.inventory <= 3) {
-    return `${variant.inventory} left`;
+    return t("inventory.left", { count: variant.inventory });
   }
 
-  return "In stock";
+  return t("inventory.inStock");
 }

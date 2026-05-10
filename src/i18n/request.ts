@@ -39,12 +39,56 @@ export default getRequestConfig(async () => {
   const language = locale.split("-")[0] ?? "en";
   // console.log({locale, language})
 
-  const messages = {
 
+
+  const messages = {
+    account: (await import(`../../messages/${language}/account.json`))
+      .default,
+    cart: (await import(`../../messages/${language}/cart.json`))
+      .default,
+    catalog: (await import(`../../messages/${language}/catalog.json`))
+      .default,
+    checkout: (await import(`../../messages/${language}/checkout.json`))
+      .default,
+    collections: (
+      await import(`../../messages/${language}/collections.json`)
+    ).default,
+    common: (await import(`../../messages/${language}/common.json`))
+      .default,
+    cookies: (await import(`../../messages/${language}/cookies.json`))
+      .default,
+    errors: (await import(`../../messages/${language}/errors.json`))
+      .default,
+    footer: (await import(`../../messages/${language}/footer.json`))
+      .default,
+    forms: (await import(`../../messages/${language}/forms.json`))
+      .default,
+    hero: (await import(`../../messages/${language}/hero.json`))
+      .default,
+    home: (await import(`../../messages/${language}/home.json`))
+      .default,
+    marketing: (
+      await import(`../../messages/${language}/marketing.json`)
+    ).default,
+    metadata: (await import(`../../messages/${language}/metadata.json`))
+      .default,
+    navbar: (await import(`../../messages/${language}/navbar.json`))
+      .default,
+    newsletter: (
+      await import(`../../messages/${language}/newsletter.json`)
+    ).default,
+    product: (await import(`../../messages/${language}/product.json`))
+      .default,
+    search: (await import(`../../messages/${language}/search.json`))
+      .default,
+    shop: (await import(`../../messages/${language}/shop.json`))
+      .default,
   };
 
   return {
-    locale: language,
+    locale,
     messages,
+    timeZone: "Europe/Berlin",
+    now: new Date(),
   };
 });

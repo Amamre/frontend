@@ -1,0 +1,32 @@
+{
+  "page": {
+    "eyebrow": "Account",
+    "headline": "Client account center",
+    "body": "Ready for Shopify Customer Account API or a headless auth provider."
+  },
+  "cards": {
+    "ordersTitle": "Orders",
+    "ordersBody": "View order status, tracking, returns, and receipts.",
+    "profileTitle": "Profile",
+    "profileBody": "Manage email, address book, preferences, and GDPR export.",
+    "wishlistTitle": "Wishlist",
+    "wishlistBody": "Return to saved AMAMBRA pieces before checkout."
+  },
+  "orders": {
+    "eyebrow": "Orders",
+    "headline": "Order history connects here.",
+    "body": "Production should connect Shopify Customer Accounts or a secure account provider before exposing customer order data."
+  },
+  "profile": {
+    "eyebrow": "Profile",
+    "headline": "Profile and consent preferences",
+    "body": "This page is structured for account preferences, address management, marketing consent, GDPR data export, and deletion requests. Connect Shopify Customer Accounts or your chosen auth provider before launch."
+  },
+  "wishlist": {
+    "emptyEyebrow": "Wishlist",
+    "emptyHeadline": "No saved pieces yet.",
+    "emptyBody": "Save products while you browse and return to them before checkout.",
+    "eyebrow": "Wishlist",
+    "headline": "Saved pieces"
+  }
+}

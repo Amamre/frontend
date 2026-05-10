@@ -1,12 +1,14 @@
 import { WishlistClient } from "@/components/shop/WishlistClient";
-import { createMetadata } from "@/lib/seo";
+import { createLocalizedMetadata } from "@/lib/localized-seo";
 
-export const metadata = createMetadata({
-  title: "Wishlist",
-  description: "Saved AMAMBRA pieces.",
-  path: "/wishlist",
-  noIndex: true,
-});
+export async function generateMetadata() {
+  return createLocalizedMetadata({
+    descriptionKey: "pages.wishlistDescription",
+    noIndex: true,
+    path: "/wishlist",
+    titleKey: "pages.wishlistTitle",
+  });
+}
 
 export default function WishlistPage() {
   return <WishlistClient />;

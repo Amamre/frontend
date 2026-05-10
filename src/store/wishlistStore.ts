@@ -1,6 +1,6 @@
-import type { Product } from "@/types";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import type { Product } from "@/types";
 
 interface WishlistStore {
   items: Product[];

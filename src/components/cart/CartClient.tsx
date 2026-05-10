@@ -1,5 +1,10 @@
 "use client";
 
+import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
+import { Box, Stack, TextField, Typography } from "@mui/material";
+import Image from "next/image";
+import { useState, useTransition } from "react";
+import toast from "react-hot-toast";
 import { startShopifyCheckout } from "@/app/actions";
 import {
   AppButton,
@@ -18,17 +23,15 @@ import {
   Surface,
 } from "@/components/ui/Primitives";
 import { useIsMounted } from "@/hooks/useUtils";
+import { useTypedTranslations } from "@/i18n/useTypedTranslations";
 import { calculateOrderSummary } from "@/lib/cart";
 import { formatPrice } from "@/lib/utils";
 import { useCartStore } from "@/store/cartStore";
 import { brandColors } from "@/styles/theme";
-import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
-import { Box, Stack, TextField, Typography } from "@mui/material";
-import Image from "next/image";
-import { useState, useTransition } from "react";
-import toast from "react-hot-toast";
 
 export function CartClient() {
+  const cart = useTypedTranslations("cart");
+  const common = useTypedTranslations("common");
   const { items, removeItem, updateQuantity } = useCartStore();
   const mounted = useIsMounted();
   const visibleItems = mounted ? items : [];
@@ -50,9 +53,7 @@ export function CartClient() {
           })),
         );
       } catch {
-        toast.error(
-          "Shopify checkout is not configured yet. Use the checkout page for the launch scaffold.",
-        );
+        toast.error(cart("toasts.checkoutUnavailable"));
       }
     });
   };
@@ -61,14 +62,11 @@ export function CartClient() {
     return (
       <EmptyState>
         <div>
-          <Eyebrow>Cart</Eyebrow>
-          <Headline>Your cart is empty.</Headline>
-          <BodyCopy>
-            Start with the Signature Satin Hood Hoodie or explore the full
-            AMAMBRA launch collection.
-          </BodyCopy>
+          <Eyebrow>{cart("empty.eyebrow")}</Eyebrow>
+          <Headline>{cart("empty.headline")}</Headline>
+          <BodyCopy>{cart("empty.body")}</BodyCopy>
           <AppButton href="/shop" variant="primary">
-            Continue shopping
+            {common("actions.continueShopping")}
           </AppButton>
         </div>
       </EmptyState>
@@ -80,11 +78,11 @@ export function CartClient() {
       <AppContainer>
         <SectionHeading>
           <Box>
-            <Eyebrow>Cart</Eyebrow>
-            <Headline>Shopping bag</Headline>
+            <Eyebrow>{cart("page.eyebrow")}</Eyebrow>
+            <Headline>{cart("page.headline")}</Headline>
           </Box>
           <Subhead>
-            {visibleItems.length} line items ready for checkout.
+            {common("counts.lineItems", { count: visibleItems.length })}
           </Subhead>
         </SectionHeading>
 
@@ -146,7 +144,9 @@ export function CartClient() {
                     }}
                   >
                     <IconAction
-                      aria-label={`Decrease ${item.product.title}`}
+                      aria-label={cart("aria.decrease", {
+                        title: item.product.title,
+                      })}
                       onClick={() =>
                         updateQuantity(
                           item.variantId,
@@ -168,7 +168,9 @@ export function CartClient() {
                       {item.quantity}
                     </Box>
                     <IconAction
-                      aria-label={`Increase ${item.product.title}`}
+                      aria-label={cart("aria.increase", {
+                        title: item.product.title,
+                      })}
                       onClick={() =>
                         updateQuantity(item.variantId, item.quantity + 1)
                       }
@@ -186,7 +188,9 @@ export function CartClient() {
                 >
                   <strong>{formatPrice(item.price * item.quantity)}</strong>
                   <IconAction
-                    aria-label={`Remove ${item.product.title}`}
+                    aria-label={cart("aria.remove", {
+                      title: item.product.title,
+                    })}
                     onClick={() => removeItem(item.variantId)}
                   >
                     <DeleteOutlinedIcon fontSize="small" />
@@ -205,41 +209,39 @@ export function CartClient() {
               gap: 2.75,
             }}
           >
-            <Eyebrow>Summary</Eyebrow>
+            <Eyebrow>{cart("summary.eyebrow")}</Eyebrow>
             <Stack spacing={2}>
               <Box component="label">
-                <FieldTitle>Promo code</FieldTitle>
+                <FieldTitle>{cart("summary.promoCode")}</FieldTitle>
                 <TextField
                   onChange={(event) => setPromoCode(event.target.value)}
-                  placeholder="AMAMBRA"
+                  placeholder={cart("summary.placeholder")}
                   value={promoCode}
                 />
               </Box>
               <AppButton
-                onClick={() =>
-                  toast("Promo logic is ready for Shopify Functions.")
-                }
+                onClick={() => toast(cart("toasts.promoReady"))}
                 type="button"
               >
-                Apply
+                {common("actions.apply")}
               </AppButton>
             </Stack>
             <DividerLine />
             <Stack spacing={1.5}>
               <SummaryRow
-                label="Subtotal"
+                label={common("summary.subtotal")}
                 value={formatPrice(summary.subtotal)}
               />
               <SummaryRow
-                label="VAT estimate"
+                label={common("summary.vatEstimate")}
                 value={formatPrice(summary.tax)}
               />
               <SummaryRow
-                label="Shipping"
+                label={common("summary.shipping")}
                 value={formatPrice(summary.shipping)}
               />
               <SummaryRow
-                label="Total"
+                label={common("summary.total")}
                 value={formatPrice(summary.total)}
                 total
               />
@@ -251,10 +253,12 @@ export function CartClient() {
               type="button"
               variant="primary"
             >
-              {isPending ? "Opening checkout" : "Checkout with Shopify"}
+              {isPending
+                ? cart("summary.checkoutPending")
+                : cart("summary.checkoutShopify")}
             </AppButton>
             <AppButton fullWidth href="/checkout">
-              Launch checkout form
+              {cart("summary.launchCheckout")}
             </AppButton>
           </Surface>
         </SplitLayout>

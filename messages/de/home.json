@@ -1,0 +1,19 @@
+{
+  "featured": {
+    "eyebrow": "Launch Pieces",
+    "headline": "Signature Wardrobe"
+  },
+  "collections": {
+    "eyebrow": "Kollektion-Architektur",
+    "headline": "Als System gebaut, nicht als isolierte Drops.",
+    "body": "Jedes Piece ist so entworfen, dass es sich über Signature, Heritage, Essentials und Atelier layern lässt und AMAMBRA ab Launch eine skalierbare Merchandising-Basis gibt."
+  },
+  "values": {
+    "materialTitle": "Materialehrlichkeit",
+    "materialBody": "Schwere Organic Cotton, Merino, Satin-Futter und Trims, gewählt für tägliche Funktion.",
+    "heritageTitle": "Subtile Heritage",
+    "heritageBody": "Afrikanische Textilreferenzen erscheinen als zurückhaltende Borders, Stickerei und Rhythmus.",
+    "shopifyTitle": "Shopify-ready",
+    "shopifyBody": "Cart, Checkout-Handoff, Produktvarianten, Inventarzustände und Merchandising Hooks sind für die Storefront API strukturiert."
+  }
+}

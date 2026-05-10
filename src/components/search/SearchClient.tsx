@@ -1,5 +1,8 @@
 "use client";
 
+import SearchIcon from "@mui/icons-material/Search";
+import { Box, TextField } from "@mui/material";
+import { useMemo, useState } from "react";
 import ProductCard from "@/components/product/ProductCard";
 import {
   AppContainer,
@@ -11,11 +14,9 @@ import {
   ProductGrid,
   SectionHeading,
 } from "@/components/ui/Primitives";
+import { useTypedTranslations } from "@/i18n/useTypedTranslations";
 import { filterProducts } from "@/lib/catalog";
 import type { Product } from "@/types";
-import SearchIcon from "@mui/icons-material/Search";
-import { Box, TextField } from "@mui/material";
-import { useMemo, useState } from "react";
 
 export function SearchClient({
   products,
@@ -24,6 +25,8 @@ export function SearchClient({
   products: Product[];
   initialQuery?: string;
 }) {
+  const common = useTypedTranslations("common");
+  const t = useTypedTranslations("search");
   const [query, setQuery] = useState(initialQuery);
   const results = useMemo(
     () =>
@@ -39,23 +42,23 @@ export function SearchClient({
       <AppContainer>
         <SectionHeading>
           <Box>
-            <Eyebrow>Search</Eyebrow>
-            <Headline>Find your AMAMBRA piece</Headline>
+            <Eyebrow>{t("eyebrow")}</Eyebrow>
+            <Headline>{t("headline")}</Headline>
           </Box>
         </SectionHeading>
 
         <Box component="label" sx={{ display: "block", mb: 3.5 }}>
-          <FieldTitle>Search products</FieldTitle>
+          <FieldTitle>{t("label")}</FieldTitle>
           <Box
             sx={{ display: "grid", gridTemplateColumns: "1fr auto", gap: 1.25 }}
           >
             <TextField
               onChange={(event) => setQuery(event.target.value)}
-              placeholder="Hoodie, beanie, satin, heritage"
+              placeholder={t("placeholder")}
               type="search"
               value={query}
             />
-            <IconAction type="button" aria-label="Search">
+            <IconAction type="button" aria-label={common("aria.search")}>
               <SearchIcon fontSize="small" />
             </IconAction>
           </Box>

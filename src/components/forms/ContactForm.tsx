@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Box, TextField } from "@mui/material";
-import { useState, useTransition } from "react";
+import { useMemo, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { submitContact } from "@/app/actions";
 import {
@@ -12,9 +12,37 @@ import {
   FieldTitle,
   FormGrid,
 } from "@/components/ui/Primitives";
-import { type ContactFormData, contactFormSchema } from "@/lib/validation";
+import { useTypedTranslations } from "@/i18n/useTypedTranslations";
+import {
+  type ContactFormData,
+  createContactFormSchema,
+} from "@/lib/validation";
 
 export function ContactForm() {
+  const t = useTypedTranslations("forms");
+  const contactFormSchema = useMemo(
+    () =>
+      createContactFormSchema({
+        cityRequired: t("validation.cityRequired"),
+        consentRequired: t("validation.consentRequired"),
+        countryRequired: t("validation.countryRequired"),
+        emailInvalid: t("validation.emailInvalid"),
+        firstNameRequired: t("validation.firstNameRequired"),
+        lastNameRequired: t("validation.lastNameRequired"),
+        messageMin: t("validation.messageMin"),
+        nameMin: t("validation.nameMin"),
+        passwordMin: t("validation.passwordMin"),
+        passwordsMatch: t("validation.passwordsMatch"),
+        postalCodeRequired: t("validation.postalCodeRequired"),
+        reviewMin: t("validation.reviewMin"),
+        searchRequired: t("validation.searchRequired"),
+        stateRequired: t("validation.stateRequired"),
+        streetRequired: t("validation.streetRequired"),
+        subjectMin: t("validation.subjectMin"),
+        titleMin: t("validation.titleMin"),
+      }),
+    [t],
+  );
   const [message, setMessage] = useState("");
   const [isPending, startTransition] = useTransition();
   const {
@@ -57,12 +85,12 @@ export function ContactForm() {
     >
       <FormGrid>
         <Box component="label">
-          <FieldTitle>Name</FieldTitle>
+          <FieldTitle>{t("contact.name")}</FieldTitle>
           <TextField {...register("name")} autoComplete="name" />
           {errors.name ? <FieldError>{errors.name.message}</FieldError> : null}
         </Box>
         <Box component="label">
-          <FieldTitle>Email</FieldTitle>
+          <FieldTitle>{t("contact.email")}</FieldTitle>
           <TextField {...register("email")} autoComplete="email" type="email" />
           {errors.email ? (
             <FieldError>{errors.email.message}</FieldError>
@@ -70,21 +98,21 @@ export function ContactForm() {
         </Box>
       </FormGrid>
       <Box component="label">
-        <FieldTitle>Subject</FieldTitle>
+        <FieldTitle>{t("contact.subject")}</FieldTitle>
         <TextField {...register("subject")} />
         {errors.subject ? (
           <FieldError>{errors.subject.message}</FieldError>
         ) : null}
       </Box>
       <Box component="label">
-        <FieldTitle>Message</FieldTitle>
+        <FieldTitle>{t("contact.message")}</FieldTitle>
         <TextField {...register("message")} multiline minRows={5} />
         {errors.message ? (
           <FieldError>{errors.message.message}</FieldError>
         ) : null}
       </Box>
       <AppButton disabled={isPending} type="submit" variant="primary">
-        {isPending ? "Sending" : "Send message"}
+        {isPending ? t("contact.sending") : t("contact.send")}
       </AppButton>
       {message ? <BodyCopy>{message}</BodyCopy> : null}
     </Box>
