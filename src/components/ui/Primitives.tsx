@@ -1,5 +1,6 @@
 "use client";
 
+import { brandColors, shadows, transitions } from "@/styles/theme";
 import type {
   BoxProps,
   ButtonProps as MuiButtonProps,
@@ -19,9 +20,8 @@ import {
   useTheme,
 } from "@mui/material";
 import type { SxProps, Theme } from "@mui/material/styles";
+import Link from "next/link";
 import type { ElementType, ReactNode } from "react";
-import { Link } from "@/i18n/navigation";
-import { brandColors, shadows, transitions } from "@/styles/theme";
 
 const sxList = (sx?: SxProps<Theme>) =>
   Array.isArray(sx) ? sx : sx ? [sx] : [];

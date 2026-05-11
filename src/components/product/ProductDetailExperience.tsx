@@ -20,13 +20,13 @@ import {
   Swatch,
 } from "@/components/ui/Primitives";
 import { useIsMounted } from "@/hooks/useUtils";
-import { useRouter } from "@/i18n/navigation";
 import { useTypedTranslations } from "@/i18n/useTypedTranslations";
 import { formatPrice } from "@/lib/utils";
 import { useCartStore } from "@/store/cartStore";
 import { useWishlistStore } from "@/store/wishlistStore";
 import { brandColors, transitions } from "@/styles/theme";
 import type { Product, ProductColorOption, ProductVariant } from "@/types";
+import { useRouter } from "next/navigation";
 
 type ProductDetailExperienceProps = {
   initialColor?: string;

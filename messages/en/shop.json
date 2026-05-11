@@ -3,11 +3,14 @@
   "headline": "Launch collection",
   "filters": {
     "button": "Filters",
+    "close": "Close filters",
     "sort": "Sort",
     "sortBy": "Sort by",
     "category": "Category",
     "collection": "Collection",
-    "color": "Color"
+    "color": "Color",
+    "size": "Size",
+    "title": "Filters"
   },
   "empty": {
     "headline": "No pieces match those filters.",

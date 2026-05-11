@@ -24,7 +24,6 @@ import {
   useState,
 } from "react";
 import { GDPR_SETTINGS } from "@/constants/config";
-import { Link } from "@/i18n/navigation";
 import { useTypedTranslations } from "@/i18n/useTypedTranslations";
 import {
   type CookieConsentCategories,
@@ -39,6 +38,7 @@ import {
   motion as motionTokens,
   transitions,
 } from "@/styles/theme";
+import Link from "next/link";
 
 type CookieConsentContextValue = {
   acceptAll: () => void;
@@ -449,8 +449,8 @@ const eyebrowSx = {
   m: { xs: "0 0 4px", sm: "0 0 7px" },
   color: "rgba(216, 198, 165, 0.88)",
   fontSize: "0.66rem",
-fontWeight: 700,
-letterSpacing: "0.16em",
+  fontWeight: 700,
+  letterSpacing: "0.16em",
   textTransform: "uppercase",
 } as const;
 

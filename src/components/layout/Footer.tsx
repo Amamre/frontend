@@ -1,32 +1,11 @@
 "use client";
 
-import {
-  Box,
-  Checkbox,
-  FormControlLabel,
-  Stack,
-  TextField,
-  Typography,
-  useTheme,
-} from "@mui/material";
-import { useActionState } from "react";
-import { subscribeNewsletter } from "@/app/actions";
-import {
-  AppButton,
-  AppContainer,
-  BodyCopy,
-  FieldError,
-  Muted,
-} from "@/components/ui/Primitives";
+import { Box, Stack, Typography, useTheme } from "@mui/material";
+import { AppContainer, BodyCopy } from "@/components/ui/Primitives";
 import { SOCIAL_LINKS } from "@/constants/config";
-import { Link } from "@/i18n/navigation";
 import { useTypedTranslations } from "@/i18n/useTypedTranslations";
 import { brandColors } from "@/styles/theme";
-
-const initialState = {
-  ok: false,
-  message: "",
-};
+import Link from "next/link";
 
 const COPYRIGHT_YEAR = 2026;
 
@@ -67,11 +46,6 @@ export function Footer() {
   const theme = useTheme();
   const common = useTypedTranslations("common");
   const footer = useTypedTranslations("footer");
-  const newsletter = useTypedTranslations("newsletter");
-  const [state, formAction, pending] = useActionState(
-    subscribeNewsletter,
-    initialState,
-  );
 
   return (
     <Box

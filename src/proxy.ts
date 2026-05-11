@@ -1,23 +1,26 @@
-import {
-  DEFAULT_LOCALE,
-  SUPPORTED_LOCALES,
-} from "@/constants/cookie";
+import { LOCALE_COOKIE } from "@/constants/cookie";
+import { DEFAULT_LOCALE, SUPPORTED_LOCALES, type Locale } from "@/i18n/locales";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-type Locale = (typeof SUPPORTED_LOCALES)[number];
 
 function detectLocale(header: string | null): Locale {
-  if (!header) return DEFAULT_LOCALE;
+  if (!header) {
+    return DEFAULT_LOCALE;
+  }
+
   const languages = header
     .split(",")
-    .map((l) => l.split(";")[0]?.trim().toLowerCase() ?? "");
+    .map((entry) => entry.split(";")[0]?.trim().toLowerCase())
+    .filter(Boolean);
 
-  for (const lang of languages) {
-    for (const supported of SUPPORTED_LOCALES) {
-      if (lang.startsWith(supported.toLowerCase().split("-")[0] ?? "")) {
-        return supported;
-      }
+  for (const language of languages) {
+    if (language === "de" || language.startsWith("de-")) {
+      return "de";
+    }
+
+    if (language === "en" || language.startsWith("en-")) {
+      return "en";
     }
   }
 
@@ -41,22 +44,22 @@ export function proxy(req: NextRequest): NextResponse {
   const res = NextResponse.next();
   const { pathname } = req.nextUrl;
 
-  const cookieLocale = req.cookies.get("locale")?.value;
+  const cookieLocale = req.cookies.get(LOCALE_COOKIE)?.value;
   if (!cookieLocale) {
     const header = req.headers.get("accept-language");
     const locale = detectLocale(header);
-    const pathLocale = pathname.split("/")[1];
+    // const pathLocale = pathname.split("/")[1];
 
-    console.log("-----------");
-    console.log("Path:", pathname);
-    console.log("URL locale:", pathLocale);
-    console.log("Cookie locale:", cookieLocale);
-    console.log("Accept-Language:", header);
-    console.log("-----------");
+    // console.log("-----------");
+    // console.log("Path:", pathname);
+    // console.log("URL locale:", pathLocale);
+    // console.log("Cookie locale:", cookieLocale);
+    // console.log("Accept-Language:", header);
+    // console.log("-----------");
 
-    console.log("Detected locale:", locale);
+    // console.log("Detected locale:", locale);
 
-    res.cookies.set("locale", locale, {
+    res.cookies.set(LOCALE_COOKIE, locale, {
       path: "/",
       maxAge: 60 * 60 * 24 * 365,
     });

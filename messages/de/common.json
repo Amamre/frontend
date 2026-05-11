@@ -97,7 +97,9 @@
     "aria": "Sprache wechseln",
     "current": "{language} ausgewählt",
     "de": "Deutsch",
+    "deShort": "DE",
     "en": "English",
+    "enShort": "EN",
     "label": "Sprache",
     "switchTo": "Zu {language} wechseln"
   }

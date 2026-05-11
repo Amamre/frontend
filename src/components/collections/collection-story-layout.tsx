@@ -1,18 +1,18 @@
 "use client";
 
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { Box, Container, Stack, Typography } from "@mui/material";
-import { alpha } from "@mui/material/styles";
 import { CollectionsHeroSection } from "@/components/collections/collections-hero-section";
 import {
   type CollectionChapter,
   collectionCtaLinkSx,
   EditorialCollectionSection,
 } from "@/components/collections/editorial-collection-section";
-import { Link } from "@/i18n/navigation";
 import { useTypedTranslations } from "@/i18n/useTypedTranslations";
 import { brandColors } from "@/styles/theme";
 import type { Collection } from "@/types";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { Box, Container, Stack, Typography } from "@mui/material";
+import { alpha } from "@mui/material/styles";
+import Link from "next/link";
 
 type CollectionStoryLayoutProps = {
   collections: Collection[];

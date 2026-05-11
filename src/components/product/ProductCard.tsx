@@ -14,13 +14,13 @@ import {
 } from "@/components/ui/Primitives";
 import { IMAGE_CONFIG } from "@/constants/config";
 import { useIsMounted } from "@/hooks/useUtils";
-import { Link } from "@/i18n/navigation";
 import { useTypedTranslations } from "@/i18n/useTypedTranslations";
 import { formatPrice } from "@/lib/utils";
 import { useCartStore } from "@/store/cartStore";
 import { useWishlistStore } from "@/store/wishlistStore";
 import { brandColors, transitions } from "@/styles/theme";
 import type { Product } from "@/types";
+import Link from "next/link";
 
 interface ProductCardProps {
   product: Product;

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { BRAND, SEO_DEFAULTS, SITE_URL } from "@/constants/config";
-import { type Locale } from "@/i18n/locales";
+import type { Locale } from "@/i18n/locales";
 
 type MetadataInput = {
   title?: string;
@@ -27,7 +27,7 @@ export const createMetadata = ({
   path = "/",
   image = SEO_DEFAULTS.ogImage,
   keywords = SEO_DEFAULTS.keywords,
-  locale = "en-US",
+  locale = "en",
   noIndex = false,
   ogImageAlt,
 }: MetadataInput = {}): Metadata => {
