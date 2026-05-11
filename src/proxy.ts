@@ -1,8 +1,7 @@
-import { LOCALE_COOKIE } from "@/constants/cookie";
-import { DEFAULT_LOCALE, SUPPORTED_LOCALES, type Locale } from "@/i18n/locales";
-import { NextResponse } from "next/server";
+import { LOCALE_COOKIE_MAX_AGE, LOCALE_COOKIE_NAME, LOCALE_COOKIE_PATH } from "@/constants/cookie";
+import { DEFAULT_LOCALE, type Locale } from "@/i18n/locales";
 import type { NextRequest } from "next/server";
-
+import { NextResponse } from "next/server";
 
 function detectLocale(header: string | null): Locale {
   if (!header) {
@@ -44,7 +43,7 @@ export function proxy(req: NextRequest): NextResponse {
   const res = NextResponse.next();
   const { pathname } = req.nextUrl;
 
-  const cookieLocale = req.cookies.get(LOCALE_COOKIE)?.value;
+  const cookieLocale = req.cookies.get(LOCALE_COOKIE_NAME)?.value;
   if (!cookieLocale) {
     const header = req.headers.get("accept-language");
     const locale = detectLocale(header);
@@ -59,9 +58,9 @@ export function proxy(req: NextRequest): NextResponse {
 
     // console.log("Detected locale:", locale);
 
-    res.cookies.set(LOCALE_COOKIE, locale, {
-      path: "/",
-      maxAge: 60 * 60 * 24 * 365,
+    res.cookies.set(LOCALE_COOKIE_NAME, locale, {
+      path: LOCALE_COOKIE_PATH,
+      maxAge: LOCALE_COOKIE_MAX_AGE,
     });
   }
 

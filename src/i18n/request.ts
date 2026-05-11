@@ -1,15 +1,19 @@
+import { LOCALE_COOKIE_NAME } from "@/constants/cookie";
+import {
+  DEFAULT_LOCALE,
+  detectLocaleFromHeader,
+  isLocale,
+  Locale,
+} from "@/i18n/locales";
 import { getRequestConfig } from "next-intl/server";
-import { DEFAULT_LOCALE, detectLocaleFromHeader, isLocale, Locale } from "@/i18n/locales";
 import { cookies, headers } from "next/headers";
-import { LOCALE_COOKIE } from "@/constants/cookie";
-
 
 export default getRequestConfig(async () => {
   // 1️⃣ Locale aus Cookie (primär)
   const cookieStore = await cookies();
   const headerStore = await headers();
 
-  const cookieLocale = cookieStore.get(LOCALE_COOKIE)?.value;
+  const cookieLocale = cookieStore.get(LOCALE_COOKIE_NAME)?.value;
   const acceptLanguage = headerStore.get("accept-language");
 
   let locale: Locale;
