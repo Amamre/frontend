@@ -240,7 +240,7 @@ function LuxuryCookieConsent({
                   <Typography sx={bannerBodySx}>{t("banner.body")}</Typography>
                 </Box>
 
-                <Stack direction="column" spacing={1} sx={bannerActionsSx}>
+                <Stack direction="column" spacing={2} sx={bannerActionsSx}>
                   <Button
                     onClick={openPreferences}
                     sx={textButtonSx}

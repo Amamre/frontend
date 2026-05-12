@@ -1,7 +1,7 @@
 "use client";
 
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import type { AbstractIntlMessages } from "next-intl";
+import type { AbstractIntlMessages, Timezone } from "next-intl";
 import { NextIntlClientProvider } from "next-intl";
 import { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
@@ -15,12 +15,16 @@ type ProvidersProps = {
   children: React.ReactNode;
   locale: Locale;
   messages: AbstractIntlMessages;
+  timeZone: Timezone;
+  now: Date;
 };
 
 export default function Providers({
   children,
   locale,
   messages,
+  timeZone,
+  now,
 }: ProvidersProps) {
   useEffect(() => {
     void useCartStore.persist.rehydrate();
@@ -29,7 +33,12 @@ export default function Providers({
 
   return (
     <ThemeProvider theme={theme}>
-      <NextIntlClientProvider locale={locale} messages={messages}>
+      <NextIntlClientProvider
+        timeZone={timeZone}
+        locale={locale}
+        messages={messages}
+        now={now}
+      >
         <CookieConsentProvider>
           <CssBaseline />
           {children}

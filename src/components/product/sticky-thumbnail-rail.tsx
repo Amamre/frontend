@@ -173,7 +173,7 @@ function ThumbnailMedia({ image }: { image: ProductImage }) {
           alt=""
           aria-hidden="true"
           fill
-          quality={82}
+          quality={85}
           sizes="76px"
           src={image.mobileUrl ?? image.url}
           style={{

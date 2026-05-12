@@ -54,7 +54,12 @@ export default async function AboutPage() {
               alt={common("brand.campaignAlt")}
               fill
               priority
-              sizes="100vw"
+              quality={90}
+              sizes="
+    (max-width: 600px) calc(100vw - 24px),
+    (max-width: 900px) calc(100vw - 32px),
+    1440px
+  "
               src="/editorial/amambra-hero-campaign.png"
             />
           </ImageFrame>

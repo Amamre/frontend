@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
-import { getLocale, getMessages } from "next-intl/server";
+import { getLocale, getMessages, getNow, getTimeZone } from "next-intl/server";
 import "./globals.css";
-import Providers from "@/components/common/Providers";
+import Providers from "@/app/Providers";
 import { AtelierMarquee } from "@/components/layout/atelier-marquee";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
@@ -30,12 +30,19 @@ export default async function RootLayout({
 }>) {
   const locale = (await getLocale()) as Locale;
   const messages = await getMessages();
+  const timeZone = await getTimeZone();
+  const now = await getNow();
 
   return (
-    <html lang={locale}>
+    <html lang={locale} data-scroll-behavior="smooth">
       <body>
         <StructuredData data={createOrganizationSchema()} />
-        <Providers locale={locale} messages={messages}>
+        <Providers
+          now={now}
+          timeZone={timeZone}
+          locale={locale}
+          messages={messages}
+        >
           <AtelierMarquee />
           <Header />
           <MainShell>{children}</MainShell>

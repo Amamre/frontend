@@ -78,26 +78,62 @@ export default function ProductCard({
           overflow: "hidden",
           aspectRatio: "4 / 5",
           background: brandColors.charcoal,
+
           "& img": {
             objectFit: "cover",
-            transition: `transform 560ms ${transitions.ease}`,
+            transition: `
+  transform 700ms ${transitions.ease},
+  opacity 700ms ${transitions.ease}
+`,
           },
+
+          "& .product-image--secondary": {
+            opacity: 0,
+          },
+
+          "&:hover .product-image--primary": {
+            transform: "scale(1.03)",
+          },
+
+          "&:hover .product-image--secondary": {
+            opacity: 1,
+            transform: "scale(1.03)",
+          },
+
           "&::after": {
             position: "absolute",
             inset: 0,
             content: '""',
             background:
               "linear-gradient(180deg, transparent 44%, rgba(9, 9, 8, 0.82)), radial-gradient(circle at 18% 18%, rgba(184, 149, 106, 0.18), transparent 28%)",
+            pointerEvents: "none",
+            zIndex: 1,
           },
         }}
       >
         <Image
           alt={product.images[0]?.alt ?? product.title}
+          className="product-image--primary"
           fill
           priority={priority}
           sizes={IMAGE_CONFIG.sizes}
-          src={product.images[0]?.url ?? "/editorial/amambra-hero-campaign.png"}
+          src={"/AMAMBRA-Transparent.png"}
+          // src={product.images[0]?.url ?? "/editorial/amambra-hero-campaign.png"}
         />
+
+        <Image
+          alt={product.images[1]?.alt ?? product.title}
+          className="product-image--secondary"
+          fill
+          sizes={IMAGE_CONFIG.sizes}
+          src={product.images[0]?.url ?? "/editorial/amambra-hero-campaign.png"}
+          // src={product.images[1].url ?? "/AMAMBRA-Transparent.png"}
+          style={{
+            position: "absolute",
+            inset: 0,
+          }}
+        />
+
         <Stack
           direction="row"
           spacing={1}
