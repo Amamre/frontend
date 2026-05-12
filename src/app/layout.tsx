@@ -1,4 +1,5 @@
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata, Viewport } from "next";
 import { getLocale, getMessages, getNow, getTimeZone } from "next-intl/server";
 import "./globals.css";
@@ -12,9 +13,6 @@ import { BRAND_META } from "@/constants/config";
 import type { Locale } from "@/i18n/locales";
 import { createLocalizedMetadata } from "@/lib/localized-seo";
 import { createOrganizationSchema } from "@/lib/structured-data";
-
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Analytics } from "@vercel/analytics/next";
 
 export async function generateMetadata(): Promise<Metadata> {
   return createLocalizedMetadata({ titleKey: "defaults.title" });
@@ -40,8 +38,6 @@ export default async function RootLayout({
   return (
     <html lang={locale} data-scroll-behavior="smooth">
       <body>
-        <SpeedInsights />
-        <Analytics />
         <StructuredData data={createOrganizationSchema()} />
         <Providers
           now={now}
@@ -55,6 +51,7 @@ export default async function RootLayout({
           <Footer />
         </Providers>
         <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );
