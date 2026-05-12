@@ -1,7 +1,6 @@
-import Link from "next/link";
-import { type SanityDocument } from "next-sanity";
-
 import { Box, Container, Divider, Stack, Typography } from "@mui/material";
+import Link from "next/link";
+import type { SanityDocument } from "next-sanity";
 
 import { client } from "@/sanity/client";
 

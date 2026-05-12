@@ -82,7 +82,6 @@ export default function LanguageSwitcher({
     }
 
     startTransition(() => {
-
       document.cookie = [
         `${LOCALE_COOKIE_NAME}=${nextLocale}`,
         `path=${LOCALE_COOKIE_PATH}`,
