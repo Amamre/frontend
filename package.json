@@ -24,7 +24,6 @@
     "@sanity/client": "^6.8.8",
     "@sanity/image-url": "^1.0.2",
     "@sentry/nextjs": "^10.52.0",
-    "@shopify/hydrogen-react": "^2024.10.0",
     "axios": "^1.6.5",
     "framer-motion": "^11.0.3",
     "graphql-request": "^6.0.0",
