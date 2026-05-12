@@ -1,11 +1,11 @@
 "use client";
 
 import { Box, Stack, Typography, useTheme } from "@mui/material";
+import Link from "next/link";
 import { AppContainer, BodyCopy } from "@/components/ui/Primitives";
 import { SOCIAL_LINKS } from "@/constants/config";
 import { useTypedTranslations } from "@/i18n/useTypedTranslations";
 import { brandColors } from "@/styles/theme";
-import Link from "next/link";
 
 const COPYRIGHT_YEAR = 2026;
 

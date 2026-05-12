@@ -15,6 +15,8 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { type ElementType, useState } from "react";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { AppContainer, IconAction } from "@/components/ui/Primitives";
@@ -23,8 +25,6 @@ import { useTypedTranslations } from "@/i18n/useTypedTranslations";
 import { useCartStore } from "@/store/cartStore";
 import { useWishlistStore } from "@/store/wishlistStore";
 import { brandColors, transitions } from "@/styles/theme";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
 
 const MAIN_NAVIGATION = [
   { href: "/shop", key: "shop" },

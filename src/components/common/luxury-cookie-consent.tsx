@@ -15,6 +15,7 @@ import {
   Typography,
 } from "@mui/material";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import Link from "next/link";
 import {
   createContext,
   useCallback,
@@ -38,7 +39,6 @@ import {
   motion as motionTokens,
   transitions,
 } from "@/styles/theme";
-import Link from "next/link";
 
 type CookieConsentContextValue = {
   acceptAll: () => void;

@@ -1,12 +1,12 @@
+import { cookies, headers } from "next/headers";
+import { getRequestConfig } from "next-intl/server";
 import { LOCALE_COOKIE_NAME } from "@/constants/cookie";
 import {
   DEFAULT_LOCALE,
   detectLocaleFromHeader,
   isLocale,
-  Locale,
+  type Locale,
 } from "@/i18n/locales";
-import { getRequestConfig } from "next-intl/server";
-import { cookies, headers } from "next/headers";
 
 export default getRequestConfig(async () => {
   // 1️⃣ Locale aus Cookie (primär)

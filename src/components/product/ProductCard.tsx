@@ -5,6 +5,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { Box, Chip, Stack, Typography, useTheme } from "@mui/material";
 import Image from "next/image";
+import Link from "next/link";
 import toast from "react-hot-toast";
 import {
   IconAction,
@@ -20,7 +21,6 @@ import { useCartStore } from "@/store/cartStore";
 import { useWishlistStore } from "@/store/wishlistStore";
 import { brandColors, transitions } from "@/styles/theme";
 import type { Product } from "@/types";
-import Link from "next/link";
 
 interface ProductCardProps {
   product: Product;

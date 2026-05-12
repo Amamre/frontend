@@ -1,7 +1,11 @@
-import { LOCALE_COOKIE_MAX_AGE, LOCALE_COOKIE_NAME, LOCALE_COOKIE_PATH } from "@/constants/cookie";
-import { DEFAULT_LOCALE, type Locale } from "@/i18n/locales";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
+import {
+  LOCALE_COOKIE_MAX_AGE,
+  LOCALE_COOKIE_NAME,
+  LOCALE_COOKIE_PATH,
+} from "@/constants/cookie";
+import { DEFAULT_LOCALE, type Locale } from "@/i18n/locales";
 
 function detectLocale(header: string | null): Locale {
   if (!header) {

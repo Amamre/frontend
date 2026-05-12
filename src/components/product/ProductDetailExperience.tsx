@@ -4,6 +4,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { Box, Stack, Typography, useTheme } from "@mui/material";
 import { MotionConfig } from "framer-motion";
+import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import { ProductMediaGallery } from "@/components/product/product-media-gallery";
@@ -26,7 +27,6 @@ import { useCartStore } from "@/store/cartStore";
 import { useWishlistStore } from "@/store/wishlistStore";
 import { brandColors, transitions } from "@/styles/theme";
 import type { Product, ProductColorOption, ProductVariant } from "@/types";
-import { useRouter } from "next/navigation";
 
 type ProductDetailExperienceProps = {
   initialColor?: string;

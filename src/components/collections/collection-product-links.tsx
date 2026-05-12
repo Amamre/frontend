@@ -1,12 +1,12 @@
 "use client";
 
-import { useTypedTranslations } from "@/i18n/useTypedTranslations";
-import { brandColors, transitions } from "@/styles/theme";
-import type { Product } from "@/types";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import { Box, Stack, Typography } from "@mui/material";
 import { alpha } from "@mui/material/styles";
 import Link from "next/link";
+import { useTypedTranslations } from "@/i18n/useTypedTranslations";
+import { brandColors, transitions } from "@/styles/theme";
+import type { Product } from "@/types";
 
 type CollectionProductLinksProps = {
   products: Product[];

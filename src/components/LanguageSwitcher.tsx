@@ -1,9 +1,5 @@
 "use client";
 
-import { LOCALE_COOKIE_MAX_AGE, LOCALE_COOKIE_NAME, LOCALE_COOKIE_PATH } from "@/constants/cookie";
-import { DEFAULT_LOCALE, isLocale, type Locale } from "@/i18n/locales";
-import { useTypedTranslations } from "@/i18n/useTypedTranslations";
-import { brandColors, motion } from "@/styles/theme";
 import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
 import {
   alpha,
@@ -16,9 +12,18 @@ import {
 } from "@mui/material";
 import type { SxProps, Theme } from "@mui/material/styles";
 import { useReducedMotion } from "framer-motion";
-import { useLocale } from "next-intl";
 import { useRouter } from "next/navigation";
+import { useLocale } from "next-intl";
 import { type MouseEvent, useMemo, useState, useTransition } from "react";
+import {
+  LOCALE_COOKIE_MAX_AGE,
+  LOCALE_COOKIE_NAME,
+  LOCALE_COOKIE_PATH,
+} from "@/constants/cookie";
+import { DEFAULT_LOCALE, isLocale, type Locale } from "@/i18n/locales";
+import { useTypedTranslations } from "@/i18n/useTypedTranslations";
+import { setCookie } from "@/lib/cookies";
+import { brandColors, motion } from "@/styles/theme";
 
 type LanguageOption = {
   code: Locale;
@@ -77,11 +82,10 @@ export default function LanguageSwitcher({
     }
 
     startTransition(() => {
-      document.cookie = [
-        `${LOCALE_COOKIE_NAME}=${nextLocale}`,
-        `path=${LOCALE_COOKIE_PATH}`,
-        `max-age=${LOCALE_COOKIE_MAX_AGE}`,
-      ].join("; ");
+      setCookie(LOCALE_COOKIE_NAME, nextLocale, {
+        path: LOCALE_COOKIE_PATH,
+        maxAge: LOCALE_COOKIE_MAX_AGE,
+      });
 
       router.refresh();
 
