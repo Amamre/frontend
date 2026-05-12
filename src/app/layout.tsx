@@ -1,3 +1,4 @@
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata, Viewport } from "next";
 import { getLocale, getMessages, getNow, getTimeZone } from "next-intl/server";
 import "./globals.css";
@@ -53,6 +54,7 @@ export default async function RootLayout({
           <MainShell>{children}</MainShell>
           <Footer />
         </Providers>
+        <SpeedInsights />
       </body>
     </html>
   );

@@ -1,12 +1,9 @@
-import Link from "next/link";
-import Image from "next/image";
-
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
-
-import { PortableText, type SanityDocument } from "next-sanity";
-
 import imageUrlBuilder from "@sanity/image-url";
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import Image from "next/image";
+import Link from "next/link";
+import { PortableText, type SanityDocument } from "next-sanity";
 
 import { client } from "@/sanity/client";
 
