@@ -97,7 +97,7 @@
   inset: 0;
   z-index: -2;
   overflow: hidden;
-  background: #090908;
+  background: #050505;
 }
 
 .cinematic-background__poster,
@@ -115,7 +115,16 @@
 
 .cinematic-background__video {
   z-index: 1;
-  opacity: 0.92;
+
+  opacity: 0;
+  animation: cinematic-fade-in 1.6s ease forwards;
+
+  filter:
+    saturate(0.92)
+    contrast(1.04)
+    brightness(0.78);
+
+  transform: scale(1.02);
 }
 
 @media (max-width: 680px) {
@@ -140,4 +149,61 @@
   .cinematic-background__video {
     display: none;
   }
+}
+
+@keyframes cinematic-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+.cinematic-background__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.44) 0%,
+      rgba(0, 0, 0, 0.18) 32%,
+      rgba(0, 0, 0, 0.55) 100%
+    );
+}
+
+.cinematic-background__grain {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+
+  opacity: 0.06;
+
+  background-image:
+    url("/textures/grain.png");
+
+  background-size: 240px;
+
+  mix-blend-mode: soft-light;
+
+  pointer-events: none;
+}
+
+.cinematic-background__vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(0, 0, 0, 0) 42%,
+      rgba(0, 0, 0, 0.52) 100%
+    );
+
+  pointer-events: none;
 }

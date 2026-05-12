@@ -64,7 +64,7 @@ export function LuxuryHero() {
         <CinematicBackground
           posterAlt={hero("posterAlt")}
           posterSrc="/editorial/amambra-hero-campaign.png"
-          videoSrc="/videos/amambra-atelier-loop.mp4"
+          videoSrc="/videos/amambra-hero.mp4"
         />
 
         <AppContainer

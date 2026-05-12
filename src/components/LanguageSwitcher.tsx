@@ -82,10 +82,19 @@ export default function LanguageSwitcher({
     }
 
     startTransition(() => {
-      setCookie(LOCALE_COOKIE_NAME, nextLocale, {
-        path: LOCALE_COOKIE_PATH,
-        maxAge: LOCALE_COOKIE_MAX_AGE,
-      });
+
+      document.cookie = [
+        `${LOCALE_COOKIE_NAME}=${nextLocale}`,
+        `path=${LOCALE_COOKIE_PATH}`,
+        `max-age=${LOCALE_COOKIE_MAX_AGE}`,
+      ].join("; ");
+
+      // setCookie(
+      //   LOCALE_COOKIE_NAME,
+      //   nextLocale, {
+      //   path: LOCALE_COOKIE_PATH,
+      //   maxAge: LOCALE_COOKIE_MAX_AGE,
+      // });
 
       router.refresh();
 
